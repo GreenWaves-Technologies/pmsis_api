@@ -33,6 +33,10 @@
 
 /**@{*/
 
+#ifndef CLUSTER_TASK_IMPLEM
+#define CLUSTER_TASK_IMPLEM
+#endif
+
 struct cluster_task{
     // entry function and its argument(s)
     void (*entry)(void*);
@@ -48,6 +52,8 @@ struct cluster_task{
     int stack_allocated;
     // to implement a fifo
     struct cluster_task *next;
+
+    CLUSTER_TASK_IMPLEM;
 };
 
 // object for device specific api
