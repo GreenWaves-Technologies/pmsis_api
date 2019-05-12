@@ -78,7 +78,7 @@ int mc_cluster_open_with_conf_async(struct pmsis_device *device,
  * \param cluster_id ID of the cluster to execute task on
  * \param cl_task task structure containing task and its parameters
  */
-void mc_cluster_send_task_to_cl(struct pmsis_device *device, struct cluster_task *task);
+int mc_cluster_send_task_to_cl(struct pmsis_device *device, struct cluster_task *task);
 
 /** \brief send a task to the cluster - async version
  * Calling this function will result in the cluster executing task passed as a parameter
@@ -89,7 +89,7 @@ void mc_cluster_send_task_to_cl(struct pmsis_device *device, struct cluster_task
  * \param cl_task task structure containing task and its parameters
  * \param async_task structure to execute at the end of cl_task execution
  */
-void mc_cluster_send_task_to_cl_async(struct pmsis_device *device, struct cluster_task *cl_task,
+int mc_cluster_send_task_to_cl_async(struct pmsis_device *device, struct cluster_task *cl_task,
         fc_task_t *async_task);
 
 /** \brief Wait for the cluster to be free i.e. nothing executes on it
