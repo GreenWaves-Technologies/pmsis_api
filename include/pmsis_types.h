@@ -120,6 +120,8 @@ enum fc_task_id {
     FC_TASK_CALLBACK_ID,
 };
 
+#ifndef PMSIS_USE_EXTERNAL_TYPES
+
 typedef struct fc_task{
     int8_t done;
     pmsis_mutex_t wait_on;
@@ -127,4 +129,7 @@ typedef struct fc_task{
     uintptr_t arg[4];
 } fc_task_t;
 
+#endif
+
+/// @endcond
 #endif
