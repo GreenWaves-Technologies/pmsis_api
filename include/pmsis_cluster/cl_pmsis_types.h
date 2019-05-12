@@ -40,6 +40,7 @@ struct cluster_task{
     // pointer to first stack, and size for each cores
     void *stacks;
     uint32_t stack_size;
+    uint32_t slave_stack_size;
     // mask of cores to be activated
     int core_mask;
     // callback called at task completion
