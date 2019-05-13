@@ -131,6 +131,13 @@ uint32_t mc_cluster_ioctl_async(struct pmsis_device *device, uint32_t func_id,
  */
 uint8_t mc_cluster_is_on(void);
 
+/** \brief Return the number of cores involved in the current cluster task
+ * This will return the number of cores activated by the cluster task pushed to cluster
+ * side and currently being eecuted.
+ * \return async_task asynchronous task to be executed at the end of operation
+ */
+INLINE int cl_cluster_nb_cores();
+
 // --- Useful defines to manipulate cluster objects
 //
 #define  GAP_CLUSTER_TINY_DATA(id, addr) (CLUSTER_BASE + 0x400000*(id) + (addr & 0xFFF))
