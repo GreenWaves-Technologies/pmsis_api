@@ -37,6 +37,14 @@
 
 /**@{*/
 
+/** \brief Return the number of cores involved in the current cluster task
+ *
+ * This will return the number of cores activated by the cluster task pushed to cluster
+ * side and currently being eecuted.
+ * \return async_task asynchronous task to be executed at the end of operation
+ */
+INLINE int cl_cluster_nb_cores();
+
 /** \brief Fork the execution of the calling core.
  *
  * Calling this function will create a team of workers and call the specified entry point
