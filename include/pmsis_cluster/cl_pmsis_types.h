@@ -37,6 +37,10 @@
 #define CLUSTER_TASK_IMPLEM
 #endif
 
+#ifndef INLINE
+#define INLINE
+#endif
+
 struct cluster_task{
     // entry function and its argument(s)
     void (*entry)(void*);

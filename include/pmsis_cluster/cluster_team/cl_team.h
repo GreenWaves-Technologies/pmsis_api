@@ -45,7 +45,7 @@
  * However, fork_task->stacks/stack_size will only concern slave cores
  * \param   fork_task task to be forked on slave cores
  */
-void cl_team_fork_task(struct cluster_task *fork_task);
+INLINE void cl_team_fork_task(struct cluster_task *fork_task);
 
 /** \brief Fork the execution of the calling core.
  *
@@ -66,7 +66,7 @@ void cl_team_fork_task(struct cluster_task *fork_task);
  * \param        entry The function entry point to be executed by all cores of the team.
  * \param        arg    The argument of the function entry point.
  */
-void cl_team_fork(int core_mask, void (*entry)(void *), void *arg);
+INLINE void cl_team_fork(int nb_cores, void (*entry)(void *), void *arg);
 
 /** \brief Execute a barrier between all cores of the team.
  *
@@ -76,7 +76,7 @@ void cl_team_fork(int core_mask, void (*entry)(void *), void *arg);
  * Each core of the team must execute the barrier exactly once for all cores 
  * to be able to go through the barrier.
  */
-void cl_team_barrier(int barrier_id);
+INLINE void cl_team_barrier();
 
 
 
@@ -88,7 +88,7 @@ void cl_team_barrier(int barrier_id);
  * the following code until 
  * rt_team_critical_exit is called.
  */
-void cl_team_critical_enter();
+INLINE void cl_team_critical_enter();
 
 
 
@@ -96,7 +96,19 @@ void cl_team_critical_enter();
  *
  * This will exit the critical code and let other cores executing it.
  */
-void cl_team_critical_exit();
+INLINE void cl_team_critical_exit();
+
+
+
+/** \brief Return the number of cores of the team.
+ *
+ * This will return the number of cores involved in the team created by the 
+ * active fork operation.
+ * \result The number of cores of the team.
+ */
+INLINE int cl_team_nb_cores();
+
+
 
 //!@}
 
