@@ -118,6 +118,7 @@ struct pmsis_event_kernel_wrap {
 
 enum fc_task_id {
     FC_TASK_CALLBACK_ID,
+    FC_TASK_NONE_ID,
 };
 
 #ifndef FC_TASK_IMPLEM
