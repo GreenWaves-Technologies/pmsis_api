@@ -18,7 +18,7 @@
 #define __FC_TO_CL_H__
 
 #include "cl_pmsis_types.h"
-#include "include/pmsis_types.h"
+#include "pmsis_types.h"
 /**
  * @ingroup groupCluster
  */
