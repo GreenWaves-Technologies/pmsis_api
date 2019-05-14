@@ -53,7 +53,7 @@ INLINE int cl_cluster_nb_cores();
  * However, fork_task->stacks/stack_size will only concern slave cores
  * \param   fork_task task to be forked on slave cores
  */
-INLINE void cl_team_fork_task(struct cluster_task *fork_task);
+INLINE void cl_team_fork_task(struct cl_team_task *fork_task);
 
 /** \brief Fork the execution of the calling core.
  *
