@@ -120,16 +120,20 @@ enum fc_task_id {
     FC_TASK_CALLBACK_ID,
 };
 
-#ifndef PMSIS_USE_EXTERNAL_TYPES
+#ifndef FC_TASK_IMPLEM
+#define FC_TASK_IMPLEM
+#endif
 
 typedef struct fc_task{
+    // Warning, might be accessed inline in asm, and thus can not be moved
+    uintptr_t arg[4];
     int8_t done;
     pmsis_mutex_t wait_on;
     int id;
-    uintptr_t arg[4];
-} fc_task_t;
 
-#endif
+    FC_TASK_IMPLEM;
+
+} fc_task_t;
 
 /// @endcond
 #endif
