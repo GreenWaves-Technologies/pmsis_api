@@ -76,7 +76,7 @@ void cl_team_fork(int core_mask, void (*entry)(void *), void *arg);
  * Each core of the team must execute the barrier exactly once for all cores 
  * to be able to go through the barrier.
  */
-void cl_team_barrier();
+void cl_team_barrier(int barrier_id);
 
 
 

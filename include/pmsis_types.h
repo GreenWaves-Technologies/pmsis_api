@@ -32,25 +32,11 @@
  * @{
  */
 
-struct pmsis_device;
-
-// device struct, it wont stay here
-typedef struct pmsis_device {
-    struct pmsis_device_api *api; // function pointers
-    void *config; // driver conf: might be filled either using device tree or manually
-    void *data; // driver data
-} pmsis_device_t;
-
-
 /**@{*/
-
-
-/// @cond IMPLEM
-
+struct pmsis_device;
 struct pmsis_event_kernel_wrap;
 
 typedef struct fc_task fc_task_t;
-typedef struct fc_task mc_task_t;
 
 typedef void (*callback_t)(void *arg);
 
@@ -65,6 +51,13 @@ typedef struct pmsis_device_config {
     int (*init)(struct pmsis_device *device);
     const void *init_conf;
 } pmsis_device_config_t;
+
+// device struct, it wont stay here
+typedef struct pmsis_device {
+    struct pmsis_device_api *api; // function pointers
+    void *config; // driver conf: might be filled either using device tree or manually
+    void *data; // driver data
+} pmsis_device_t;
 
 
 typedef uint32_t (*device_rw_func)(struct pmsis_device *device, uintptr_t size,
@@ -133,7 +126,5 @@ typedef struct fc_task{
     int id;
     uintptr_t arg[4];
 } fc_task_t;
-
-/// @endcond
 
 #endif

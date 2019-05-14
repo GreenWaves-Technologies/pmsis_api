@@ -43,7 +43,7 @@ struct cluster_task{
     // mask of cores to be activated
     int core_mask;
     // callback called at task completion
-    struct fc_task_t *completion_callback;
+    fc_task_t *completion_callback;
     int stack_allocated;
     // to implement a fifo
     struct cluster_task *next;
@@ -62,6 +62,7 @@ typedef struct cluster_driver_conf {
     int id;
     void *heap_start;
     uint32_t heap_size;
+    struct pmsis_event_kernel_wrap* event_kernel;
 } cluster_driver_conf_t;
 
 // object for cluster driver specific data
