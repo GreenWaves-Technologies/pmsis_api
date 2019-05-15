@@ -138,4 +138,10 @@ static inline void pmsis_task_suspend(__os_native_task_t *task)
     __os_native_task_suspend(task);
 }
 
+static inline void pmsis_exit(int err)
+{
+    exit(err);
+}
+fc_task_t *mc_task_callback(fc_task_t *callback_task, void *func, void *arg);
+
 #endif  /* __PMSIS_TASK_H__ */
