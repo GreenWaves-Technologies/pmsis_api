@@ -37,6 +37,19 @@ static inline void *pmsis_task_create(void (*entry)(void*),
 
 static inline void pmsis_task_suspend(__os_native_task_t *task);
 
+fc_task_t *mc_task_callback(fc_task_t *callback_task, void (*callback)(void*), void *arg);
+
+static inline struct fc_task *mc_task(struct fc_task *task)
+{
+  task->id = FC_TASK_NONE_ID;
+  task->arg[0] = (uint32_t)0;
+  return task;
+}
+
+static inline void pmsis_exit(int err);
+
+void pmsis_yield();
+
 #ifndef PMSIS_NO_INLINE_INCLUDE
 
 #include "pmsis_hal.h"
@@ -170,7 +183,6 @@ static inline void pmsis_exit(int err)
 {
     exit(err);
 }
-fc_task_t *mc_task_callback(fc_task_t *callback_task, void *func, void *arg);
 
 #endif  /* __PMSIS_TASK_H__ */
 

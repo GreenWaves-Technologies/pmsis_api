@@ -127,6 +127,16 @@ uint32_t mc_cluster_ioctl(struct pmsis_device *device, uint32_t func_id, void *a
 uint32_t mc_cluster_ioctl_async(struct pmsis_device *device, uint32_t func_id,
         void *arg, fc_task_t *async_task);
 
+static inline struct cluster_task *mc_cluster_task(struct cluster_task *task, void (*entry)(void*), void *arg)
+{
+  task->entry = entry;
+  task->arg = arg;
+  task->stacks = NULL;
+  task->stack_size = 0;
+  task->nb_cores = 0;
+  return task;
+}
+
 /** \brief check if any cluster is on
  */
 uint8_t mc_cluster_is_on(void);

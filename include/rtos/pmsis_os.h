@@ -80,6 +80,9 @@ static inline uint32_t __native_native_nb_cores() {
   return NBCORES;
 }
 
+#define pmsis_core_id __native_core_id
+#define pmsis_cluster_id __native_cluster_id
+
 #endif
 
 #endif
