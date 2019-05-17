@@ -21,27 +21,14 @@
  * creation */
 static inline int pmsis_kickoff(void *arg);
 
-/** FC_CLUSTER_ID Definitions */
-#if defined(__GAP8__)
-#define FC_CLUSTER_ID                 32                /**< FC CLuster ID */
-#elif defined(__GAP9__)
-#define FC_CLUSTER_ID                 31                /**< FC CLuster ID */
-#endif
+static inline uint32_t pi_core_id();
 
-/**
-  \ingroup  CMSIS_Core_IDFunctionInterface
-  \defgroup CMSIS_Core_IDFunctions ID Functions
-  \brief    Functions that manage Cluster and Core ID.
-  @{
- */
+static inline uint32_t pi_cluster_id();
 
-static inline uint32_t __native_core_id();
+static inline uint32_t pi_is_fc();
 
-static inline uint32_t __native_cluster_id();
+static inline uint32_t pi_nb_custer_cores();
 
-static inline uint32_t __native_is_fc();
-
-static inline uint32_t __native_cluster_nb_cores();
 
 #ifndef PMSIS_NO_INLINE_INCLUDE
 
@@ -52,36 +39,6 @@ static inline int pmsis_kickoff(void *arg)
 {
     return __os_native_kickoff(arg);
 }
-
-/**
-  \ingroup  CMSIS_Core_IDFunctionInterface
-  \defgroup CMSIS_Core_IDFunctions ID Functions
-  \brief    Functions that manage Cluster and Core ID.
-  @{
- */
-
-static inline uint32_t __native_core_id() {
-  int hart_id;
-  asm volatile ("csrr %0, 0x014" : "=r" (hart_id) : );
-  return hart_id & 0x1f;
-}
-
-static inline uint32_t __native_cluster_id() {
-  int hart_id;
-  asm volatile ("csrr %0, 0x014" : "=r" (hart_id) : );
-  return (hart_id >> 5) & 0x3f;
-}
-
-static inline uint32_t __native_is_fc() {
-  return ( __native_cluster_id() == FC_CLUSTER_ID);
-}
-
-static inline uint32_t __native_native_nb_cores() {
-  return NBCORES;
-}
-
-#define pmsis_core_id __native_core_id
-#define pmsis_cluster_id __native_cluster_id
 
 #endif
 

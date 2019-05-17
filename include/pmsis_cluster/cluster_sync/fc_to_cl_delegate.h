@@ -131,7 +131,7 @@ static inline struct cluster_task *mc_cluster_task(struct cluster_task *task, vo
 {
   task->entry = entry;
   task->arg = arg;
-  task->stacks = NULL;
+  task->stacks = (void *)0;
   task->stack_size = 0;
   task->nb_cores = 0;
   return task;
