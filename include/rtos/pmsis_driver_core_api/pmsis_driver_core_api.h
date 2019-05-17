@@ -22,6 +22,9 @@
 // if no name is passed, just allocate necessary memory
 struct pmsis_device *pmsis_open(const char *name);
 
+struct pmsis_device *pmsis_open_from_conf(void *conf);
+
+
 int pmsis_close(struct pmsis_device *device);
 
 // ioctl like mechanism
