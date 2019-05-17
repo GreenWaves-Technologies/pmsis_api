@@ -37,9 +37,9 @@ static inline void *pmsis_task_create(void (*entry)(void*),
 
 static inline void pmsis_task_suspend(__os_native_task_t *task);
 
-fc_task_t *mc_task_callback(fc_task_t *callback_task, void (*callback)(void*), void *arg);
+pi_fc_task_t *mc_task_callback(pi_fc_task_t *callback_task, void (*callback)(void*), void *arg);
 
-static inline struct fc_task *mc_task(struct fc_task *task)
+static inline struct pi_fc_task *mc_task(struct pi_fc_task *task)
 {
   task->id = FC_TASK_NONE_ID;
   task->arg[0] = (uint32_t)0;
@@ -48,7 +48,7 @@ static inline struct fc_task *mc_task(struct fc_task *task)
 
 static inline void pmsis_exit(int err);
 
-void pmsis_yield();
+void pi_yield();
 
 #ifndef PMSIS_NO_INLINE_INCLUDE
 

@@ -43,7 +43,7 @@
  * It can be instantiated as a normal variable, for example as a global variable, a local one on the stack,
  * or through a memory allocator.
  */
-typedef struct pmsis_cl_alloc_req_s pmsis_cl_alloc_req_t ;
+typedef struct pi_cl_alloc_req_s pi_cl_alloc_req_t ;
 
 
 /** \brief Free request structure.
@@ -53,7 +53,7 @@ typedef struct pmsis_cl_alloc_req_s pmsis_cl_alloc_req_t ;
  * It can be instantiated as a normal variable, for example as a global variable, a local one on the stack,
  * or through a memory allocator.
  */
-typedef struct pmsis_cl_free_req_s pmsis_cl_free_req_t ;
+typedef struct pi_cl_free_req_s pi_cl_free_req_t ;
 
 
 
@@ -62,7 +62,7 @@ typedef struct pmsis_cl_free_req_s pmsis_cl_free_req_t ;
  * \param size   The size in bytes of the memory to be allocated.
  * \param req       The request structure used for termination.
  */
-void pmsis_cl_l2_malloc(int size, pmsis_cl_alloc_req_t *req);
+void pi_cl_l2_malloc(int size, pi_cl_alloc_req_t *req);
 
 
 
@@ -72,7 +72,7 @@ void pmsis_cl_l2_malloc(int size, pmsis_cl_alloc_req_t *req);
  * \param size   The size in bytes of the memory to be freed.
  * \param req    The request structure used for termination.
  */
-void pmsis_cl_l2_free(void *chunk, int size, pmsis_cl_free_req_t *req);
+void pi_cl_l2_free(void *chunk, int size, pi_cl_free_req_t *req);
 
 
 
@@ -83,7 +83,7 @@ void pmsis_cl_l2_free(void *chunk, int size, pmsis_cl_free_req_t *req);
  * \param req       The request structure used for termination.
  * \return          The allocated chunk or NULL if there was not enough memory available.
  */
-static inline void *pmsis_cl_l2_malloc_wait(rt_alloc_req_t *req);
+static inline void *pi_cl_l2_malloc_wait(pi_cl_alloc_req_t *req);
 
 
 
@@ -93,7 +93,7 @@ static inline void *pmsis_cl_l2_malloc_wait(rt_alloc_req_t *req);
  *
  * \param req       The request structure used for termination.
  */
-static inline void pmsis_cl_l2_free_wait(rt_free_req_t *req);
+static inline void pi_cl_l2_free_wait(pi_cl_free_req_t *req);
 
 //!@}
 
