@@ -17,14 +17,17 @@
 #ifndef __FC_TO_CL_H__
 #define __FC_TO_CL_H__
 
+/// @cond IMPLEM
+
 #include "pmsis_cluster/cl_pmsis_types.h"
 #include "pmsis_types.h"
+
 /**
- * @ingroup groupCluster
+ * @ingroup groupDrivers
  */
 
 /**
- * @defgroup clusterDriver
+ * @defgroup clusterDriver Cluster driver
  *
  * Primitives to pilot the cluster
  * Can only be use from mcu side
@@ -33,7 +36,7 @@
 
 
 /**
- * @addtogroup groupCluster
+ * @addtogroup clusterDriver
  * @{
  */
 
@@ -152,4 +155,7 @@ uint8_t mc_cluster_is_on(void);
 /**
  * @} end of Team group
  */
+
+/// @endcond
+
 #endif
