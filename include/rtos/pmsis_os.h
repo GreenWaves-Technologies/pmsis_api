@@ -40,6 +40,26 @@ static inline int pmsis_kickoff(void *arg)
     return __os_native_kickoff(arg);
 }
 
+static inline uint32_t pi_core_id()
+{
+  return __native_core_id();
+}
+
+static inline uint32_t pi_cluster_id()
+{
+  return __native_cluster_id();
+}
+
+static inline uint32_t pi_is_fc()
+{
+  return __native_is_fc();
+}
+
+static inline uint32_t pi_nb_cluster_cores()
+{
+  return NBCORES;
+}
+
 #endif
 
 #endif
