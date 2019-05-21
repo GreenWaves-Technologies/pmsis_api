@@ -41,12 +41,7 @@ pi_task_t *pi_task_callback(pi_task_t *callback_task, void (*callback)(void*), v
 
 pi_task_t *pi_task_block(pi_task_t *callback_task);
 
-static inline struct pi_task *pi_task(struct pi_task *task)
-{
-  task->id = PI_TASK_NONE_ID;
-  task->arg[0] = (uint32_t)0;
-  return task;
-}
+static inline struct pi_task *pi_task(struct pi_task *task);
 
 void pi_task_release(pi_task_t *task);
 
@@ -63,6 +58,13 @@ void pi_yield();
 #ifndef PMSIS_NO_INLINE_INCLUDE
 
 #include "pmsis_hal.h"
+
+static inline struct pi_task *pi_task(struct pi_task *task)
+{
+  task->id = FC_TASK_NONE_ID;
+  task->arg[0] = (uint32_t)0;
+  return task;
+}
 
 /*
  * Disable IRQs while saving previous irq state
