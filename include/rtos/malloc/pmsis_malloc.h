@@ -28,8 +28,8 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __PMSIS_MALLOC_H__
-#define __PMSIS_MALLOC_H__
+#ifndef _GAP_MALLOC_H_
+#define _GAP_MALLOC_H_
 
 /*!
  * @addtogroup pmsis_malloc
@@ -103,4 +103,4 @@ void pmsis_malloc_display(void);
 
 /* @} */
 
-#endif /* __PMSIS_MALLOC_H__ */
+#endif /*_GAP_MALLOC_H_*/
