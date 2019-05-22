@@ -57,7 +57,7 @@ static inline uint32_t pi_is_fc()
 
 static inline uint32_t pi_nb_cluster_cores()
 {
-  return NBCORES;
+  return PI_CLUSTER_NB_CORES;
 }
 
 #endif
