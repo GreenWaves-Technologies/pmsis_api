@@ -7,6 +7,7 @@
 #include "rtos/malloc/pmsis_malloc.h"
 #include "rtos/malloc/pmsis_l1_malloc.h"
 #include "rtos/malloc/pmsis_l2_malloc.h"
+#include "rtos/malloc/pmsis_hyperram_malloc.h"
 #ifdef __GAP8__
     #include "pmsis_fc_tcdm_malloc.h"
 #endif
