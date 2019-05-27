@@ -10,6 +10,8 @@ void pmsis_hyperram_malloc_free(void *_chunk, int32_t size);
 
 void pmsis_hyperram_malloc_init(void *heapstart, int32_t size);
 
+void pmsis_hyperram_malloc_deinit();
+
 /*
 void *pmsis_hyperram_malloc_align(int size, int align);
 
