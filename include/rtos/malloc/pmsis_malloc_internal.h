@@ -144,8 +144,8 @@ void __malloc_free(malloc_t *a, void *_chunk, int32_t size);
  * @return Start address of an allocated memory chunk or NULL if there is not enough memory to allocate.
  */
 void *__malloc_align(malloc_t *a, int32_t size, int32_t align);
-
 /*!
+
  * @brief Initialize an external memory allocator.
  *
  * This function initializes an external memory allocator(HyperRam).
@@ -155,6 +155,13 @@ void *__malloc_align(malloc_t *a, int32_t size, int32_t align);
  * @param size   Size of the memory region to be used by the allocator.
  */
 uint32_t __malloc_extern_init(malloc_t *a, void *_chunk, int32_t size);
+
+/*!
+ * @brief Free the memory bloc used by an external memory allocator.
+ *
+ * @param a      Pointer to a memory allocator.
+ */
+void __malloc_extern_deinit(malloc_t *a);
 
 /*!
  * @brief Allocate memory from an external allocator.

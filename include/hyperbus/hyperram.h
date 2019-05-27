@@ -49,10 +49,11 @@
  *
  * This structure is used to pass the desired HyperRAM configuration to the runtime when opening the device.
  */
-struct pi_hyperram_conf 
+struct pi_hyperram_conf
 {
-  signed char id;         /*!< If it is different from -1, this specifies on which hyperbus interface the device is connected. */
-  signed int ram_size;   /*!< Size of the ram. */
+    pi_device_e device;  /* Device type. */
+    signed char id;      /*!< If it is different from -1, this specifies on which hyperbus interface the device is connected. */
+    signed int ram_size; /*!< Size of the ram. */
 };
 
 /** \brief HyperRAM request structure.
