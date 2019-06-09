@@ -50,6 +50,13 @@ typedef enum {
 struct pi_device;
 struct pmsis_event_kernel_wrap;
 
+// device type placed at the top of conf
+typedef enum {
+    PI_DEVICE_CLUSTER_TYPE,
+    PI_DEVICE_HYPERBUS_TYPE,
+    PI_DEVICE_SPI_TYPE
+} pi_device_e;
+
 typedef struct pi_task pi_task_t;
 
 typedef void (*callback_t)(void *arg);
@@ -131,12 +138,12 @@ struct pmsis_event_kernel_wrap {
 };
 
 enum pi_task_id {
-    FC_TASK_CALLBACK_ID,
-    FC_TASK_NONE_ID,
+    PI_TASK_CALLBACK_ID,
+    PI_TASK_NONE_ID,
 };
 
-#ifndef PI_TAsK_IMPLEM
-#define PI_TAsK_IMPLEM
+#ifndef PI_TASK_IMPLEM
+#define PI_TASK_IMPLEM
 #endif
 
 typedef struct pi_task{
@@ -146,7 +153,7 @@ typedef struct pi_task{
     pmsis_mutex_t wait_on;
     int id;
 
-    PI_TAsK_IMPLEM;
+    PI_TASK_IMPLEM;
 
 } pi_task_t;
 
