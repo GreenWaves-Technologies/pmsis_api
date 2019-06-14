@@ -5,7 +5,7 @@
 //#define __NO_NATIVE_MUTEX__
 
 #include "pmsis_types.h"
-#include "pmsis_backend_native_task_api.h"
+#include "pmsis_backend/pmsis_backend_native_task_api.h"
 
 // define task priorities
 #define PMSIS_TASK_MAX_PRIORITY 2
@@ -69,7 +69,7 @@ static inline void pi_yield();
 
 #ifndef PMSIS_NO_INLINE_INCLUDE
 
-#include "pmsis_hal.h"
+#include "pmsis_hal/pmsis_hal.h"
 
 static inline struct pi_task *pi_task(struct pi_task *task)
 {
