@@ -749,7 +749,7 @@ WARN_LOGFILE           =
 # spaces.
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = ../pmsis_api/include/pmsis_cluster/cluster_sync/fc_to_cl_delegate.h ../pmsis_api/include/pmsis_types.h ../pmsis_api/include/hyperbus/hyperram.h
+INPUT                  = ../include/pmsis_cluster/cluster_sync/fc_to_cl_delegate.h ../include/pmsis_types.h ../include/hyperbus/hyperram.h ../include/drivers/perf.h ../include/drivers/cpi.h ../include/drivers/i2c.h ../include/drivers/spi.h
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses

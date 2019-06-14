@@ -51,6 +51,8 @@ void pi_task_release(pi_task_t *task);
  **/
 void pi_task_wait_on(pi_task_t *task);
 
+static inline struct pi_task *pi_task(struct pi_task *task);
+
 static inline void pmsis_exit(int err);
 
 void pi_yield();
