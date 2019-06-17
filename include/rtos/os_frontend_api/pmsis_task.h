@@ -41,6 +41,8 @@ pi_task_t *pi_task_callback(pi_task_t *callback_task, void (*callback)(void*), v
 
 pi_task_t *pi_task_block(pi_task_t *callback_task);
 
+pi_task_t *pi_task_block_no_mutex(pi_task_t *callback_task);
+
 static inline struct pi_task *pi_task(struct pi_task *task);
 
 void pi_task_release(pi_task_t *task);
@@ -50,6 +52,8 @@ void pi_task_release(pi_task_t *task);
  * Task must already have been initialized
  **/
 void pi_task_wait_on(pi_task_t *task);
+
+void pi_task_wait_on_no_mutex(pi_task_t *task);
 
 static inline void pmsis_exit(int err);
 
