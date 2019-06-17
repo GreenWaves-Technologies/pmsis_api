@@ -273,10 +273,44 @@ int32_t pi_hyperram_free(struct pi_device *device, uint32_t chunk, uint32_t size
 
 
 
-
-
-
 #if 0
+struct pi_cl_hyper_req_s
+{
+    struct pi_device *device;
+    void *addr;
+    uint32_t hyper_addr;
+    uint32_t size;
+    int32_t stride;
+    uint32_t length;
+    rt_event_t event;
+    struct pi_cl_hyper_req_s *next;
+    int done;
+    unsigned char cid;
+    unsigned char is_write;
+    unsigned char is_2d;
+};
+
+struct pi_cl_hyperram_alloc_req_s {
+  struct pi_device *device;
+  uint32_t result;
+  uint32_t  size;
+  rt_event_t event;
+  char done;
+  char cid;
+};
+
+struct pi_cl_hyperram_free_req_s {
+  struct pi_device *device;
+  uint32_t result;
+  uint32_t size;
+  uint32_t chunk;
+  rt_event_t event;
+  char done;
+  char cid;
+};
+
+
+
 /** \brief Enqueue a read copy to the Hyperbus from cluster side (from Hyperbus to processor).
  *
  * This function is a remote call that the cluster can do to the fabric-controller in order to ask
