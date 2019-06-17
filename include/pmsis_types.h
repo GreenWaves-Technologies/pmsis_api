@@ -152,9 +152,7 @@ typedef struct pi_task{
     volatile int8_t done;
     pmsis_mutex_t wait_on;
     int id;
-
     PI_TASK_IMPLEM;
-
 } pi_task_t;
 
 #endif
