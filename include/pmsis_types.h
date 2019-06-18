@@ -137,17 +137,15 @@ enum pi_task_id {
 };
 
 #ifndef PI_TASK_IMPLEM
-#define PI_TASK_IMPLEM
+#define PI_TASK_IMPLEM \
+    struct pi_task *next;
 #endif
 
 typedef struct pi_task{
     // Warning, might be accessed inline in asm, and thus can not be moved
     uintptr_t arg[4];
-    int8_t done;
-#ifndef PI_TASK_IMPLEM
-    // TODO should be moved to implem
+    volatile int8_t done;
     pmsis_mutex_t wait_on;
-#endif
     int id;
 
     PI_TASK_IMPLEM;
