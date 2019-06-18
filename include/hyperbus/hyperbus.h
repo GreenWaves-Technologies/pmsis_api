@@ -273,42 +273,13 @@ int32_t pi_hyperram_free(struct pi_device *device, uint32_t chunk, uint32_t size
 
 
 
-#if 0
-struct pi_cl_hyper_req_s
-{
-    struct pi_device *device;
-    void *addr;
-    uint32_t hyper_addr;
-    uint32_t size;
-    int32_t stride;
-    uint32_t length;
-    rt_event_t event;
-    struct pi_cl_hyper_req_s *next;
-    int done;
-    unsigned char cid;
-    unsigned char is_write;
-    unsigned char is_2d;
-};
+#if (FEATURE_CLUSTER == 1)
 
-struct pi_cl_hyperram_alloc_req_s {
-  struct pi_device *device;
-  uint32_t result;
-  uint32_t  size;
-  rt_event_t event;
-  char done;
-  char cid;
-};
+typedef struct pi_cl_hyper_req_s pi_cl_hyper_req_t;
 
-struct pi_cl_hyperram_free_req_s {
-  struct pi_device *device;
-  uint32_t result;
-  uint32_t size;
-  uint32_t chunk;
-  rt_event_t event;
-  char done;
-  char cid;
-};
+typedef struct pi_cl_hyperram_alloc_req_s pi_cl_hyperram_alloc_req_t;
 
+typedef struct pi_cl_hyperram_free_req_s pi_cl_hyperram_free_req_t;
 
 
 /** \brief Enqueue a read copy to the Hyperbus from cluster side (from Hyperbus to processor).
@@ -478,6 +449,6 @@ static inline uint32_t pi_cl_hyperram_alloc_wait(pi_cl_hyperram_alloc_req_t *req
  * \return 0        if the operation was successful, -1 otherwise
  */
 static inline void pi_cl_hyperram_free_wait(pi_cl_hyperram_free_req_t *req);
-#endif
+#endif  /* (FEATURE_CLUSTER == 1) */
 
 #endif  /* _PMSIS_HYPERBUS_H_ */
