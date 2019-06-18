@@ -55,6 +55,55 @@ struct pi_hyper_conf
     int32_t ram_size;     /*!< Size of the ram. */
 };
 
+
+struct hyper_transfer_s
+{
+    uint32_t hyper_addr;
+    void *buffer;
+    uint32_t size;
+    uint32_t stride;
+    uint32_t length;
+    udma_channel_e channel;
+    int8_t device_id;
+};
+
+struct hyper_cb_args_s
+{
+    struct pi_task *cb;
+    struct hyper_transfer_s transfer;
+};
+
+#if (FEATURE_CLUSTER == 1)
+struct pi_cl_hyper_req_s
+{
+    struct pi_device *device;
+    struct hyper_transfer_s transfer;
+    struct pi_cl_hyper_req_s *next;
+    pi_task_t task_done;
+    uint8_t cid;
+    uint8_t is_2d;
+};
+
+struct pi_cl_hyper_alloc_req_s
+{
+    struct pi_device *device;
+    uint32_t result;
+    uint32_t size;
+    pi_task_t task_done;
+    uint8_t cid;
+};
+
+struct pi_cl_hyper_free_req_s
+{
+    struct pi_device *device;
+    uint32_t result;
+    uint32_t size;
+    uint32_t chunk;
+    pi_task_t task_done;
+    uint8_t cid;
+};
+#endif  /* (FEATURE_CLUSTER == 1) */
+
 /*******************************************************************************
  * API
  ******************************************************************************/
@@ -271,104 +320,129 @@ uint32_t pi_hyperram_alloc(struct pi_device *device, uint32_t size);
 int32_t pi_hyperram_free(struct pi_device *device, uint32_t chunk, uint32_t size);
 
 
-
-
 #if (FEATURE_CLUSTER == 1)
 
 typedef struct pi_cl_hyper_req_s pi_cl_hyper_req_t;
 
-typedef struct pi_cl_hyperram_alloc_req_s pi_cl_hyperram_alloc_req_t;
+typedef struct pi_cl_hyper_alloc_req_s pi_cl_hyper_alloc_req_t;
 
-typedef struct pi_cl_hyperram_free_req_s pi_cl_hyperram_free_req_t;
+typedef struct pi_cl_hyper_free_req_s pi_cl_hyper_free_req_t;
 
-
-/** \brief Enqueue a read copy to the Hyperbus from cluster side (from Hyperbus to processor).
+/*!
+ * @brief Enqueue a read copy to the Hyperbus from cluster side (from Hyperbus to processor).
  *
- * This function is a remote call that the cluster can do to the fabric-controller in order to ask
- * for an HyperBus read copy.
- * The copy will make an asynchronous transfer between the Hyperbus and one of the processor memory areas.
- * A pointer to a request structure must be provided so that the runtime can properly do the remote call.
- * Can only be called from cluster side.
+ * This function is a remote call that the cluster can do to the fabric-controller
+ * in order to ask for an HyperBus read copy.
+ * The copy will make an asynchronous transfer between the Hyperbus and one of
+ * the processor memory areas.
+ * A pointer to a request structure must be provided so that the runtime can
+ * properly do the remote call.
  *
- * \param device      The device descriptor of the Hyperbus chip on which to do the copy.
- * \param addr        The address of the copy in the processor.
- * \param hyper_addr  The address of the copy in the Hyperbus.
- * \param size        The size in bytes of the copy
- * \param req         A pointer to the HyperBus request structure. It must be allocated by the caller and kept alive until the copy is finished.
+ * @note This function can only be called from the cluster.
+ *
+ * @param device         The device descriptor of the Hyperbus chip.
+ * @param hyper_addr     The address of the buffer in the Hyperbus.
+ * @param buffer         The address of the L2 memory buffer.
+ * @param size           The size in bytes of the buffer to copy.
+ * @param req            A pointer to the Hyperbus request structure. It must be
+ *                       allocated by the caller and kept alive until the copy is finished.
  */
-static inline void pi_cl_hyper_read(struct pi_device *device,
-  uint32_t hyper_addr, void *addr, uint32_t size, pi_cl_hyper_req_t *req);
+void pi_cl_hyper_read(struct pi_device *device, uint32_t hyper_addr,
+                      void *buffer, uint32_t size, pi_cl_hyper_req_t *req);
 
-/** \brief Enqueue a 2D read copy (rectangle area) to the Hyperbus from cluster side (from Hyperbus to processor).
+/*!
+ * @brief Enqueue a 2D read copy (rectangle area) to the Hyperbus from cluster side (from Hyperbus to processor).
  *
- * This function is a remote call that the cluster can do to the fabric-controller in order to ask
- * for an HyperBus read copy.
- * The copy will make an asynchronous transfer between the Hyperbus and one of the processor memory areas.
- * A pointer to a request structure must be provided so that the runtime can properly do the remote call.
- * Can only be called from cluster side.
+ * This function is a remote call that the cluster can do to the fabric-controller
+ * in order to ask for an HyperBus read copy.
+ * The copy will make an asynchronous transfer between the Hyperbus and one of
+ * the processor memory areas.
+ * A pointer to a request structure must be provided so that the runtime can
+ * properly do the remote call.
  *
- * \param device      The device descriptor of the Hyperbus chip on which to do the copy.
- * \param addr        The address of the copy in the processor.
- * \param hyper_addr  The address of the copy in the Hyperbus.
- * \param size        The size in bytes of the copy
- * \param stride      2D stride, which is the number of bytes which are added to the beginning of the current line to switch to the next one.
- * \param length      2D length, which is the number of transfered bytes after which the driver will switch to the next line.
- * \param req         A pointer to the HyperBus request structure. It must be allocated by the caller and kept alive until the copy is finished.
+ * @note This function can only be called from the cluster.
+ *
+ * @param device         The device descriptor of the Hyperbus chip.
+ * @param hyper_addr     The address of the buffer in the Hyperbus.
+ * @param buffer         The address of the L2 memory buffer.
+ * @param size           The size in bytes of the buffer to copy.
+ * @param stride         2D stride(number of bytes added to the beginning
+ *                       of the current line to switch to the next one).
+ * @param length         2D length(number of transfered bytes after which
+ *                       the driver will switch to the next line).
+ * @param req            A pointer to the Hyperbus request structure. It must be
+ *                       allocated by the caller and kept alive until the copy is finished.
  */
-static inline void pi_cl_hyper_read_2d(struct pi_device *device,
-  uint32_t hyper_addr, void *addr, uint32_t size, uint32_t stride, uint32_t length, pi_cl_hyper_req_t *req);
+void pi_cl_hyper_read_2d(struct pi_device *device, uint32_t hyper_addr,
+                         void *buffer, uint32_t size,
+                         uint32_t stride, uint32_t length, pi_cl_hyper_req_t *req);
 
-/** \brief Wait until the specified hyperbus request has finished.
+/*!
+ * @brief Wait until the specified hyperbus request has finished.
  *
- * This blocks the calling core until the specified cluster remote copy is finished.
+ * This function blocks the calling core until the specified request is finished.
  *
- * \param req       The request structure used for termination.
+ * @param req            A pointer to the Hyperbus request structure.
  */
-static inline void pi_cl_hyper_read_wait(pi_cl_hyper_req_t *req);
+void pi_cl_hyper_read_wait(pi_cl_hyper_req_t *req);
 
-/** \brief Enqueue a write copy to the Hyperbus from cluster side (from Hyperbus to processor).
+/*!
+ * @brief Enqueue a write copy to the Hyperbus from cluster side (from Hyperbus to processor).
  *
- * This function is a remote call that the cluster can do to the fabric-controller in order to ask
- * for an HyperBus write copy.
- * The copy will make an asynchronous transfer between the Hyperbus and one of the processor memory areas.
- * A pointer to a request structure must be provided so that the runtime can properly do the remote call.
- * Can only be called from cluster side.
+ * This function is a remote call that the cluster can do to the fabric-controller
+ * in order to ask for an HyperBus write copy.
+ * The copy will make an asynchronous transfer between the Hyperbus and one of
+ * the processor memory areas.
+ * A pointer to a request structure must be provided so that the runtime can
+ * properly do the remote call.
  *
- * \param device      The device descriptor of the Hyperbus chip on which to do the copy.
- * \param addr        The address of the copy in the processor.
- * \param hyper_addr  The address of the copy in the Hyperbus.
- * \param size        The size in bytes of the copy
- * \param req         A pointer to the HyperBus request structure. It must be allocated by the caller and kept alive until the copy is finished.
+ * @note This function can only be called from the cluster.
+ *
+ * @param device         The device descriptor of the Hyperbus chip.
+ * @param hyper_addr     The address of the buffer in the Hyperbus.
+ * @param buffer         The address of the L2 memory buffer.
+ * @param size           The size in bytes of the buffer to copy.
+ * @param req            A pointer to the Hyperbus request structure. It must be
+ *                       allocated by the caller and kept alive until the copy is finished.
  */
-static inline void pi_cl_hyper_write(struct pi_device *device,
-  uint32_t hyper_addr, void *addr, uint32_t size, pi_cl_hyper_req_t *req);
+void pi_cl_hyper_write(struct pi_device *device, uint32_t hyper_addr,
+                       void *buffer, uint32_t size, pi_cl_hyper_req_t *req);
 
-/** \brief Enqueue a 2D write copy (rectangle area) to the Hyperbus from cluster side (from Hyperbus to processor).
+/*!
+ * @brief Enqueue a 2D write copy (rectangle area) to the Hyperbus from cluster side (from Hyperbus to processor).
  *
- * This function is a remote call that the cluster can do to the fabric-controller in order to ask
- * for an HyperBus write copy.
- * The copy will make an asynchronous transfer between the Hyperbus and one of the processor memory areas.
- * A pointer to a request structure must be provided so that the runtime can properly do the remote call.
- * Can only be called from cluster side.
+ * This function is a remote call that the cluster can do to the fabric-controller
+ * in order to ask for an HyperBus write copy.
+ * The copy will make an asynchronous transfer between the Hyperbus and one of
+ * the processor memory areas.
+ * A pointer to a request structure must be provided so that the runtime can
+ * properly do the remote call.
  *
- * \param device      The device descriptor of the Hyperbus chip on which to do the copy.
- * \param addr        The address of the copy in the processor.
- * \param hyper_addr  The address of the copy in the Hyperbus.
- * \param size        The size in bytes of the copy
- * \param stride      2D stride, which is the number of bytes which are added to the beginning of the current line to switch to the next one.
- * \param length      2D length, which is the number of transfered bytes after which the driver will switch to the next line.
- * \param req         A pointer to the HyperBus request structure. It must be allocated by the caller and kept alive until the copy is finished.
+ * @note This function can only be called from the cluster.
+ *
+ * @param device         The device descriptor of the Hyperbus chip.
+ * @param hyper_addr     The address of the buffer in the Hyperbus.
+ * @param addr           The address of the L2 memory buffer.
+ * @param size           The size in bytes of the buffer to copy.
+ * @param stride         2D stride(number of bytes are added to the beginning
+ *                       of the current line to switch to the next one).
+ * @param length         2D length(number of transfered bytes after which
+ *                       the driver will switch to the next line).
+ * @param req            A pointer to the HyperBus request structure. It must be
+ *                       allocated by the caller and kept alive until the copy is finished.
  */
-static inline void pi_cl_hyper_write_2d(struct pi_device *device,
-  uint32_t hyper_addr, void *addr, uint32_t size, uint32_t stride, uint32_t length, pi_cl_hyper_req_t *req);
+void pi_cl_hyper_write_2d(struct pi_device *device, uint32_t hyper_addr,
+                          void *buffer, uint32_t size,
+                          uint32_t stride, uint32_t length, pi_cl_hyper_req_t *req);
 
-/** \brief Wait until the specified hyperbus request has finished.
+/*!
+ * @brief Wait until the specified hyperbus request has finished.
  *
- * This blocks the calling core until the specified cluster remote copy is finished.
+ * This function blocks the calling core until the request is finished.
  *
- * \param req       The request structure used for termination.
+ * @param req            A pointer to the Hyperbus request structure.
  */
-static inline void pi_cl_hyper_write_wait(pi_cl_hyper_req_t *req);
+void pi_cl_hyper_write_wait(pi_cl_hyper_req_t *req);
 
 /** \brief Enqueue a copy with the Hyperbus from cluster side.
  *
@@ -385,8 +459,8 @@ static inline void pi_cl_hyper_write_wait(pi_cl_hyper_req_t *req);
  * \param ext2loc     1 if the copy is from HyperBus to the chip or 0 for the contrary.
  * \param req         A pointer to the HyperBus request structure. It must be allocated by the caller and kept alive until the copy is finished.
  */
-static inline void pi_cl_hyper_copy(struct pi_device *device,
-  uint32_t hyper_addr, void *addr, uint32_t size, int ext2loc, pi_cl_hyper_req_t *req);
+void pi_cl_hyper_copy(struct pi_device *device, uint32_t hyper_addr,
+                      void *addr, uint32_t size, int ext2loc, pi_cl_hyper_req_t *req);
 
 /** \brief Enqueue a 2D copy (rectangle area) with the Hyperbus from cluster side.
  *
@@ -405,8 +479,9 @@ static inline void pi_cl_hyper_copy(struct pi_device *device,
  * \param ext2loc     1 if the copy is from HyperBus to the chip or 0 for the contrary.
  * \param req         A pointer to the HyperBus request structure. It must be allocated by the caller and kept alive until the copy is finished.
  */
-static inline void pi_cl_hyper_copy_2d(struct pi_device *device,
-  uint32_t hyper_addr, void *addr, uint32_t size, uint32_t stride, uint32_t length, int ext2loc, pi_cl_hyper_req_t *req);
+void pi_cl_hyper_copy_2d(struct pi_device *device, uint32_t hyper_addr,
+                         void *addr, uint32_t size,
+                         uint32_t stride, uint32_t length, int ext2loc, pi_cl_hyper_req_t *req);
 
 /** \brief Allocate Hyperram memory from cluster
  *
@@ -417,7 +492,7 @@ static inline void pi_cl_hyper_copy_2d(struct pi_device *device,
  * \param size   The size in bytes of the memory to allocate
  * \param req    The request structure used for termination.
  */
-void pi_cl_hyperram_alloc(struct pi_device *device, uint32_t size, pi_cl_hyperram_alloc_req_t *req);
+void pi_cl_hyperram_alloc(struct pi_device *device, uint32_t size, pi_cl_hyper_alloc_req_t *req);
 
 /** \brief Free Hyperram memory from cluster
  *
@@ -430,7 +505,7 @@ void pi_cl_hyperram_alloc(struct pi_device *device, uint32_t size, pi_cl_hyperra
  * \param size   The size in bytes of the memory chunk which was allocated
  * \param req    The request structure used for termination.
  */
-void pi_cl_hyperram_free(struct pi_device *device, uint32_t chunk, uint32_t size, pi_cl_hyperram_free_req_t *req);
+void pi_cl_hyperram_free(struct pi_device *device, uint32_t chunk, uint32_t size, pi_cl_hyper_free_req_t *req);
 
 /** \brief Wait until the specified hyperram alloc request has finished.
  *
@@ -439,7 +514,7 @@ void pi_cl_hyperram_free(struct pi_device *device, uint32_t chunk, uint32_t size
  * \param req       The request structure used for termination.
  * \return NULL     if not enough memory was available, otherwise the address of the allocated chunk
  */
-static inline uint32_t pi_cl_hyperram_alloc_wait(pi_cl_hyperram_alloc_req_t *req);
+uint32_t pi_cl_hyperram_alloc_wait(pi_cl_hyper_alloc_req_t *req);
 
 /** \brief Wait until the specified hyperbus free request has finished.
  *
@@ -448,7 +523,7 @@ static inline uint32_t pi_cl_hyperram_alloc_wait(pi_cl_hyperram_alloc_req_t *req
  * \param req       The request structure used for termination.
  * \return 0        if the operation was successful, -1 otherwise
  */
-static inline void pi_cl_hyperram_free_wait(pi_cl_hyperram_free_req_t *req);
+void pi_cl_hyperram_free_wait(pi_cl_hyper_free_req_t *req);
 #endif  /* (FEATURE_CLUSTER == 1) */
 
 #endif  /* _PMSIS_HYPERBUS_H_ */
