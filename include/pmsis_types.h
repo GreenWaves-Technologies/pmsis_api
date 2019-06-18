@@ -137,7 +137,8 @@ enum pi_task_id {
 };
 
 #ifndef PI_TASK_IMPLEM
-#define PI_TASK_IMPLEM
+#define PI_TASK_IMPLEM \
+    struct pi_task *next;
 #endif
 
 typedef struct pi_task{

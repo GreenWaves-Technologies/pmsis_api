@@ -39,6 +39,8 @@ static inline void pmsis_task_suspend(__os_native_task_t *task);
 
 pi_task_t *pi_task_callback(pi_task_t *callback_task, void (*callback)(void*), void *arg);
 
+pi_task_t *pi_task_callback_no_mutex(pi_task_t *callback_task, void (*func)(void *), void *arg);
+
 pi_task_t *pi_task_block(pi_task_t *callback_task);
 
 pi_task_t *pi_task_block_no_mutex(pi_task_t *callback_task);
@@ -57,7 +59,7 @@ void pi_task_wait_on_no_mutex(pi_task_t *task);
 
 static inline void pmsis_exit(int err);
 
-void pi_yield();
+static inline void pi_yield();
 
 #ifndef PMSIS_NO_INLINE_INCLUDE
 
@@ -199,6 +201,11 @@ static inline void pmsis_task_suspend(__os_native_task_t *task)
 static inline void pmsis_exit(int err)
 {
     exit(err);
+}
+
+static inline void pi_yield()
+{
+    __os_native_yield();
 }
 
 #endif  /* __PMSIS_TASK_H__ */
