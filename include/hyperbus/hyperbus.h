@@ -80,6 +80,7 @@ struct pi_cl_hyper_req_s
     struct hyper_transfer_s transfer;
     struct pi_cl_hyper_req_s *next;
     pi_task_t task_done;
+    pi_task_t cb;
     uint8_t cid;
     uint8_t is_2d;
 };
@@ -90,6 +91,7 @@ struct pi_cl_hyper_alloc_req_s
     uint32_t result;
     uint32_t size;
     pi_task_t task_done;
+    pi_task_t cb;
     uint8_t cid;
 };
 
@@ -100,6 +102,7 @@ struct pi_cl_hyper_free_req_s
     uint32_t size;
     uint32_t chunk;
     pi_task_t task_done;
+    pi_task_t cb;
     uint8_t cid;
 };
 #endif  /* (FEATURE_CLUSTER == 1) */
