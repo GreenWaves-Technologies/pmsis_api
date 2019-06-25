@@ -84,6 +84,8 @@ int pi_uart_write_async(struct pi_device *device, void *buffer, uint32_t size, p
 
 int pi_uart_read(struct pi_device *device, void *buffer, uint32_t size);
 
+int pi_uart_read_async(struct pi_device *device, void *buffer, uint32_t size, pi_task_t* callback);
+
 int pi_uart_write_byte(struct pi_device *device, uint8_t *byte);
 
 int pi_uart_write_byte_async(struct pi_device *device, uint8_t *byte, pi_task_t* callback);
