@@ -2,7 +2,7 @@
 #define __PMSIS_TASK_H__
 
 // used to avoid OS dependency or in bare metal mode
-//#define __NO_NATIVE_MUTEX__
+#define __NO_NATIVE_MUTEX__
 
 #include "pmsis_types.h"
 #include "pmsis_backend/pmsis_backend_native_task_api.h"

@@ -8,14 +8,14 @@
 #include "rtos/malloc/pmsis_l1_malloc.h"
 #include "rtos/malloc/pmsis_l2_malloc.h"
 #include "rtos/malloc/pmsis_hyperram_malloc.h"
-#ifdef __GAP8__
+#if (defined(__GAP8__) && defined(__USE_TCDM_MALLOC__))
     #include "pmsis_fc_tcdm_malloc.h"
 #endif
 #include "rtos/os_frontend_api/pmsis_task.h"
 #include "rtos/event_kernel/event_kernel.h"
 
-#include "pmsis_backend_native_types.h"
-#include "pmsis_backend_native_task_api.h"
+#include "pmsis_backend/pmsis_backend_native_types.h"
+#include "pmsis_backend/pmsis_backend_native_task_api.h"
 
 /** Kickoff the system : Must be called in the main
  * Completely OS dependant might do anything from a function call to main task 
