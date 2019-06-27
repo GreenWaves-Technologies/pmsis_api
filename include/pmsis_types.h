@@ -113,11 +113,15 @@ typedef struct pi_device_api {
     void *specific_api;
 } pi_device_api_t;
 
+#ifndef IMPLEM_MUTEX_OBJECT_TYPE
+#define IMPLEM_MUTEX_OBJECT_TYPE void*
+#endif
+
 /** Task types **/
-typedef void (*__pmsis_mutex_func)(void *mutex_object);
+typedef void (*__pmsis_mutex_func)(IMPLEM_MUTEX_OBJECT_TYPE mutex_object);
 
 typedef struct pmsis_mutex {
-    void *mutex_object;
+    IMPLEM_MUTEX_OBJECT_TYPE mutex_object;
     __pmsis_mutex_func take;
     __pmsis_mutex_func release;
 } pmsis_mutex_t;
