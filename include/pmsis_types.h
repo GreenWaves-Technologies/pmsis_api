@@ -136,6 +136,8 @@ enum pi_task_id {
     PI_TASK_NONE_ID,
 };
 
+#ifndef PMSIS_USE_EXTERNAL_TYPES
+
 #ifndef PI_TASK_IMPLEM
 #define PI_TASK_IMPLEM \
     struct pi_task *next;\
@@ -152,6 +154,8 @@ typedef struct pi_task{
     PI_TASK_IMPLEM;
 
 } pi_task_t;
+
+#endif
 
 /// @endcond
 #endif
