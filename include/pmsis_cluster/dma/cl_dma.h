@@ -200,7 +200,7 @@ struct cl_dma_cmd_s
   int id;
 };
 
-static inline void cl_dma_cmd(uint32_t ext, uint32_t loc, uint32_t size, cl_dma_transfer_dir_e dir, cl_dma_cmd_t *cmd)
+static inline void cl_dma_cmd(uint32_t ext, uint32_t loc, uint32_t size, cl_dma_dir_e dir, cl_dma_cmd_t *cmd)
 {
   cl_dma_copy_t copy;
   copy.merge = 0;
@@ -212,7 +212,7 @@ static inline void cl_dma_cmd(uint32_t ext, uint32_t loc, uint32_t size, cl_dma_
   cmd->id = copy.id;
 }
 
-static inline void cl_dma_cmd_2d(uint32_t ext, uint32_t loc, uint32_t size, uint32_t stride, uint32_t length, cl_dma_cmd_dir_e dir, rt_dma_cmd_t *cmd)
+static inline void cl_dma_cmd_2d(uint32_t ext, uint32_t loc, uint32_t size, uint32_t stride, uint32_t length, cl_dma_dir_e dir, cl_dma_cmd_t *cmd)
 {
   cl_dma_copy_2d_t copy;
   copy.merge = 0;
