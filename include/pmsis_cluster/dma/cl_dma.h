@@ -185,6 +185,9 @@ static inline void cl_dma_memcpy_2d(cl_dma_copy_t *copy)
 static inline void cl_dma_flush()
 {
     while(hal_read32(&DMAMCHAN->STATUS));
+
+    // Free all counters
+    hal_write32(&DMAMCHAN->STATUS, -1);
 }
 
 static inline void cl_dma_wait(void *copy)
