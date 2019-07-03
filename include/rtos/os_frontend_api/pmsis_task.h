@@ -49,6 +49,10 @@ void pi_task_destroy(pi_task_t *task);
 
 static inline struct pi_task *pi_task(struct pi_task *task);
 
+void pi_task_push(pi_task_t *task);
+
+void pi_task_push_delayed_us(pi_task_t *task, uint32_t delay);
+
 void pi_task_release(pi_task_t *task);
 
 /**
