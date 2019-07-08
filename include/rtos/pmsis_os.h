@@ -9,7 +9,7 @@
 #include "rtos/malloc/pmsis_l2_malloc.h"
 #include "rtos/malloc/pmsis_hyperram_malloc.h"
 #if (defined(__GAP8__) && defined(__USE_TCDM_MALLOC__))
-    #include "pmsis_fc_tcdm_malloc.h"
+    #include "rtos/malloc/pmsis_fc_tcdm_malloc.h"
 #endif
 #include "rtos/os_frontend_api/pmsis_task.h"
 #include "rtos/event_kernel/event_kernel.h"
