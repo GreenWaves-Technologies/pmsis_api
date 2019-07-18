@@ -17,6 +17,8 @@
 #ifndef __PI_DRIVERS_CPI_H__
 #define __PI_DRIVERS_CPI_H__
 
+#include "pmsis_types.h"
+
 /**
 * @ingroup groupDrivers
 */
@@ -98,7 +100,7 @@ void pi_cpi_close(struct pi_device *device);
  * \param buffer    The memory buffer where the captured samples will be transfered.
  * \param bufferlen      The size in bytes of the memory buffer.
  */
-void pi_cpi_capture(struct pi_device *device, void *buffer, size_t bufferlen);
+void pi_cpi_capture(struct pi_device *device, void *buffer, int32_t bufferlen);
 
 /** \brief Capture a sequence of samples asynchronously.
  *
@@ -114,7 +116,7 @@ void pi_cpi_capture(struct pi_device *device, void *buffer, size_t bufferlen);
  * \param bufferlen      The size in bytes of the memory buffer.
  * \param task        The task used to notify the end of transfer. See the documentation of pi_task for more details.
  */
-void pi_cpi_capture_async(struct pi_device *device, void *buffer, size_t bufferlen, pi_task_t *task);
+void pi_cpi_capture_async(struct pi_device *device, void *buffer, int32_t bufferlen, pi_task_t *task);
 
 /** \brief Start capturing samples.
  *

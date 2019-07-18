@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-#ifndef __PMSIS_DRIVERS_I2C_H__
-#define __PMSIS_DRIVERS_I2C_H__
+#ifndef __PI_DRIVERS_I2C_H__
+#define __PI_DRIVERS_I2C_H__
 
+#include "pmsis_types.h"
 
 /**
 * @ingroup groupDrivers
@@ -176,6 +177,4 @@ void pi_i2c_write_async(struct pi_device *device, uint8_t *tx_data, int length, 
 
 
 
-#endif
-
-
+#endif  /* __PI_DRIVERS_I2C_H__ */
