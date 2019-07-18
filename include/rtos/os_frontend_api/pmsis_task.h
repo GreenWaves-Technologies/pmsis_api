@@ -206,7 +206,7 @@ static inline void pmsis_task_suspend(__os_native_task_t *task)
 
 static inline void pmsis_exit(int err)
 {
-    exit(err);
+    __os_native_exit(err);
 }
 
 static inline void pi_yield()
