@@ -4,17 +4,20 @@
 // used to avoid OS dependency or in bare metal mode
 //#define __NO_NATIVE_MUTEX__
 
-#include "pmsis_types.h"
+#include "pmsis.h"
 #include "pmsis_backend/pmsis_backend_native_task_api.h"
-
-// define task priorities
-#define PMSIS_TASK_MAX_PRIORITY 2
-#define PMSIS_TASK_OS_PRIORITY 1
-#define PMSIS_TASK_USER_PRIORITY 0
 
 static inline int disable_irq(void);
 
 static inline void restore_irq(int irq_enable);
+
+static inline void pmsis_sem_take(pi_sem_t *mutex);
+
+static inline void pmsis_sem_give(pi_sem_t *mutex);
+
+static inline int pmsis_sem_init(pi_sem_t *mutex);
+
+static inline int pmsis_sem_deinit(pi_sem_t *mutex);
 
 static inline void pmsis_mutex_take(pmsis_mutex_t *mutex);
 
@@ -165,6 +168,41 @@ static inline int pmsis_mutex_deinit(pmsis_mutex_t *mutex)
 #else
     return  __os_native_api_mutex_deinit(mutex);
 #endif
+}
+/*
+ * decrement a semaphore
+ */
+static inline void pi_sem_take(pi_sem_t *sem)
+{
+    hal_compiler_barrier();
+    sem->take(sem->sem_object);
+}
+
+/*
+ * increment a semapphore
+ */
+static inline void pi_sem_give(pi_sem_t *sem)
+{
+    sem->give(sem->sem_object);
+    hal_compiler_barrier();
+}
+
+/*
+ * init a semaphore, return non zero in case of failure
+ */
+static inline int pi_sem_init(pi_sem_t *sem)
+{
+    hal_compiler_barrier();
+    return  __os_native_api_sem_init(sem);
+}
+
+/*
+ * deinit a semaphore, return non zero in case of failure
+ */
+static inline int pmsis_sem_deinit(pi_sem_t *sem)
+{
+    hal_compiler_barrier();
+    return  __os_native_api_sem_deinit(sem);
 }
 
 static inline void pmsis_spinlock_init(pmsis_spinlock_t *spinlock)
