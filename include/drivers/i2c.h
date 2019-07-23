@@ -50,10 +50,12 @@
  *
  * This structure is used to pass the desired I2C configuration to the runtime when opening a device.
  */
-typedef struct pi_i2c_conf {
-	unsigned char itf;            /*!< Specifies on which I2C interface the device is connected. */
-    signed char cs;               /*!< i2c slave address (7 bits on MSB), the runtime will take care of the LSB of READ and Write. */
-    unsigned int  max_baudrate;   /*!< Maximum baudrate for the I2C bitstream which can be used with the opened device . */
+typedef struct pi_i2c_conf
+{
+    pi_device_e device;  /* Device type. */
+    uint8_t itf;            /*!< Specifies on which I2C interface the device is connected. */
+    int8_t cs;               /*!< i2c slave address (7 bits on MSB), the runtime will take care of the LSB of READ and Write. */
+    uint32_t max_baudrate;   /*!< Maximum baudrate for the I2C bitstream which can be used with the opened device . */
 } pi_i2c_conf_t;
 
 
