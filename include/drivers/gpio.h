@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-#ifndef __DRIVERS__GPIO_H__
-#define __DRIVERS__GPIO_H__
+#ifndef __PI_DRIVERS_GPIO_H__
+#define __PI_DRIVERS_GPIO_H__
 
 #include <stdint.h>
+#include "pmsis_types.h"
 
 typedef enum {
   PI_GPIO_INPUT = 0<<1,   /*!< The GPIO is an output, the chip can transmit a value. */
@@ -28,7 +29,7 @@ typedef enum {
   PI_GPIO_NOTIF_EDGE = 3,    /*!< Notifications are sent when there is both a rising edge or a falling edge on the GPIO value. */
   PI_GPIO_NOTIF_RISE = 2,    /*!< Notifications are sent when there is a rising edge on the GPIO value. */
   PI_GPIO_NOTIF_FALL = 1,    /*!< Notifications are sent when there is a falling edge on the GPIO value. */
-  PI_GPIO_NOTIF_NONE = 0	
+  PI_GPIO_NOTIF_NONE = 0
 } pi_gpio_notif_e;
 
 
@@ -66,4 +67,4 @@ int pi_gpio_mask_task_add(struct pi_device *device, uint32_t mask, pi_task_t *ta
 
 int pi_gpio_mask_task_remove(struct pi_device *device, uint32_t mask);
 
-#endif
+#endif  /* __PI_DRIVERS_GPIO_H__ */
