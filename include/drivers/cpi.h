@@ -57,9 +57,10 @@ typedef enum {
  *
  * This structure is used to pass the desired CPI configuration to the runtime when opening the device.
  */
-struct pi_cpi_conf 
+struct pi_cpi_conf
 {
-  unsigned char itf;  /*!< CPI interface ID where the device is connected. */
+    pi_device_e device; /*!< Device type.  */
+    uint8_t itf;        /*!< CPI interface ID where the device is connected. */
 };
 
 /** \brief Initialize a CPI configuration with default values.
@@ -189,4 +190,4 @@ static inline void pi_cpi_set_slice(struct pi_device *device, uint32_t x, uint32
  * @}
  */
 
-#endif
+#endif  /* __PI_DRIVERS_CPI_H__ */
