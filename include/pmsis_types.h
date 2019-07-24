@@ -48,7 +48,9 @@ struct pmsis_event_kernel_wrap;
 typedef enum {
     PI_DEVICE_CLUSTER_TYPE,
     PI_DEVICE_HYPERBUS_TYPE,
-    PI_DEVICE_SPI_TYPE
+    PI_DEVICE_SPI_TYPE,
+    PI_DEVICE_CPI_TYPE,
+    PI_DEVICE_I2C_TYPE
 } pi_device_e;
 
 typedef struct pi_task pi_task_t;
