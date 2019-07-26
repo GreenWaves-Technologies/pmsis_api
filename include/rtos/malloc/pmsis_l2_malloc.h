@@ -4,7 +4,8 @@
 #include "pmsis_types.h"
 #include "pmsis_malloc_internal.h"
 
-void *pmsis_l2_malloc(size_t size);
+
+void *pmsis_l2_malloc(int size);
 
 void pmsis_l2_malloc_free(void *_chunk, int size);
 
