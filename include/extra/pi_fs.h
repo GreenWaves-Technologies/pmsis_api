@@ -112,7 +112,6 @@ typedef struct _fs_file_s
     fs_handle_t *fs;
     uint32_t pending_buffer;
     uint32_t pending_size;
-    char name[];
 } fs_file_t;
 
 /*******************************************************************************
@@ -154,7 +153,7 @@ void pi_fs_unmount(fs_handle_t *fs_handle);
  * @param file      Path to the file.
  * @param mode      File opening mode.
  */
-fs_file_t *pi_fs_open(fs_handle_t *fs_handle, const char *file, uint8_t mode);
+fs_file_t *pi_fs_open(fs_handle_t *fs_handle, const char *file_name, uint8_t mode);
 
 /*!
  * @brief Close a file.
