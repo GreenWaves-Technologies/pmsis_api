@@ -76,8 +76,7 @@ static inline void pi_yield();
 
 static inline struct pi_task *pi_task(struct pi_task *task)
 {
-  task->id = PI_TASK_NONE_ID;
-  task->arg[0] = (uint32_t)0;
+  pi_task_block_no_mutex(task);
   return task;
 }
 
