@@ -46,6 +46,7 @@ struct pmsis_event_kernel_wrap;
 
 // device type placed at the top of conf
 typedef enum {
+    PI_DEVICE_UNKWN_TYPE,
     PI_DEVICE_CLUSTER_TYPE,
     PI_DEVICE_HYPERBUS_TYPE,
     PI_DEVICE_SPI_TYPE,
