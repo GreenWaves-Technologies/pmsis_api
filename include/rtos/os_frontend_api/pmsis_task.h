@@ -11,13 +11,14 @@ static inline int disable_irq(void);
 
 static inline void restore_irq(int irq_enable);
 
-static inline void pmsis_sem_take(pi_sem_t *mutex);
+#ifdef PMSIS_DRIVER
+static inline void pi_sem_take(pi_sem_t *mutex);
 
-static inline void pmsis_sem_give(pi_sem_t *mutex);
+static inline void pi_sem_give(pi_sem_t *mutex);
 
-static inline int pmsis_sem_init(pi_sem_t *mutex);
+static inline int pi_sem_init(pi_sem_t *mutex);
 
-static inline int pmsis_sem_deinit(pi_sem_t *mutex);
+static inline int pi_sem_deinit(pi_sem_t *mutex);
 
 static inline void pmsis_mutex_take(pmsis_mutex_t *mutex);
 
@@ -39,6 +40,8 @@ static inline void *pmsis_task_create(void (*entry)(void*),
         int priority);
 
 static inline void pmsis_task_suspend(__os_native_task_t *task);
+
+#endif
 
 pi_task_t *pi_task_callback(pi_task_t *callback_task, void (*callback)(void*), void *arg);
 
