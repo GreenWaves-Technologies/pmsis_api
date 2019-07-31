@@ -76,8 +76,8 @@ static inline void pi_yield();
 
 static inline struct pi_task *pi_task(struct pi_task *task)
 {
-  pi_task_block_no_mutex(task);
-  return task;
+    pi_task_block(task);
+    return task;
 }
 
 /*
