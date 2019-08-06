@@ -198,7 +198,7 @@ static inline int pi_sem_init(pi_sem_t *sem)
 /*
  * deinit a semaphore, return non zero in case of failure
  */
-static inline int pmsis_sem_deinit(pi_sem_t *sem)
+static inline int pi_sem_deinit(pi_sem_t *sem)
 {
     hal_compiler_barrier();
     return  __os_native_api_sem_deinit(sem);
