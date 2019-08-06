@@ -11,7 +11,7 @@ static inline int disable_irq(void);
 
 static inline void restore_irq(int irq_enable);
 
-#ifdef PMSIS_DRIVER
+#ifdef PMSIS_DRIVERS
 static inline void pi_sem_take(pi_sem_t *mutex);
 
 static inline void pi_sem_give(pi_sem_t *mutex);
