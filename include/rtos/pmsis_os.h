@@ -1,4 +1,5 @@
 #ifndef __PMSIS_OS_H__
+#define __PMSIS_OS_H__
 
 #include <stdint.h>
 #include <stddef.h>
@@ -34,4 +35,4 @@ static inline int pmsis_kickoff(void *arg)
 
 #endif
 
-#endif
+#endif  /* __PMSIS_OS_H__ */
