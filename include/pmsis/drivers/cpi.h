@@ -17,7 +17,7 @@
 #ifndef __PI_DRIVERS_CPI_H__
 #define __PI_DRIVERS_CPI_H__
 
-#include "pmsis.h"
+#include "pmsis/pmsis_types.h"
 /**
 * @ingroup groupDrivers
 */

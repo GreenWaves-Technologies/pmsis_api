@@ -17,7 +17,7 @@
 #ifndef __CL_TEAM_H__
 #define __CL_TEAM_H__
 
-#include "pmsis.h"
+#include "pmsis/pmsis_types.h"
 
 /**        
  * @ingroup groupCluster        

@@ -1,5 +1,5 @@
-#ifndef __PMSIS_TASK_H__
-#define __PMSIS_TASK_H__
+#ifndef __PMSIS_PMSIS_TASK_H__
+#define __PMSIS_PMSIS_TASK_H__
 
 // used to avoid OS dependency or in bare metal mode
 //#define __NO_NATIVE_MUTEX__
@@ -43,32 +43,6 @@ static inline void pmsis_task_suspend(__os_native_task_t *task);
 
 #endif
 
-pi_task_t *pi_task_callback(pi_task_t *callback_task, void (*callback)(void*), void *arg);
-
-pi_task_t *pi_task_callback_no_mutex(pi_task_t *callback_task, void (*func)(void *), void *arg);
-
-pi_task_t *pi_task_block(pi_task_t *callback_task);
-
-pi_task_t *pi_task_block_no_mutex(pi_task_t *callback_task);
-
-void pi_task_destroy(pi_task_t *task);
-
-static inline struct pi_task *pi_task(struct pi_task *task);
-
-void pi_task_push(pi_task_t *task);
-
-void pi_task_push_delayed_us(pi_task_t *task, uint32_t delay);
-
-void pi_task_release(pi_task_t *task);
-
-/**
- * Wait on the execution of the task associated to pi_task_t
- * Task must already have been initialized
- **/
-void pi_task_wait_on(pi_task_t *task);
-
-void pi_task_wait_on_no_mutex(pi_task_t *task);
-
 static inline void pmsis_exit(int err);
 
 static inline void pi_yield();
@@ -76,12 +50,6 @@ static inline void pi_yield();
 #ifndef PMSIS_NO_INLINE_INCLUDE
 
 #include "pmsis_hal/pmsis_hal.h"
-
-static inline struct pi_task *pi_task(struct pi_task *task)
-{
-    pi_task_block(task);
-    return task;
-}
 
 /*
  * Disable IRQs while saving previous irq state
