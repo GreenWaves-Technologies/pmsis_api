@@ -1,7 +1,7 @@
 #ifndef __EVENT_KERNEL_H__
 #define __EVENT_KERNEL_H__
 
-#include "pmsis_types.h"
+#include "pmsis/pmsis_types.h"
 
 /** Typical event kernel main function **/
 void pmsis_event_kernel_main(void *arg);

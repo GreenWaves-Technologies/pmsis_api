@@ -47,7 +47,7 @@ static inline void pmsis_exit(int err);
 
 static inline void pi_yield();
 
-#ifndef PMSIS_NO_INLINE_INCLUDE
+#ifdef PMSIS_DRIVERS
 
 #include "pmsis_hal/pmsis_hal.h"
 

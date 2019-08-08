@@ -160,7 +160,7 @@ enum pi_task_id {
     PI_TASK_NONE_ID,
 };
 
-#ifndef PMSIS_USE_EXTERNAL_TYPES
+#ifdef PMSIS_DRIVERS
 
 #ifndef PI_TASK_IMPLEM
 #define PI_TASK_IMPLEM \

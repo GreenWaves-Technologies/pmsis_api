@@ -1,8 +1,7 @@
 #ifndef __PMSIS_L2_MALLOC_H__
 #define __PMSIS_L2_MALLOC_H__
 
-#include "pmsis.h"
-#include "rtos/malloc/pmsis_malloc_internal.h"
+#include "pmsis/pmsis_types.h"
 
 #ifndef __L2_MALLOC_NATIVE__
 void *pmsis_l2_malloc(int size);

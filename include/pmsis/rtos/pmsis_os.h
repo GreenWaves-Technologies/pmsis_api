@@ -23,7 +23,7 @@
  * creation */
 static inline int pmsis_kickoff(void *arg);
 
-#ifndef PMSIS_NO_INLINE_INCLUDE
+#ifdef PMSIS_DRIVERS
 
 /** Kickoff the system : Must be called in the main
  * Completely OS dependant might do anything from a function call to main task 

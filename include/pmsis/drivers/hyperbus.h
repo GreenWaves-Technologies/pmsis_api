@@ -17,7 +17,7 @@
 #ifndef __PI_DRIVERS_HYPERBUS_H__
 #define __PI_DRIVERS_HYPERBUS_H__
 
-#include "pmsis_types.h"
+#include "pmsis/pmsis_types.h"
 
 
 /**

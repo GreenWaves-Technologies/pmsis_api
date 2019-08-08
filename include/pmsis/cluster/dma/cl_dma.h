@@ -17,7 +17,7 @@
 #ifndef __CL_DMA_H__
 #define __CL_DMA_H__
 
-#include "pmsis_cluster/cl_pmsis_types.h"
+#include "pmsis/cluster/cl_pmsis_types.h"
 /**
  * @ingroup groupCluster
  */
@@ -147,7 +147,7 @@ static inline void cl_dma_cmd_2d(uint32_t ext, uint32_t loc, uint32_t size, uint
 
 static inline void cl_dma_cmd_wait(cl_dma_cmd_t *cmd);
 
-#ifndef PMSIS_NO_INLINE_INCLUDE
+#ifdef PMSIS_DRIVERS
 
 static inline void cl_dma_memcpy(cl_dma_copy_t *copy)
 {
