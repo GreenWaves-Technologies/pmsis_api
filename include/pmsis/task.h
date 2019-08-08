@@ -7,7 +7,7 @@ pi_task_t *pi_task_callback(pi_task_t *callback_task, void (*callback)(void*), v
 
 pi_task_t *pi_task_callback_no_mutex(pi_task_t *callback_task, void (*func)(void *), void *arg);
 
-pi_task_t *pi_task_block(pi_task_t *callback_task);
+static inline pi_task_t *pi_task_block(pi_task_t *callback_task);
 
 pi_task_t *pi_task_block_no_mutex(pi_task_t *callback_task);
 
@@ -31,11 +31,12 @@ void pi_task_wait_on_no_mutex(pi_task_t *task);
 
 //#include "pmsis_hal/pmsis_hal.h"
 #include "pmsis_backend/pmsis_backend_native_task_api.h"
+pi_task_t *__pi_task_block(pi_task_t *callback_task);
 
-static inline struct pi_task *pi_task(struct pi_task *task)
+static inline struct pi_task *pi_task_block(struct pi_task *callback_task)
 {
-    pi_task_block(task);
-    return task;
+    __pi_task_block(callback_task);
+    return callback_task;
 }
 #else
 #include "pmsis/implem/implem.h"
