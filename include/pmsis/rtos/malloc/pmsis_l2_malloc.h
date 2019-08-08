@@ -12,8 +12,8 @@ void *pmsis_l2_malloc_align(int size, int align);
 
 void pmsis_l2_malloc_init(void *heapstart, uint32_t size);
 
-void pmsis_l2_malloc_set_malloc_struct(malloc_t malloc_struct);
+//void pmsis_l2_malloc_set_malloc_struct(malloc_t malloc_struct);
 
-malloc_t pmsis_l2_malloc_get_malloc_struct(void);
+//malloc_t pmsis_l2_malloc_get_malloc_struct(void);
 #endif
 #endif
