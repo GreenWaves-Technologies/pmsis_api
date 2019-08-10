@@ -311,6 +311,9 @@ static inline unsigned int __attribute__ ((always_inline)) ExtInsMaskSafe(unsign
 #define gap8_roundnorm_reg(x, scale)		__builtin_pulp_addRN_r((x), 0, (scale)) /*int,int,int*/
 
 /* STOP_DEF_BTIN */
+
+#define gap8_waitbarrier cl_team_barrier
+
 #else
 /* Here we compile for another target than Gap, PC for example, we emulate the builtins */
 
