@@ -4,7 +4,9 @@
 #include "pmsis.h"
 #include "rtos/malloc/pmsis_malloc_internal.h"
 
-#ifndef __L2_MALLOC_NATIVE__
+#if (__L2_MALLOC_NATIVE__ != 0)
+void pmsis_l2_malloc_dump();
+
 void *pmsis_l2_malloc(int size);
 
 void pmsis_l2_malloc_free(void *_chunk, int size);
