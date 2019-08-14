@@ -115,25 +115,25 @@ static int Private_call(void (*fn)(void *), void * arg, __event_cb * event)
 
 //All this stuff should not stay here!!!!!!!!!!!!!!!
 
-#include "pmsis.h"
+//#include "pmsis.h"
 
-#ifdef __FREERTOS__
-#include "drivers/hyperbus.h"
-#include "pmsis_cluster/dma/cl_dma.h"
-#include "pmsis_cluster/drivers/delegate/hyperbus/hyperbus_cl_internal.h"
+#ifdef __PULP_OS__
+    #include "rt/rt_api.h"
+#elif defined __FREERTOS__
+    #include "drivers/hyperbus.h"
+    #include "pmsis_cluster/dma/cl_dma.h"
+    #include "pmsis_cluster/drivers/delegate/hyperbus/hyperbus_cl_internal.h"
 #endif
 
 extern struct pi_device *hyperram;
 
 #define __cl_hyper_copy(a,b,c,d,e,f) \
-    pi_cl_hyper_copy((struct pi_device *) a, (uint32_t) b, (void *) c, d, f, (pi_cl_hyper_req_t *) e)
+        pi_cl_hyper_copy((struct pi_device *) a, (uint32_t) b, (void *) c, d, f, (pi_cl_hyper_req_t *) e)
 
 #define __cl_hyper_copy_2d(a,b,c,d,e,f,g,h) \
-    pi_cl_hyper_copy_2d((struct pi_device *) a, (uint32_t) b, (void *) c, d, e, f, h, (pi_cl_hyper_req_t *) g)
+        pi_cl_hyper_copy_2d((struct pi_device *) a, (uint32_t) b, (void *) c, d, e, f, h, (pi_cl_hyper_req_t *) g)
 
 #define __cl_hyper_copy_wait        pi_cl_hyper_read_wait
-
-
 
 #define CL_HYPER_EXT2LOC 1
 #define CL_HYPER_LOC2EXT 0
@@ -176,10 +176,16 @@ static inline void __cl_dma_memcpy_2d(uint32_t ext, uint32_t loc, uint16_t size,
 // #define rt_alloc_align(Space, Size)	malloc((Size))
 // #define rt_free(Space, Pointer, Size)	free((Pointer))
 
-#define gap_setupbarrier(BarN, CoreM)   
-//eu_bar_setup(eu_bar_addr(BarN), CoreM)
-#define gap_waitbarrier(BarN)           cl_team_barrier(BarN)
-//eu_bar_trig_wait_clr(eu_bar_addr(BarN))
+//This is not used anywehre
+//#define gap_setupbarrier(BarN, CoreM)   eu_bar_setup(eu_bar_addr(BarN), CoreM)
+#ifdef __PULP_OS__
+    #define gap_waitbarrier(BarN)           rt_team_barrier(BarN) //eu_bar_trig_wait_clr(eu_bar_addr(BarN))
+#elif  defined __FREERTOS__
+    #define gap_waitbarrier(BarN)           CLUSTER_SynchBarrier()
+#else //pmsis
+    #define gap_waitbarrier(BarN)           cl_team_barrier(BarN) 
+#endif
+
 
 #define gap_fc_starttimer()             timer_start(timer_base_fc(0, 0))
 #define gap_fc_resethwtimer()           timer_reset(timer_base_fc(0, 0))
