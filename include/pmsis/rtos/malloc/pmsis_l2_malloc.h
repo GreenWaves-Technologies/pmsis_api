@@ -3,7 +3,7 @@
 
 #include "pmsis/pmsis_types.h"
 
-#if (__L2_MALLOC_NATIVE__ != 0)
+#if !defined(PMSIS_DRIVERS) || (__L2_MALLOC_NATIVE__ != 0)
 void pmsis_l2_malloc_dump();
 
 void *pmsis_l2_malloc(int size);
