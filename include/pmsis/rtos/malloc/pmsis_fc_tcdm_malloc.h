@@ -17,7 +17,6 @@
 #ifndef __PMSIS_FC_TCDM_MALLOC_H__
 #define __PMSIS_FC_TCDM_MALLOC_H__
 
-#include "pmsis_hal/pmsis_hal.h"
 #include "pmsis/rtos/malloc/pmsis_malloc_internal.h"
 
 void *pmsis_fc_tcdm_malloc(uint32_t size);
@@ -32,4 +31,4 @@ void pmsis_fc_tcdm_malloc_set_malloc_struct(malloc_t malloc_struct);
 
 malloc_t pmsis_fc_tcdm_malloc_get_malloc_struct(void);
 
-#endif
+#endif  /* __PMSIS_FC_TCDM_MALLOC_H__ */
