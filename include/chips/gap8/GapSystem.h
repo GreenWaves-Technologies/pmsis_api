@@ -195,7 +195,7 @@ static inline void __cl_dma_memcpy_2d(uint32_t ext, uint32_t loc, uint16_t size,
 //This is not used anywehre
 //#define gap_setupbarrier(BarN, CoreM)   eu_bar_setup(eu_bar_addr(BarN), CoreM)
 #ifdef __PULP_OS__
-    #define gap_waitbarrier(BarN)           rt_team_barrier(BarN) //eu_bar_trig_wait_clr(eu_bar_addr(BarN))
+    #define gap_waitbarrier(BarN)           eu_bar_trig_wait_clr(eu_bar_addr(BarN))
 #elif  defined __FREERTOS__
     #define gap_waitbarrier(BarN)           CLUSTER_SynchBarrier()
 #else //pmsis
