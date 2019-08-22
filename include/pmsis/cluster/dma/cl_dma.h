@@ -192,6 +192,7 @@ static inline void cl_dma_flush()
 
 static inline void cl_dma_wait(void *copy)
 {
+    hal_compiler_barrier();
     cl_dma_copy_t *_copy = (cl_dma_copy_t *) copy;
     while((hal_read32(&DMAMCHAN->STATUS) >> _copy->id ) & 0x1 );
 
