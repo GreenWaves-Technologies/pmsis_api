@@ -35,7 +35,7 @@ typedef unsigned char  v4u __attribute__((vector_size (4)));
 //#include "rt/rt_api.h"
 typedef unsigned int rt_pointerT;
 #else
-typedef void * rt_pointerT;
+typedef char* rt_pointerT;
 #endif
 
 
