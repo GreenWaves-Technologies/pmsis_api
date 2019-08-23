@@ -18,7 +18,6 @@
 #define __CL_TO_FC_DELEGATE_H__
 
 #include "pmsis/cluster/cl_pmsis_types.h"
-#include "pmsis_hal/pmsis_hal.h"
 #include "pmsis/rtos/malloc/pmsis_malloc_internal.h"
 
 /**

@@ -65,8 +65,6 @@ static inline void pi_yield();
 
 #ifdef PMSIS_DRIVERS
 
-#include "pmsis_hal/pmsis_hal.h"
-
 /*
  * Disable IRQs while saving previous irq state
  */
