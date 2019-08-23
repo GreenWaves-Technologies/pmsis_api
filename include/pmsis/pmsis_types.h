@@ -164,16 +164,22 @@ enum pi_task_id {
 
 #ifndef PI_TASK_IMPLEM
 #define PI_TASK_IMPLEM \
-    struct pi_task *next;\
-    int destroy;
+    int8_t destroy;
 #endif
 
-typedef struct pi_task{
+#ifndef PI_TASK_IMPLEM_NB_DATA
+#define PI_TASK_IMPLEM_NB_DATA 8
+#endif  /* PI_TASK_IMPLEM_NB_DATA */
+
+typedef struct pi_task
+{
     // Warning, might be accessed inline in asm, and thus can not be moved
     uintptr_t arg[4];
     volatile int8_t done;
+    int32_t id;
+    uint32_t data[PI_TASK_IMPLEM_NB_DATA];
     pi_sem_t wait_on;
-    int id;
+    struct pi_task *next;
     PI_TASK_IMPLEM;
 } pi_task_t;
 
