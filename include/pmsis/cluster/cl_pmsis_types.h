@@ -17,10 +17,6 @@
 #ifndef __CL_PMSIS_TYPES__H__
 #define __CL_PMSIS_TYPES__H__
 
-#ifdef PMSIS_DRIVERS
-#include "pmsis_cluster/cl_pmsis.h"
-#endif
-
 /**
  * @ingroup groupCluster
  */
