@@ -19,8 +19,7 @@
 
 #include "pmsis/rtos/malloc/pmsis_malloc_internal.h"
 
-//#if defined(PMSIS_DRIVERS) || (__L2_MALLOC_NATIVE__ != 0)
-#if !defined(__L2_MALLOC_NATIVE__)
+#if !defined(__L2_MALLOC_NATIVE__) || (__L2_MALLOC_NATIVE__ == 0)
 
 void *pmsis_l2_malloc(int size);
 

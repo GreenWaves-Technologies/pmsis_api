@@ -165,6 +165,7 @@ static inline void __cl_dma_memcpy(uint32_t ext, uint32_t loc, uint16_t size, cl
     copy->ext = ext;
     copy->stride = 0;
     copy->length = 0;
+    hal_compiler_barrier();
     cl_dma_memcpy(copy);
 }
 
