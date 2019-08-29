@@ -27,7 +27,7 @@ static inline pi_task_t *pi_task_block(pi_task_t *callback_task);
 
 pi_task_t *pi_task_block_no_mutex(pi_task_t *callback_task);
 
-void pi_task_destroy(pi_task_t *task);
+static inline void pi_task_destroy(pi_task_t *task);
 
 void pi_task_push(pi_task_t *task);
 
@@ -54,6 +54,14 @@ static inline struct pi_task *pi_task_block(struct pi_task *callback_task)
     __pi_task_block(callback_task);
     return callback_task;
 }
+
+void __pi_task_destroy(pi_task_t *task);
+
+static inline void pi_task_destroy(pi_task_t *task)
+{
+    __pi_task_destroy(task);
+}
+
 #else
 #include "pmsis/implem/implem.h"
 #endif
