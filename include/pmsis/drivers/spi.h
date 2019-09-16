@@ -204,6 +204,10 @@ void pi_spi_send(struct pi_device *device, void *data, size_t len, pi_spi_flags_
  */
 void pi_spi_send_async(struct pi_device *device, void *data, size_t len, pi_spi_flags_e flag, pi_task_t *task);
 
+void *pi_spi_send_ucode_set(struct pi_device *device, uint8_t *ucode, uint32_t ucode_size);
+
+void pi_spi_send_ucode_set_addr_info(struct pi_device *device, uint8_t *ucode, uint32_t ucode_size);
+
 
 
 /** \brief Enqueue a read copy to the SPI (from Chip to SPI device).
@@ -239,6 +243,10 @@ void pi_spi_receive(struct pi_device *device, void *data, size_t len, pi_spi_fla
  */
 void pi_spi_receive_async(struct pi_device *device, void *data, size_t len, pi_spi_flags_e flag, pi_task_t *task);
 
+void *pi_spi_receive_ucode_set(struct pi_device *device, uint8_t *ucode, uint32_t ucode_size);
+
+void pi_spi_receive_ucode_set_addr_info(struct pi_device *device, uint8_t *ucode, uint32_t ucode_size);
+
 /** \brief Enqueue a read and write copy to the SPI (using full duplex flag).
  *
  * This function can be used to send and receive data with the SPI device using full duplex flag.
@@ -270,7 +278,7 @@ void pi_spi_transfer(struct pi_device *device, void *tx_data, void *rx_data, siz
  */
 void pi_spi_transfer_async(struct pi_device *device, void *tx_data, void *rx_data, size_t len, pi_spi_flags_e flag, pi_task_t *task);
 
-void pi_spi_ucode_set(struct pi_device *device, uint8_t *ucode, uint32_t ucode_size);
+void pi_spi_transfer_ucode_set(struct pi_device *device, uint8_t *ucode, uint32_t ucode_size);
 
 //!@}
 
