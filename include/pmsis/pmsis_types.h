@@ -18,6 +18,9 @@
 #define __PMSIS_TYPES__H__
 
 #include "inttypes.h"
+#ifdef PMSIS_DRIVERS
+#include "pmsis_backend/implementation_specific_defines.h"
+#endif  /* PMSIS_DRIVERS */
 
 /**
  * @defgroup groupDrivers Drivers
