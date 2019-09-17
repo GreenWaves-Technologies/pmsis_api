@@ -62,8 +62,6 @@ static inline void pi_task_destroy(pi_task_t *task)
     __pi_task_destroy(task);
 }
 
-#else
-#include "pmsis/implem/implem.h"
 #endif
 
 #endif  /* __PMSIS_TASK_H__ */
