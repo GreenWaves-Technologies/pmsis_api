@@ -53,6 +53,7 @@ struct pi_cluster_task {
     // callback called at task completion
     pi_task_t *completion_callback;
     int stack_allocated;
+    int is_cc_task;
     // to implement a fifo
     struct pi_cluster_task *next;
 
@@ -65,6 +66,19 @@ struct cl_team_task {
     int core_mask;
     int nb_cores;
 };
+
+typedef struct cl_task {
+    void *stacks;
+    uint32_t stack_size;
+    int nb_cores;
+    struct pi_cluster_task *cluster_task;
+    uint32_t dispatcher_base;
+    uint32_t barrier_base;
+    uint32_t mutex_base;
+    uint32_t core_mask;
+    uint32_t slave_mask;
+    int pending;
+} cl_task_t;
 
 // object for device specific api
 typedef struct cluster_driver_api {

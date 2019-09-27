@@ -78,6 +78,16 @@ void cl_team_fork_task(struct cl_team_task *fork_task);
  */
 void cl_team_fork(int nb_cores, void (*entry)(void *), void *arg);
 
+
+
+void cl_task_init(cl_task_t *task, uint32_t nb_cores, void *stacks, uint32_t stack_size, struct pi_cluster_task *cluster_task);
+
+static inline void cl_task_offload(cl_task_t *task, void (*entry)(void *), void *arg);
+
+static inline void cl_task_wait(cl_task_t *task);
+
+
+
 /** \brief Execute a barrier between all cores of the team.
  *
  * This will block the execution of each calling core until all cores 
