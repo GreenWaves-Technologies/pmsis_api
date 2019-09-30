@@ -78,6 +78,7 @@ typedef struct cl_task {
     uint32_t core_mask;
     uint32_t slave_mask;
     int pending;
+    int hw_sync;
 } cl_task_t;
 
 // object for device specific api
