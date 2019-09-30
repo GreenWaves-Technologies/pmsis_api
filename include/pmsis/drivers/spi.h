@@ -111,14 +111,14 @@ typedef enum {
  * 
  */
 typedef enum {
-  PI_SPI_CS_AUTO      = 0 << 0,    /*!< Handles the chip select automatically. It is set low just before the transfer is started and set back high when the transfer is finished. */
-  PI_SPI_CS_KEEP      = 1 << 0,    /*!< Handle the chip select manually. It is set low just before the transfer is started and is kept low until the next transfer. */
-  PI_SPI_CS_NONE      = 2 << 0,    /*!< Don't do anything with the chip select. */
-  PI_SPI_LINES_SINGLE = 0 << 2,    /*!< Use a single MISO line. */
-  PI_SPI_LINES_QUAD   = 1 << 2,    /*!< Use quad MISO lines. */
-  PI_SPI_LINES_OCTAL  = 2 << 2,    /*!< Use octal MISO lines. */
+  PI_SPI_CS_AUTO       = 0 << 0,    /*!< Handles the chip select automatically. It is set low just before the transfer is started and set back high when the transfer is finished. */
+  PI_SPI_CS_KEEP       = 1 << 0,    /*!< Handle the chip select manually. It is set low just before the transfer is started and is kept low until the next transfer. */
+  PI_SPI_CS_NONE       = 2 << 0,    /*!< Don't do anything with the chip select. */
+  PI_SPI_LINES_SINGLE  = 0 << 2,    /*!< Use a single MISO line. */
+  PI_SPI_LINES_QUAD    = 1 << 2,    /*!< Use quad MISO lines. */
+  PI_SPI_LINES_OCTAL   = 2 << 2,    /*!< Use octal MISO lines. */
+  PI_SPI_APPEND_UCODE  = 1 << 4,    /*!< Append micro-append to transfer. */
 } pi_spi_flags_e;
-
 
 
 /** \brief Initialize an SPI master configuration with default values.
@@ -270,5 +270,25 @@ void pi_spi_transfer_async(struct pi_device *device, void *tx_data, void *rx_dat
 /**
  * @} end of SPI master
  */
+
+/// @cond IMPLEM
+
+
+#define SPI_UCODE_CMD_SEND_CMD(cmd,bits,qpi)    ((2<<28) | ((qpi)<<27) | (((bits)-1)<<16) | (((cmd)>>8)<<0) | (((cmd)&0xff)<<(0+8)))
+#define SPI_UCODE_CMD_SEND_ADDR(bits,qpi)       ((3<<28) | ((qpi)<<27) | (((bits)-1)<<16))
+#define SPI_UCODE_CMD_DUMMY(cycles)             ((4<<28) | (((cycles)-1)<<16))
+
+void *pi_spi_receive_ucode_set(struct pi_device *device, uint8_t *ucode, uint32_t ucode_size);
+
+void pi_spi_receive_ucode_set_addr_info(struct pi_device *device, uint8_t *ucode, uint32_t ucode_size);
+
+void pi_spi_transfer_ucode_set(struct pi_device *device, uint8_t *ucode, uint32_t ucode_size);
+
+void *pi_spi_send_ucode_set(struct pi_device *device, uint8_t *ucode, uint32_t ucode_size);
+
+void pi_spi_send_ucode_set_addr_info(struct pi_device *device, uint8_t *ucode, uint32_t ucode_size);
+
+/// @endcond
+
 
 #endif
