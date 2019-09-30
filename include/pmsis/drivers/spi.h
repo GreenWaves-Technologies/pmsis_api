@@ -121,11 +121,6 @@ typedef enum {
 } pi_spi_flags_e;
 
 
-#define SPI_UCODE_CMD_SEND_CMD(cmd,bits,qpi)    ((2<<28) | ((qpi)<<27) | (((bits)-1)<<16) | (((cmd)>>8)<<0) | (((cmd)&0xff)<<(0+8)))
-#define SPI_UCODE_CMD_SEND_ADDR(bits,qpi)       ((3<<28) | ((qpi)<<27) | (((bits)-1)<<16))
-#define SPI_UCODE_CMD_DUMMY(cycles)             ((4<<28) | (((cycles)-1)<<16))
-
-
 /** \brief Initialize an SPI master configuration with default values.
  *
  * This function can be called to get default values for all parameters before setting some of them.
@@ -204,10 +199,6 @@ void pi_spi_send(struct pi_device *device, void *data, size_t len, pi_spi_flags_
  */
 void pi_spi_send_async(struct pi_device *device, void *data, size_t len, pi_spi_flags_e flag, pi_task_t *task);
 
-void *pi_spi_send_ucode_set(struct pi_device *device, uint8_t *ucode, uint32_t ucode_size);
-
-void pi_spi_send_ucode_set_addr_info(struct pi_device *device, uint8_t *ucode, uint32_t ucode_size);
-
 
 
 /** \brief Enqueue a read copy to the SPI (from Chip to SPI device).
@@ -243,10 +234,6 @@ void pi_spi_receive(struct pi_device *device, void *data, size_t len, pi_spi_fla
  */
 void pi_spi_receive_async(struct pi_device *device, void *data, size_t len, pi_spi_flags_e flag, pi_task_t *task);
 
-void *pi_spi_receive_ucode_set(struct pi_device *device, uint8_t *ucode, uint32_t ucode_size);
-
-void pi_spi_receive_ucode_set_addr_info(struct pi_device *device, uint8_t *ucode, uint32_t ucode_size);
-
 /** \brief Enqueue a read and write copy to the SPI (using full duplex flag).
  *
  * This function can be used to send and receive data with the SPI device using full duplex flag.
@@ -278,12 +265,30 @@ void pi_spi_transfer(struct pi_device *device, void *tx_data, void *rx_data, siz
  */
 void pi_spi_transfer_async(struct pi_device *device, void *tx_data, void *rx_data, size_t len, pi_spi_flags_e flag, pi_task_t *task);
 
-void pi_spi_transfer_ucode_set(struct pi_device *device, uint8_t *ucode, uint32_t ucode_size);
-
 //!@}
 
 /**
  * @} end of SPI master
  */
+
+/// @cond IMPLEM
+
+
+#define SPI_UCODE_CMD_SEND_CMD(cmd,bits,qpi)    ((2<<28) | ((qpi)<<27) | (((bits)-1)<<16) | (((cmd)>>8)<<0) | (((cmd)&0xff)<<(0+8)))
+#define SPI_UCODE_CMD_SEND_ADDR(bits,qpi)       ((3<<28) | ((qpi)<<27) | (((bits)-1)<<16))
+#define SPI_UCODE_CMD_DUMMY(cycles)             ((4<<28) | (((cycles)-1)<<16))
+
+void *pi_spi_receive_ucode_set(struct pi_device *device, uint8_t *ucode, uint32_t ucode_size);
+
+void pi_spi_receive_ucode_set_addr_info(struct pi_device *device, uint8_t *ucode, uint32_t ucode_size);
+
+void pi_spi_transfer_ucode_set(struct pi_device *device, uint8_t *ucode, uint32_t ucode_size);
+
+void *pi_spi_send_ucode_set(struct pi_device *device, uint8_t *ucode, uint32_t ucode_size);
+
+void pi_spi_send_ucode_set_addr_info(struct pi_device *device, uint8_t *ucode, uint32_t ucode_size);
+
+/// @endcond
+
 
 #endif
