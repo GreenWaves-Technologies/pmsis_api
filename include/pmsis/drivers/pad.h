@@ -19,7 +19,52 @@
 
 #include <stdint.h>
 
+/**
+* @ingroup groupDrivers
+*/
 
+
+
+/**
+ * @defgroup Padframe Padframe
+ *
+ * The padframe driver provides support for controlling PADs.
+ *
+ */
+
+/**
+ * @addtogroup Padframe
+ * @{
+ */
+
+/**@{*/
+
+/** \brief Set the function of one pad.
+ *
+ * This function can be used to configure the function of the specified pad
+ * in case it can have several functions.
+ *
+ * \param pad  Pad number. See the chip specific configuration for more details.
+ * \param function Pad function. See the chip specific configuration for more
+ *   details.
+ */
+void pi_pad_set_function(pi_pad_e pad, pi_pad_func_e function);
+
+/** \brief Set the function of all pads.
+ *
+ * This function can be used to configure the function of all the pads
+ * in case it can have several functions.
+ *
+ * \param pad_values Pad values. This is an array of 32bits values, with one bit
+ *   per pad and one 32bit value per group of 32 pads.
+ */
+void pi_pad_init(uint32_t pad_values[]);
+
+/** \enum pi_pad_e
+ * \brief Pad numbers.
+ *
+ * This is used to identify pads.
+ */
 typedef enum {
   PI_PAD_8_A4_RF_SPIM1_MISO        = 0,
   PI_PAD_9_B3_RF_SPIM1_MOSI        = 1,
@@ -72,8 +117,12 @@ typedef enum {
 } pi_pad_e;
 
 
+/** \enum pi_pad_func_e
+ * \brief Pad functions.
+ *
+ * This is used to identify the function for each pad.
+ */
 typedef enum {
-  /* Func 0, Alt0 : Default function. */
   PI_PAD_8_A4_RF_SPIM1_MISO_FUNC0  = 0,
   PI_PAD_9_B3_RF_SPIM1_MOSI_FUNC0  = 0,
   PI_PAD_10_A5_RF_SPIM1_CSN_FUNC0  = 0,
@@ -124,7 +173,6 @@ typedef enum {
   PI_PAD_57_B23_I2S0_SDI_FUNC0     = 0,
   PI_PAD_FUNC0                     = 0,
 
-  /* Func 1, Alt1 : GPIO. */
   PI_PAD_8_A4_GPIO_A0_FUNC1        = 1,
   PI_PAD_9_B3_GPIO_A1_FUNC1        = 1,
   PI_PAD_10_A5_GPIO_A2_FUNC1       = 1,
@@ -165,7 +213,6 @@ typedef enum {
   PI_PAD_49_A16_GPIO_A31_FUNC1     = 1,
   PI_PAD_FUNC1                     = 1,
 
-  /* Func 2, Alt2. */
   PI_PAD_10_A5_I2C1_SDA_FUNC2      = 2,
   PI_PAD_11_B4_I2C1_SCL_FUNC2      = 2,
   PI_PAD_12_A3_SPIM1_CS0_FUNC2     = 2,
@@ -198,7 +245,6 @@ typedef enum {
   PI_PAD_48_B15_SPIM1_CS1_FUNC2    = 2,
   PI_PAD_FUNC2                     = 2,
 
-  /* Func 3, Alt3. */
   PI_PAD_16_A44_SPIS0_SDIO2_FUNC3  = 3,
   PI_PAD_17_B40_SPIS0_SDIO3_FUNC3  = 3,
   PI_PAD_35_B13_I2S1_SDI_FUNC3     = 3,
@@ -219,9 +265,13 @@ typedef enum {
 } pi_pad_func_e;
 
 
-void pi_pad_set_function(pi_pad_e pad, pi_pad_func_e function);
 
-void pi_pad_init(uint32_t pad_values[]);
+//!@}
 
+
+
+/**
+ * @}
+ */
 
 #endif

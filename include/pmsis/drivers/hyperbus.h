@@ -158,7 +158,7 @@ void pi_hyper_read_async(struct pi_device *device,
  *
  * The copy will make a transfer between the Hyperbus and one of the processor
  * memory areas.
- * The calller is blocked until the transfer is finished.
+ * The caller is blocked until the transfer is finished.
  * Depending on the chip, there may be some restrictions on the memory which
  * can be used. Check the chip-specific documentation for more details.
  *
@@ -197,7 +197,7 @@ void pi_hyper_write_async(struct pi_device *device,
  *
  * The copy will make a transfer between the Hyperbus and one of
  * the processor memory areas.
- * The calller is blocked until the transfer is finished.
+ * The caller is blocked until the transfer is finished.
  * Depending on the chip, there may be some restrictions on the memory which
  * can be used. Check the chip-specific documentation for more details.
  *
@@ -246,7 +246,7 @@ void pi_hyper_read_2d_async(struct pi_device *device,
  *
  * The copy will make a transfer between the Hyperbus and one of the processor
  * memory areas.
- * The calller is blocked until the transfer is finished.
+ * The caller is blocked until the transfer is finished.
  * Depending on the chip, there may be some restrictions on the memory which
  * can be used. Check the chip-specific documentation for more details.
  *
