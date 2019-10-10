@@ -86,7 +86,7 @@ int pi_cl_uart_write(pi_device_t *device, void *buffer, uint32_t size, pi_cl_uar
 
 int pi_cl_uart_write_byte(pi_device_t *device, uint8_t *byte, pi_cl_uart_req_t *req);
 
-static inline void pi_cl_hyperram_write_wait(pi_cl_uart_req_t *req);
+static inline void pi_cl_uart_write_wait(pi_cl_uart_req_t *req);
 
 int pi_cl_uart_read(pi_device_t *device, void *addr, uint32_t size, pi_cl_uart_req_t *req);
 
