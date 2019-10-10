@@ -1,5 +1,7 @@
-PMSIS documentation
-===================
+PMSIS API documentation
+=======================
+
+.. include:: mainpage.md
 
 .. toctree::
    :maxdepth: 2

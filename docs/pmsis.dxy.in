@@ -749,7 +749,7 @@ WARN_LOGFILE           =
 # spaces.
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = ../include/pmsis/drivers/hyperbus.h headers
+INPUT                  = ../include/pmsis/drivers/hyperbus.h ../include/pmsis/drivers/cpi.h headers
 #INPUT                  = ../include/pmsis/cluster/cluster_sync/fc_to_cl_delegate.h ../include/pmsis/pmsis_types.h ../include/pmsis/drivers/hyperbus.h ../include/pmsis/drivers/perf.h ../include/pmsis/drivers/cpi.h ../include/pmsis/drivers/i2c.h ../include/pmsis/drivers/spi.h
 #INPUT                  = ../include
 
