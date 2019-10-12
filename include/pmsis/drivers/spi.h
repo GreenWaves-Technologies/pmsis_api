@@ -196,7 +196,7 @@ void pi_spi_ioctl(struct pi_device *device, uint32_t cmd, void *arg);
  * The copy will make a synchronous transfer between the SPI and one of the
  * chip memory.
  * This is by default using classic SPI transfer with MOSI and MISO lines, but
- * other kind of transfers like quad SPI  can be used by specifying addional
+ * other kind of transfers like quad SPI  can be used by specifying additional
  * flags.
  * Due to hardware constraints, the address of the buffer must be aligned on
  * 4 bytes and the size must be a multiple of 4.
@@ -221,7 +221,7 @@ void pi_spi_send(struct pi_device *device, void *data, size_t len,
  * chip memory.
  * This is by default using classic SPI transfer with MOSI and MISO lines, but
  * other kind of transfers like quad SPI 
- * can be used by specifying addional flags.
+ * can be used by specifying additional flags.
  * Due to hardware constraints, the address of the buffer must be aligned on 4
  * bytes and the size must be a multiple of 4.
  * The caller is blocked until the transfer is finished.
@@ -271,7 +271,7 @@ void pi_spi_transfer(struct pi_device *device, void *tx_data, void *rx_data,
  * The copy will make an asynchronous transfer between the SPI and one of the
  * chip memory. This is by default using classic SPI transfer with MOSI and
  * MISO lines, but other kind of transfers like quad SPI 
- * can be used by specifying addional flags.
+ * can be used by specifying additional flags.
  * Due to hardware constraints, the address of the buffer must be aligned on 4
  * bytes and the size must be a multiple of 4.
  * A task must be specified in order to specify how the caller should be
@@ -299,7 +299,7 @@ void pi_spi_send_async(struct pi_device *device, void *data, size_t len,
  * chip memory.
  * This is by default using classic SPI transfer with MOSI and MISO lines, but
  * other kind of transfers like quad SPI 
- * can be used by specifying addional flags.
+ * can be used by specifying additional flags.
  * Due to hardware constraints, the address of the buffer must be aligned on 4
  * bytes and the size must be a multiple of 4.
  * A task must be specified in order to specify how the caller should be

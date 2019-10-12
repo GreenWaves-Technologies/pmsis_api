@@ -208,7 +208,7 @@ void pi_hyper_write_async(struct pi_device *device,
  * \param size        The size in bytes of the copy
  * \param stride      2D stride, which is the number of bytes which are added
  *   to the beginning of the current line to switch to the next one.
- * \param length      2D length, which is the number of transfered bytes after
+ * \param length      2D length, which is the number of transferred bytes after
  *   which the driver will switch to the next line.
  */
 void pi_hyper_read_2d(struct pi_device *device,
@@ -232,7 +232,7 @@ void pi_hyper_read_2d(struct pi_device *device,
  * \param size        The size in bytes of the copy
  * \param stride      2D stride, which is the number of bytes which are added
  *   to the beginning of the current line to switch to the next one.
- * \param length      2D length, which is the number of transfered bytes after
+ * \param length      2D length, which is the number of transferred bytes after
  *   which the driver will switch to the next line.
  * \param task        The task used to notify the end of transfer. See the
  * documentation of pi_task_t for more details.
@@ -257,7 +257,7 @@ void pi_hyper_read_2d_async(struct pi_device *device,
  * \param size        The size in bytes of the copy
  * \param stride      2D stride, which is the number of bytes which are added
  *   to the beginning of the current line to switch to the next one.
- * \param length      2D length, which is the number of transfered bytes after
+ * \param length      2D length, which is the number of transferred bytes after
  *   which the driver will switch to the next line.
  */
 void pi_hyper_write_2d(struct pi_device *device,
@@ -281,7 +281,7 @@ void pi_hyper_write_2d(struct pi_device *device,
  * \param size        The size in bytes of the copy
  * \param stride      2D stride, which is the number of bytes which are added
  *   to the beginning of the current line to switch to the next one.
- * \param length      2D length, which is the number of transfered bytes after
+ * \param length      2D length, which is the number of transferred bytes after
  *   which the driver will switch to the next line.
  * \param task        The task used to notify the end of transfer. See the
  *   documentation of pi_task_t for more details.
@@ -313,10 +313,10 @@ void pi_hyper_write_2d_async(struct pi_device *device,
 static inline void pi_cl_hyper_read(struct pi_device *device,
   uint32_t hyper_addr, void *addr, uint32_t size, pi_cl_hyper_req_t *req);
 
-/** \brief Enqueue a 2D read copy (rectangle area) to the Hyperbus from cluste
+/** \brief Enqueue a 2D read copy (rectangle area) to the Hyperbus from cluster
  * side (from Hyperbus to processor).
  *
- * This function is a remote call that the cluster can do to the
+ * This function is a remote call that the cluster can issue to the
  * fabric-controller in order to ask for an HyperBus read copy.
  * The copy will make an asynchronous transfer between the Hyperbus and one of
  * the processor memory areas.
@@ -332,7 +332,7 @@ static inline void pi_cl_hyper_read(struct pi_device *device,
  * \param size        The size in bytes of the copy.
  * \param stride      2D stride, which is the number of bytes which are added
  *   to the beginning of the current line to switch to the next one.
- * \param length      2D length, which is the number of transfered bytes after
+ * \param length      2D length, which is the number of transferred bytes after
  *   which the driver will switch to the next line.
  * \param req         A pointer to the HyperBus request structure. It must be
  *   allocated by the caller and kept alive until the copy is finished.
@@ -353,7 +353,7 @@ static inline void pi_cl_hyper_read_wait(pi_cl_hyper_req_t *req);
 /** \brief Enqueue a write copy to the Hyperbus from cluster side (from
  * Hyperbus to processor).
  *
- * This function is a remote call that the cluster can do to the
+ * This function is a remote call that the cluster can issue to the
  * fabric-controller in order to ask for an HyperBus write copy.
  * The copy will make an asynchronous transfer between the Hyperbus and one of
  * the processor memory areas.
@@ -376,7 +376,7 @@ static inline void pi_cl_hyper_write(struct pi_device *device,
 /** \brief Enqueue a 2D write copy (rectangle area) to the Hyperbus from
  * cluster side (from Hyperbus to processor).
  *
- * This function is a remote call that the cluster can do to the
+ * This function is a remote call that the cluster can issue to the
  * fabric-controller in order to ask for an HyperBus write copy.
  * The copy will make an asynchronous transfer between the Hyperbus and one of
  * the processor memory areas.
@@ -392,7 +392,7 @@ static inline void pi_cl_hyper_write(struct pi_device *device,
  * \param size        The size in bytes of the copy
  * \param stride      2D stride, which is the number of bytes which are added
  *   to the beginning of the current line to switch to the next one.
- * \param length      2D length, which is the number of transfered bytes after
+ * \param length      2D length, which is the number of transferred bytes after
  *   which the driver will switch to the next line.
  * \param req         A pointer to the HyperBus request structure. It must be
  *   allocated by the caller and kept alive until the copy is finished.
@@ -412,7 +412,7 @@ static inline void pi_cl_hyper_write_wait(pi_cl_hyper_req_t *req);
 
 /** \brief Enqueue a copy with the Hyperbus from cluster side.
  *
- * This function is a remote call that the cluster can do to the
+ * This function is a remote call that the cluster can issue to the
  * fabric-controller in order to ask for an HyperBus copy.
  * The copy will make an asynchronous transfer between the Hyperbus and one of
  * the processor memory areas.
@@ -438,7 +438,7 @@ static inline void pi_cl_hyper_copy(struct pi_device *device,
 /** \brief Enqueue a 2D copy (rectangle area) with the Hyperbus from cluster
  * side.
  *
- * This function is a remote call that the cluster can do to the
+ * This function is a remote call that the cluster can issue to the
  * fabric-controller in order to ask for an HyperBus copy.
  * The copy will make an asynchronous transfer between the Hyperbus and one of
  * the processor memory areas.
@@ -454,7 +454,7 @@ static inline void pi_cl_hyper_copy(struct pi_device *device,
  * \param size        The size in bytes of the copy
  * \param stride      2D stride, which is the number of bytes which are added
  *   to the beginning of the current line to switch to the next one.
- * \param length      2D length, which is the number of transfered bytes after
+ * \param length      2D length, which is the number of transferred bytes after
  *   which the driver will switch to the next line.
  * \param ext2loc     1 if the copy is from HyperBus to the chip or 0 for the
  *   contrary.

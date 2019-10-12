@@ -1,7 +1,7 @@
 Introduction
 ============
 
-The PMSIS API is a set of low-level drivers which any operating system can implement to provide a common layer to upper layers. Together with the PMSIS BSP, it provides a full stack of drivers, allowing the development of applications portable accros a wide rage of operating systems.
+The PMSIS API is a set of low-level drivers which any operating system can implement to provide a common layer to upper layers. Together with the PMSIS BSP, it provides a full stack of drivers, allowing the development of applications portable across a wide range of operating systems.
 
 Conventions
 ===========

@@ -112,7 +112,7 @@ void pi_cl_team_critical_enter();
  */
 void pi_cl_team_critical_exit();
 
-/** \brief Return the number of cores of the team.
+/** \brief Return the number of cores in the team.
  *
  * This will return the number of cores involved in the team created by the 
  * active fork operation.

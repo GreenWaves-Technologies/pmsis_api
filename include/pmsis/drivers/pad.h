@@ -247,7 +247,7 @@ typedef enum {
 /** \brief Set the function of one pad.
  *
  * This function can be used to configure the function of the specified pad
- * in case it can have several functions.
+ * in the case that it supports several functions.
  *
  * \param pad  Pad number. See the chip specific configuration for more details.
  * \param function Pad function. See the chip specific configuration for more
@@ -258,10 +258,10 @@ void pi_pad_set_function(pi_pad_e pad, pi_pad_func_e function);
 /** \brief Set the function of all pads.
  *
  * This function can be used to configure the function of all the pads
- * in case it can have several functions.
+ * in the case that they support several functions.
  *
- * \param pad_values Pad values. This is an array of 32bits values, with one bit
- *   per pad and one 32bit value per group of 32 pads.
+ * \param pad_values Pad values. This is an array of 32 bit values, with one bit
+ *   per pad and one 32 bit value per group of 32 pads.
  */
 void pi_pad_init(uint32_t pad_values[]);
 

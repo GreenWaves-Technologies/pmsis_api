@@ -238,11 +238,11 @@ void pi_cluster_wait_free(struct pi_device *device);
  */
 void pi_cluster_wait_free_async(struct pi_device *device, pi_task_t *async_task);
 
-/** \brief poweron the cluster (deactivate clock gating) - async version
- * Calling this function will poweron the cluster
+/** \brief power on the cluster (deactivate clock gating) - async version
+ * Calling this function will power on the cluster
  * At the end of the call, cluster is ready to execute a task
  * Function is thread safe and reentrant
- * \param cluster_id ID of the cluster to poweron
+ * \param cluster_id ID of the cluster to power on
  * \param async_task asynchronous task to be executed at the end of operation
  */
 int pi_cluster_open_async(struct pi_device *device,

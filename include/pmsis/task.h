@@ -93,7 +93,7 @@ void pi_task_wait_on(pi_task_t *task);
  *
  * This can be used to trigger the specified notification. If the notification
  * is a callback, this will schedule the callback execution. If the notification
- * is an avent, this will trigger the event.
+ * is an event, this will trigger the event.
  *
  * \param task  A pointer to the notification event.
  */
@@ -104,7 +104,7 @@ void pi_task_push(pi_task_t *task);
  * This can be used to trigger the specified notification after the specified
  * delay, given in micro-seconds. If the notification
  * is a callback, this will schedule the callback execution. If the notification
- * is an avent, this will trigger the event.
+ * is an event, this will trigger the event.
  *
  * \param task  A pointer to the notification event.
  * \param delay  The number of micro-seconds after which the notification

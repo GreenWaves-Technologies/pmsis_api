@@ -68,7 +68,7 @@ typedef enum
     PI_FS_READ_ONLY = 0
 } fs_type_t;
 
-/* Filesytem config struct. */
+/* Filesystem config struct. */
 typedef struct _fs_config_s
 {
     fs_type_t fs_type;
@@ -163,7 +163,7 @@ fs_file_t *pi_fs_open(fs_handle_t *fs_handle, const char *file_name, uint8_t mod
 void pi_fs_close(fs_file_t *file);
 
 /*!
- * @brief Read file. The offset is incremented by the nimber of bytes read.
+ * @brief Read file. The offset is incremented by the number of bytes read.
  *
  * @param file    Pointer to an opened file.
  * @param size    Number of bytes to read from file.

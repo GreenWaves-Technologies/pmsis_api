@@ -50,8 +50,8 @@ typedef enum {
 	PI_CPI_FORMAT_RGB555        = 1, /*!< RGB555 format. */
 	PI_CPI_FORMAT_RGB444        = 2, /*!< RGB444 format. */
 	PI_CPI_FORMAT_YUV422        = 3, /*!< YUV422 format. */
-	PI_CPI_FORMAT_BYPASS_LITEND = 4, /*!< Only least signifant byte is kept. */
-	PI_CPI_FORMAT_BYPASS_BIGEND = 5  /*!< Only most signifant byte is kept. */
+	PI_CPI_FORMAT_BYPASS_LITEND = 4, /*!< Only least significant byte is kept. */
+	PI_CPI_FORMAT_BYPASS_BIGEND = 5  /*!< Only most significant byte is kept. */
 } pi_cpi_format_e;
 
 /** \struct pi_cpi_conf
@@ -110,7 +110,7 @@ void pi_cpi_close(struct pi_device *device);
  *
  * \param device    A pointer to the structure describing the device.
  * \param buffer    The memory buffer where the captured samples will be
- * transfered.
+ * transferred.
  * \param bufferlen The size in bytes of the memory buffer.
  */
 void pi_cpi_capture(struct pi_device *device, void *buffer, int32_t bufferlen);
@@ -132,7 +132,7 @@ void pi_cpi_capture(struct pi_device *device, void *buffer, int32_t bufferlen);
  *
  * \param device    A pointer to the structure describing the device.
  * \param buffer    The memory buffer where the captured samples will be
- *   transfered.
+ *   transferred.
  * \param bufferlen   The size in bytes of the memory buffer.
  * \param task        The task used to notify the end of transfer. See the
  *   documentation of pi_task for more details.

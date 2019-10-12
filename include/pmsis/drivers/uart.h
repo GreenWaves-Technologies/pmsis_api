@@ -57,7 +57,7 @@ struct pi_uart_conf
     uint8_t uart_id; /*!< Uart interface number where the device is
       connected. */
     uint8_t enable_rx; /*!< 1 to activate reception, 0 to deactivate it. */
-    uint8_t enable_tx; /*!< 1 to activate trasmission, 0 to deactivate it. */
+    uint8_t enable_tx; /*!< 1 to activate transmission, 0 to deactivate it. */
 };
 
 /** \brief UART cluster request structure.
