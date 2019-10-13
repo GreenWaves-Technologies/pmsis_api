@@ -36,6 +36,12 @@
  *
  * All functions transfering data between an external device and a chip memory
  * must use the L2 memory for the chip memory.
+ *
+ * The cluster controller is core 0 of the cluster. Core 1 to 7 are the slave
+ * cores.
+ *
+ * Up to 8 cluster DMA counters can be allocated at the same time. Trying to
+ * allocate one more will stall the core.
  */
 
 /**        

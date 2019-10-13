@@ -18,138 +18,195 @@
 #define __CL_DMA_H__
 
 #include "pmsis/cluster/cl_pmsis_types.h"
+
 /**
- * @ingroup groupCluster
+ * @addtogroup clusterDriver
+ * @{
  */
 
-
 /**
- * @defgroup DMA DMA management
+ * @defgroup ClusterDMA Cluster DMA
  *
+ * This set of functions provides support for controlling the cluster DMA.
  * The cluster has its own local memory for fast access from the cluster cores
  * while the other memories are relatively slow if accessed by the cluster.
  * To keep all the cores available for computation each cluster contains a DMA
  * unit whose role is to asynchronously transfer data between a remote memory
  * and the cluster memory.
  *
- * The following API can be used to control the DMA in various ways:
- *   - Simple completion. This is only usable by a cluster. A set of transfers
- *   can be queued together. An identifier is allocated for the first transfer
- *   and reused for the following transfers. This identifier can then be used to
- *   block the calling core until all transfers are completed.
- *   - Event-based completion. This can be used on either the fabric controller
- *   or a cluster to enqueue a transfer and get notified on completion via an
- *   event on the fabric controller.
+ * The DMA is using HW counters to track the termination of transfers.
+ * Each transfer is by default allocating one counter, which is freed when
+ * the wait function is called and returns, which is limiting the maximum
+ * number of transfers which can be done at the same time.
+ * You can check the chip-specific section to know the number of HW counters.
  */
 
 /**
- * @addtogroup DMA
+ * @addtogroup ClusterDMA
  * @{
  */
 
 /**@{*/
 
-/**
+/** \enum pi_cl_dma_dir_e
  * \brief DMA transfer direction.
  *
  * Describes the direction for a DMA transfer.
  */
-/*!< Transfer from cluster memory to external memory. */
-#define CL_DMA_DIR_LOC2EXT 0
-/*!< Transfer from external memory to cluster memory. */
-#define CL_DMA_DIR_EXT2LOC  1
-typedef uint8_t cl_dma_dir_e;
+typedef enum {
+  PI_CL_DMA_DIR_LOC2EXT = 0, /*!< Transfer from cluster memory to external
+    memory. */
+  PI_CL_DMA_DIR_EXT2LOC = 1  /*!< Transfer from external memory to cluster
+    memory. */
+} pi_cl_dma_dir_e;
 
-#define CL_DMA_COMMON \
-    uint32_t ext;\
-    uint32_t loc;\
-    uint32_t id;\
-    uint16_t size;\
-    cl_dma_dir_e dir;\
-    uint8_t merge;
-
-
-/** \brief DMA 1D copy structure.
+/** \brief Structure for DMA commands.
  *
- * This structure is used by the runtime to manage a 1d DMA copy.
+ * This structure is used by the runtime to manage a DMA command.
  * It must be instantiated once for each copy and must be kept alive
  * until the copy is finished.
- * It can be instantiated as a normal variable, for example as a global variable,
- * a local one on the stack,
- * or through the memory allocator.
+ * It can be instantiated as a normal variable, for example as a global
+ * variable, a local one on the stack, or through the memory allocator.
  */
-typedef struct cl_dma_copy_s
-{
-    CL_DMA_COMMON
-    // 2d transfers args
-    uint32_t stride;
-    uint32_t length;
-} cl_dma_copy_t;
+typedef struct pi_cl_dma_cmd_s pi_cl_dma_cmd_t;
 
-/** \brief DMA 2D copy structure.
+/** \brief Structure for 1D DMA copy structure.
  *
- * This structure is used by the runtime to manage a 2d DMA copy.
+ * This structure is used by the runtime to manage a 1D DMA copy.
  * It must be instantiated once for each copy and must be kept alive
  * until the copy is finished.
- * It can be instantiated as a normal variable, for example as a global variable,
- * a local one on the stack,
- * or through the memory allocator.
+ * It can be instantiated as a normal variable, for example as a global
+ * variable, a local one on the stack, or through the memory allocator.
  */
-typedef cl_dma_copy_t cl_dma_copy_2d_t;
+typedef struct pi_cl_dma_copy_s pi_cl_dma_copy_t;
+
+/** \brief Structure for 2D DMA copy structure.
+ *
+ * This structure is used by the runtime to manage a 2D DMA copy.
+ * It must be instantiated once for each copy and must be kept alive
+ * until the copy is finished.
+ * It can be instantiated as a normal variable, for example as a global
+ * variable, a local one on the stack, or through the memory allocator.
+ */
+typedef pi_cl_dma_copy_t pi_cl_dma_copy_2d_t;
+
+/** \brief 1D DMA memory transfer. 
+ *
+ * This enqueues a 1D DMA memory transfer (i.e. classic memory copy) with
+ * simple completion based on transfer identifier.
+ *
+ * \param   ext     Address in the external memory where to access the data.
+ * \param   loc     Address in the cluster memory where to access the data.
+ * \param   size    Number of bytes to be transfered.
+ * \param   dir     Direction of the transfer. If it is PI_CL_DMA_DIR_EXT2LOC,
+ *   the transfer is loading data from external memory and storing to cluster
+ *   memory. If it is PI_CL_DMA_DIR_LOC2EXT, it is the opposite.
+ * \param   cmd    A pointer to the structure for the copy. This can be used
+ *   with pi_cl_dma_wait to wait for the completion of this transfer.
+ */
+static inline void pi_cl_dma_cmd(uint32_t ext, uint32_t loc, uint32_t size,
+  pi_cl_dma_dir_e dir, pi_cl_dma_cmd_t *cmd);
+
+/** \brief 2D DMA memory transfer. 
+ *
+ * This enqueues a 2D DMA memory transfer (rectangle) with
+ * simple completion based on transfer identifier.
+ *
+ * \param   ext     Address in the external memory where to access the data.
+ * \param   loc     Address in the cluster memory where to access the data.
+ * \param   size    Number of bytes to be transfered.
+ * \param   stride  2D stride, which is the number of bytes which are added to
+ *   the beginning of the current line to switch to the next one.
+ * \param   length  2D length, which is the number of transfered bytes after
+ * which the DMA will switch to the next line.
+ * \param   dir     Direction of the transfer. If it is PI_CL_DMA_DIR_EXT2LOC,
+ *   the transfer is loading data from external memory and storing to cluster
+ *   memory. If it is PI_CL_DMA_DIR_LOC2EXT, it is the opposite.
+ * \param   cmd    A pointer to the structure for the copy. This can be used
+ *   with pi_cl_dma_wait to wait for the completion of this transfer.
+ */
+static inline void pi_cl_dma_cmd_2d(uint32_t ext, uint32_t loc, uint32_t size,
+  uint32_t stride, uint32_t length, pi_cl_dma_dir_e dir, pi_cl_dma_cmd_t *cmd);
+
+/** \brief Simple DMA transfer completion wait.
+ *
+ * This blocks the core until the specified transfer is finished. The transfer
+ * must be described trough the identifier given to the copy function.
+ *
+ * \param   cmd  The copy structure (1d or 2d).
+ */
+static inline void pi_cl_dma_cmd_wait(pi_cl_dma_cmd_t *cmd);
+
+/** \brief Simple DMA transfer completion flush.
+ *
+ * This blocks the core until the DMA does not have any pending transfer.
+ */
+static inline void pi_cl_dma_flush();
 
 /** \brief 1D DMA memory transfer.
  *
  * This enqueues a 1D DMA memory transfer (i.e. classic memory copy) with simple
  * completion based on transfer identifier.
  *
- * This can only be called on a cluster.
- *
- * \param   copy    The structure for the copy. This can be used with cl_dma_wait
- * to wait for the completion of this transfer.
+ * \param copy A pointer to the structure describing the transfer. The same
+ * structure can be used with pi_cl_dma_wait to wait for the completion of
+ * this transfer.
  */
-static inline void cl_dma_memcpy(cl_dma_copy_t *copy);
+static inline void pi_cl_dma_memcpy(pi_cl_dma_copy_t *copy);
 
 /** \brief 2D DMA memory transfer.
  *
- * This enqueues a 2D DMA memory transfer (rectangle area) with simple completion
- * based on transfer identifier.
+ * This enqueues a 2D DMA memory transfer (rectangle area) with simple
+ * completion based on transfer identifier.
  *
- * This can only be called on a cluster.
- * \param   copy    The structure for the copy. This can be used with
- * cl_dma_wait to wait for the completion of this transfer.
+ * \param copy A pointer to the structure describing the transfer. The same
+ * structure can be used with pi_cl_dma_wait to wait for the completion of
+ * this transfer.
  */
-static inline void cl_dma_memcpy_2d(cl_dma_copy_2d_t *copy);
-
-/** \brief Simple DMA transfer completion flush.
- *
- * This blocks the core until the DMA does not have any pending transfers.
- *
- * This can only be called on a cluster.
- */
-static inline void cl_dma_flush();
+static inline void pi_cl_dma_memcpy_2d(pi_cl_dma_copy_2d_t *copy);
 
 /** \brief Simple DMA transfer completion wait.
  *
  * This blocks the core until the specified transfer is finished. The transfer
- * must be described trough the identifier returned by the copy function.
- *
- * This can only be called on a cluster.
+ * must be described trough the identifier given to the copy function.
  *
  * \param   copy  The copy structure (1d or 2d).
  */
-static inline void cl_dma_wait(void *copy);
+static inline void pi_cl_dma_wait(void *copy);
 
-typedef struct cl_dma_cmd_s cl_dma_cmd_t;
 
-static inline void cl_dma_cmd(uint32_t ext, uint32_t loc, uint32_t size, cl_dma_dir_e dir, cl_dma_cmd_t *cmd);
+//!@}
 
-static inline void cl_dma_cmd_2d(uint32_t ext, uint32_t loc, uint32_t size, uint32_t stride, uint32_t length, cl_dma_dir_e dir, cl_dma_cmd_t *cmd);
+/**
+ * @}
+ */
 
-static inline void cl_dma_cmd_wait(cl_dma_cmd_t *cmd);
+/**
+ * @}
+ */
+
+
+/// @cond IMPLEM
+
+#define CL_DMA_COMMON \
+    uint32_t ext;\
+    uint32_t loc;\
+    uint32_t id;\
+    uint16_t size;\
+    pi_cl_dma_dir_e dir;\
+    uint8_t merge;
+
+struct pi_cl_dma_copy_s
+{
+    CL_DMA_COMMON
+    // 2d transfers args
+    uint32_t stride;
+    uint32_t length;
+};
 
 #ifdef PMSIS_DRIVERS
 
-static inline void cl_dma_memcpy(cl_dma_copy_t *copy)
+static inline void pi_cl_dma_memcpy(pi_cl_dma_copy_t *copy)
 {
     if(!copy->merge)
     {// if copy is unique, give it an id
@@ -165,7 +222,7 @@ static inline void cl_dma_memcpy(cl_dma_copy_t *copy)
     hal_write32(&DMAMCHAN->CMD,copy->ext);
 }
 
-static inline void cl_dma_memcpy_2d(cl_dma_copy_t *copy)
+static inline void pi_cl_dma_memcpy_2d(pi_cl_dma_copy_t *copy)
 {
     if(!copy->merge)
     {// if copy is unique, give it an id
@@ -182,7 +239,7 @@ static inline void cl_dma_memcpy_2d(cl_dma_copy_t *copy)
             | (copy->stride << DMAMCHAN_CMD_2D_STRIDE_Pos));
 }
 
-static inline void cl_dma_flush()
+static inline void pi_cl_dma_flush()
 {
     while(hal_read32(&DMAMCHAN->STATUS));
 
@@ -190,35 +247,35 @@ static inline void cl_dma_flush()
     hal_write32(&DMAMCHAN->STATUS, -1);
 }
 
-static inline void cl_dma_wait(void *copy)
+static inline void pi_cl_dma_wait(void *copy)
 {
     hal_compiler_barrier();
-    cl_dma_copy_t *_copy = (cl_dma_copy_t *) copy;
+    pi_cl_dma_copy_t *_copy = (pi_cl_dma_copy_t *) copy;
     while((hal_read32(&DMAMCHAN->STATUS) >> _copy->id ) & 0x1 );
 
     hal_write32(&DMAMCHAN->STATUS, (0x1<<_copy->id));
 }
 
-struct cl_dma_cmd_s
+struct pi_cl_dma_cmd_s
 {
   int id;
 };
 
-static inline void cl_dma_cmd(uint32_t ext, uint32_t loc, uint32_t size, cl_dma_dir_e dir, cl_dma_cmd_t *cmd)
+static inline void pi_cl_dma_cmd(uint32_t ext, uint32_t loc, uint32_t size, pi_cl_dma_dir_e dir, pi_cl_dma_cmd_t *cmd)
 {
-  cl_dma_copy_t copy;
+  pi_cl_dma_copy_t copy;
   copy.merge = 0;
   copy.ext = ext;
   copy.loc = loc;
   copy.size = size;
   copy.dir = dir;
-  cl_dma_memcpy(&copy);
+  pi_cl_dma_memcpy(&copy);
   cmd->id = copy.id;
 }
 
-static inline void cl_dma_cmd_2d(uint32_t ext, uint32_t loc, uint32_t size, uint32_t stride, uint32_t length, cl_dma_dir_e dir, cl_dma_cmd_t *cmd)
+static inline void pi_cl_dma_cmd_2d(uint32_t ext, uint32_t loc, uint32_t size, uint32_t stride, uint32_t length, pi_cl_dma_dir_e dir, pi_cl_dma_cmd_t *cmd)
 {
-  cl_dma_copy_2d_t copy;
+  pi_cl_dma_copy_2d_t copy;
   copy.merge = 0;
   copy.ext = ext;
   copy.loc = loc;
@@ -226,18 +283,19 @@ static inline void cl_dma_cmd_2d(uint32_t ext, uint32_t loc, uint32_t size, uint
   copy.dir = dir;
   copy.length = length;
   copy.stride = stride;
-  cl_dma_memcpy_2d(&copy);
+  pi_cl_dma_memcpy_2d(&copy);
   cmd->id = copy.id;
 }
 
-static inline void cl_dma_cmd_wait(cl_dma_cmd_t *cmd)
+static inline void pi_cl_dma_cmd_wait(pi_cl_dma_cmd_t *cmd)
 {
-  cl_dma_copy_t copy;
+  pi_cl_dma_copy_t copy;
   copy.id = cmd->id;
-  cl_dma_wait(&copy);
+  pi_cl_dma_wait(&copy);
 }
 
 #endif
 
+/// @endcond
 
 #endif

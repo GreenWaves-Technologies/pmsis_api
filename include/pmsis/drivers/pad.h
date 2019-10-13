@@ -39,27 +39,6 @@
 
 /**@{*/
 
-/** \brief Set the function of one pad.
- *
- * This function can be used to configure the function of the specified pad
- * in case it can have several functions.
- *
- * \param pad  Pad number. See the chip specific configuration for more details.
- * \param function Pad function. See the chip specific configuration for more
- *   details.
- */
-void pi_pad_set_function(pi_pad_e pad, pi_pad_func_e function);
-
-/** \brief Set the function of all pads.
- *
- * This function can be used to configure the function of all the pads
- * in case it can have several functions.
- *
- * \param pad_values Pad values. This is an array of 32bits values, with one bit
- *   per pad and one 32bit value per group of 32 pads.
- */
-void pi_pad_init(uint32_t pad_values[]);
-
 /** \enum pi_pad_e
  * \brief Pad numbers.
  *
@@ -264,6 +243,27 @@ typedef enum {
   PI_PAD_FUNC3                     = 3
 } pi_pad_func_e;
 
+
+/** \brief Set the function of one pad.
+ *
+ * This function can be used to configure the function of the specified pad
+ * in case it can have several functions.
+ *
+ * \param pad  Pad number. See the chip specific configuration for more details.
+ * \param function Pad function. See the chip specific configuration for more
+ *   details.
+ */
+void pi_pad_set_function(pi_pad_e pad, pi_pad_func_e function);
+
+/** \brief Set the function of all pads.
+ *
+ * This function can be used to configure the function of all the pads
+ * in case it can have several functions.
+ *
+ * \param pad_values Pad values. This is an array of 32bits values, with one bit
+ *   per pad and one 32bit value per group of 32 pads.
+ */
+void pi_pad_init(uint32_t pad_values[]);
 
 
 //!@}

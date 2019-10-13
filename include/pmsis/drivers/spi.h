@@ -82,6 +82,8 @@ struct pi_spi_conf {
     address. This is taken into account only if the wordsize is 32 bits. */
   char polarity;          /*!< Polarity of the clock. */
   char phase;             /*!< Phase of the clock. */
+  signed char cs;         /*!< Specifies which SPI chip select is used for the
+    device. */
   signed char itf;        /*!< Specifies on which SPI interface the device is
     connected. */
 };
@@ -153,9 +155,10 @@ void pi_spi_conf_init(struct pi_spi_conf *conf);
  * This function must be called before the SPI device can be used.
  * It will do all the needed configuration to make it usable and initialize
  * the handle used to refer to this opened device when calling other functions.
+ * The caller is blocked until the operation is finished.
  *
  * \param device    A pointer to the device structure of the device to open.
- *   This structure is allocated by the called and must be kept alive until the
+ *   This structure is allocated by the caller and must be kept alive until the
  *   device is closed.
  * \return          0 if the operation is successfull, -1 if there was an error.
  */
@@ -167,6 +170,7 @@ int pi_spi_open(struct pi_device *device);
  * needed anymore, in order to free all allocated resources. Once this function
  * is called, the device is not accessible anymore and must be opened
  * again before being used.
+ * The caller is blocked until the operation is finished.
  *
  * \param device  A pointer to the structure describing the device.
  */

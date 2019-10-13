@@ -758,7 +758,13 @@ INPUT                  = ../include/pmsis/chips/gap8/perf.h   \
                          ../include/pmsis/drivers/gpio.h      \
                          ../include/pmsis/drivers/hyperbus.h  \
                          ../include/pmsis/drivers/cpi.h       \
-                         ../include/pmsis/cluster/cl_malloc.h
+                         ../include/pmsis/cluster/cl_malloc.h \
+                         ../include/pmsis/cluster/cluster_team/cl_team.h \
+                         ../include/pmsis/cluster/cl_pmsis_types.h \
+                         ../include/pmsis/cluster/cluster_sync/fc_to_cl_delegate.h \
+                         ../include/pmsis/cluster/cluster_sync/cl_to_fc_delegate.h \
+                         ../include/pmsis/cluster/dma/cl_dma.h \
+                         ../include/pmsis/task.h \
                          headers
 
 #INPUT                  = ../include/pmsis/cluster/cluster_sync/fc_to_cl_delegate.h ../include/pmsis/pmsis_types.h

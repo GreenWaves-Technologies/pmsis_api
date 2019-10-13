@@ -18,19 +18,36 @@
 #define __CL_PMSIS_TYPES__H__
 
 /**
- * @ingroup groupCluster
- */
-
-/**
- * @defgroup ClusterTypes cluster common types
- */
-
-/**
- * @addtogroup ClusterTypes
+ * @addtogroup FcClusterSync
  * @{
  */
 
 /**@{*/
+
+/** \struct pi_cluster_conf
+ * \brief Cluster configuration structure.
+ *
+ * This structure is used to pass the desired cluster configuration to the
+ * runtime when opening a cluster.
+ */
+struct pi_cluster_conf {
+    // do not move this one, might be accessed in various hackish way
+    pi_device_e device_type; /*!< Device type. */
+    int id;                  /*!< Cluster ID, starting from 0. */
+    void *heap_start;        /* Reserved for internal usage. */
+    uint32_t heap_size; /* Reserved for internal usage. */
+    struct pmsis_event_kernel_wrap* event_kernel; /* Reserved for internal
+      usage. */
+};
+
+//!@}
+
+/**
+ * @}
+ */
+
+
+/// @cond IMPLEM
 
 #ifndef CLUSTER_TASK_IMPLEM
 #define CLUSTER_TASK_IMPLEM
@@ -59,7 +76,7 @@ struct pi_cluster_task {
     CLUSTER_TASK_IMPLEM;
 };
 
-struct cl_team_task {
+struct pi_cl_team_task {
     void *stacks;
     uint32_t stack_size;
     int core_mask;
@@ -74,15 +91,6 @@ typedef struct cluster_driver_api {
     void (*wait_free)(struct pi_device *device);
     void (*wait_free_async)(struct pi_device *device, struct pi_task *async_task);
 } cluster_driver_api_t;
-
-typedef struct cluster_driver_conf {
-    // do not move this one, might be accessed in various hackish way
-    pi_device_e device_type;
-    int id;
-    void *heap_start;
-    uint32_t heap_size;
-    struct pmsis_event_kernel_wrap* event_kernel;
-} cluster_driver_conf_t;
 
 // object for cluster driver specific data
 struct cluster_driver_data {
@@ -100,4 +108,7 @@ struct cluster_driver_data {
     void *heap_start;
     uint32_t heap_size;
 };
+
+/// @endcond
+
 #endif

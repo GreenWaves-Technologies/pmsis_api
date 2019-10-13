@@ -1,8 +1,35 @@
 Drivers
 -------
 
+Cluster
+.......
+
+FC/cluster synchronization
+==========================
+
+.. doxygengroup:: FcClusterSync
+    :members:
+    :private-members:
+    :protected-members:
+
+Cluster team synchronization
+============================
+
+.. doxygengroup:: ClusterTeam
+    :members:
+    :private-members:
+    :protected-members:
+
+Cluster DMA
+===========
+
+.. doxygengroup:: ClusterDMA
+    :members:
+    :private-members:
+    :protected-members:
+
 UART
-........
+....
 
 .. doxygengroup:: UART
     :members:
@@ -10,7 +37,7 @@ UART
     :protected-members:
 
 SPI
-........
+...
 
 .. doxygengroup:: SPI
     :members:
@@ -42,7 +69,7 @@ GPIO
     :protected-members:
 
 I2C
-....
+...
 
 .. doxygengroup:: I2C
     :members:
