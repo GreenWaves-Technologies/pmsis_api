@@ -1,7 +1,7 @@
 
 
 /**
- * @defgroup groupKernel Kernel
+ * @defgroup groupRTOS RTOS
  */
 
 /**

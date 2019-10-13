@@ -749,9 +749,19 @@ WARN_LOGFILE           =
 # spaces.
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = ../include/pmsis/drivers/spi.h ../include/pmsis/drivers/uart.h ../include/pmsis/drivers/perf.h ../include/pmsis/drivers/pad.h ../include/pmsis/drivers/i2c.h ../include/pmsis/drivers/gpio.h ../include/pmsis/drivers/hyperbus.h ../include/pmsis/drivers/cpi.h headers
-#INPUT                  = ../include/pmsis/cluster/cluster_sync/fc_to_cl_delegate.h ../include/pmsis/pmsis_types.h ../include/pmsis/drivers/hyperbus.h ../include/pmsis/drivers/perf.h ../include/pmsis/drivers/cpi.h ../include/pmsis/drivers/i2c.h ../include/pmsis/drivers/spi.h
-#INPUT                  = ../include
+INPUT                  = ../include/pmsis/chips/gap8/perf.h   \
+                         ../include/pmsis/drivers/spi.h       \
+                         ../include/pmsis/drivers/uart.h      \
+                         ../include/pmsis/drivers/perf.h      \
+                         ../include/pmsis/drivers/pad.h       \
+                         ../include/pmsis/drivers/i2c.h       \
+                         ../include/pmsis/drivers/gpio.h      \
+                         ../include/pmsis/drivers/hyperbus.h  \
+                         ../include/pmsis/drivers/cpi.h       \
+                         ../include/pmsis/cluster/cl_malloc.h
+                         headers
+
+#INPUT                  = ../include/pmsis/cluster/cluster_sync/fc_to_cl_delegate.h ../include/pmsis/pmsis_types.h
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses

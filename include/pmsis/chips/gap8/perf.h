@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 ETH Zurich, University of Bologna and GreenWaves Technologies
+ * Copyright (C) 2018 GreenWaves Technologies
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,35 +18,86 @@
 #define __CHIPS_GAP8_DRIVERS_PERF_H__
 
 /**        
- * @addtogroup Perf
+ * @ingroup groupChips
+ */
+
+/**        
+ * @defgroup GAP8 GAP8
+ *
+ * This section gives information about GAP8 specific features.
+ */
+
+/**        
+ * @ingroup GAP8
+ */
+
+/**        
+ * @defgroup GAP8_INFO GAP8_INFO
+ *
+ * All functions transfering data between an external device and a chip memory
+ * must use the L2 memory for the chip memory.
+ */
+
+/**        
+ * @defgroup GAP8_PERF GAP8_PERF
+ *
+ */
+
+/**        
+ * @addtogroup GAP8_PERF
  * @{        
  */
+
+/**@{*/
 
 /** \enum pi_perf_event_e
  * \brief Performance event identifiers.
  *
- * This can be used to describe which performance event to monitor (cycles, cache miss, etc).
+ * This can be used to describe which performance event to monitor (cycles, 
+ * cache miss, etc).
  */
 typedef enum {
-  PI_PERF_CYCLES        = 16,    /*!< Total number of cycles (also includes the cycles where the core is sleeping). Be careful that this event is using a timer shared within the cluster, so resetting, starting or stopping it on one core will impact other cores of the same cluster. */
-  PI_PERF_ACTIVE_CYCLES = 0,       /*!< Counts the number of cycles the core was active (not sleeping). */
-  PI_PERF_INSTR         = 1,        /*!< Counts the number of instructions executed. */
-  PI_PERF_LD_STALL      = 2,     /*!< Number of load data hazards. */  
-  PI_PERF_JR_STALL      = 3,    /*!< Number of jump register data hazards. */
-  PI_PERF_IMISS         = 4,        /*!< Cycles waiting for instruction fetches, i.e. number of instructions wasted due to non-ideal caching. */
-  PI_PERF_LD            = 5,           /*!< Number of data memory loads executed. Misaligned accesses are counted twice. */
-  PI_PERF_ST            = 6,           /*!< Number of data memory stores executed. Misaligned accesses are counted twice. */
-  PI_PERF_JUMP          = 7,         /*!< Number of unconditional jumps (j, jal, jr, jalr). */
-  PI_PERF_BRANCH        = 8,       /*!< Number of branches. Counts both taken and not taken branches. */
+  PI_PERF_CYCLES        = 16, /*!< Total number of cycles (also includes the
+    cycles where the core is sleeping). Be careful that this event is using a
+    timer shared within the cluster, so resetting, starting or stopping it on
+    one core will impact other cores of the same cluster. */
+  PI_PERF_ACTIVE_CYCLES = 0,  /*!< Counts the number of cycles the core was
+    active (not sleeping). */
+  PI_PERF_INSTR         = 1,  /*!< Counts the number of instructions executed.
+  */
+  PI_PERF_LD_STALL      = 2,  /*!< Number of load data hazards. */  
+  PI_PERF_JR_STALL      = 3,  /*!< Number of jump register data hazards. */
+  PI_PERF_IMISS         = 4,  /*!< Cycles waiting for instruction fetches, i.e.
+    number of instructions wasted due to non-ideal caching. */
+  PI_PERF_LD            = 5,  /*!< Number of data memory loads executed.
+    Misaligned accesses are counted twice. */
+  PI_PERF_ST            = 6,  /*!< Number of data memory stores executed.
+    Misaligned accesses are counted twice. */
+  PI_PERF_JUMP          = 7,  /*!< Number of unconditional jumps (j, jal, jr,
+    jalr). */
+  PI_PERF_BRANCH        = 8,  /*!< Number of branches. Counts both taken and
+    not taken branches. */
   PI_PERF_BTAKEN        = 9, /*!< Number of taken branches. */
-  PI_PERF_RVC           = 10,          /*!< Number of compressed instructions executed. */
-  PI_PERF_LD_EXT        = 11,       /*!< Number of memory loads to EXT executed. Misaligned accesses are counted twice. Every non-TCDM access is considered external (cluster only). */
-  PI_PERF_ST_EXT        = 12,       /*!< Number of memory stores to EXT executed. Misaligned accesses are counted twice. Every non-TCDM access is considered external (cluster only). */
-  PI_PERF_LD_EXT_CYC    = 13,   /*!< Cycles used for memory loads to EXT. Every non-TCDM access is considered external (cluster only). */
-  PI_PERF_ST_EXT_CYC    = 14,   /*!< Cycles used for memory stores to EXT. Every non-TCDM access is considered external (cluster only). */
-  PI_PERF_TCDM_CONT     = 15,    /*!< Cycles wasted due to TCDM/log-interconnect contention (cluster only). */
+  PI_PERF_RVC           = 10, /*!< Number of compressed instructions
+    executed. */
+  PI_PERF_LD_EXT        = 11, /*!< Number of memory loads to EXT executed.
+    Misaligned accesses are counted twice. Every non-TCDM access is considered
+    external (cluster only). */
+  PI_PERF_ST_EXT        = 12, /*!< Number of memory stores to EXT executed.
+    Misaligned accesses are counted twice. Every non-TCDM access is considered
+    external (cluster only). */
+  PI_PERF_LD_EXT_CYC    = 13, /*!< Cycles used for memory loads to EXT.
+  Every non-TCDM access is considered external (cluster only). */
+  PI_PERF_ST_EXT_CYC    = 14, /*!< Cycles used for memory stores to EXT.
+  Every non-TCDM access is considered external (cluster only). */
+  PI_PERF_TCDM_CONT     = 15, /*!< Cycles wasted due to TCDM/log-interconnect
+  contention (cluster only). */
 } pi_perf_event_e;
 
 //!@}
+
+/**
+ * @} end of Hyperbus
+ */
 
 #endif

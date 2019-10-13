@@ -7,7 +7,9 @@ PMSIS API documentation
    :maxdepth: 2
    :caption: Contents:
 
+   rtos
    drivers
+   chips
 
 Indices and tables
 ==================
