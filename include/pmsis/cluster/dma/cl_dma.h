@@ -188,12 +188,12 @@ static inline void pi_cl_dma_wait(void *copy);
 
 /// @cond IMPLEM
 
-#define CL_DMA_COMMON \
-    uint32_t ext;\
-    uint32_t loc;\
-    uint32_t id;\
-    uint16_t size;\
-    pi_cl_dma_dir_e dir;\
+#define CL_DMA_COMMON                           \
+    uint32_t ext;                               \
+    uint32_t loc;                               \
+    uint32_t id;                                \
+    uint16_t size;                              \
+    pi_cl_dma_dir_e dir;                        \
     uint8_t merge;
 
 struct pi_cl_dma_copy_s
@@ -204,98 +204,6 @@ struct pi_cl_dma_copy_s
     uint32_t length;
 };
 
-#ifdef PMSIS_DRIVERS
-
-static inline void pi_cl_dma_memcpy(pi_cl_dma_copy_t *copy)
-{
-    if(!copy->merge)
-    {// if copy is unique, give it an id
-        copy->id = hal_read32(&DMAMCHAN->CMD);
-    }
-    hal_write32(&DMAMCHAN->CMD,copy->size
-            | (copy->dir << DMAMCHAN_CMD_TYP_Pos)
-            | (!copy->merge << (DMAMCHAN_CMD_INC_Pos))
-            | (1 << 19)
-            | (1 << 21)
-            );
-    hal_write32(&DMAMCHAN->CMD,copy->loc);
-    hal_write32(&DMAMCHAN->CMD,copy->ext);
-}
-
-static inline void pi_cl_dma_memcpy_2d(pi_cl_dma_copy_t *copy)
-{
-    if(!copy->merge)
-    {// if copy is unique, give it an id
-        copy->id = hal_read32(&DMAMCHAN->CMD);
-    }
-    hal_write32(&DMAMCHAN->CMD,copy->size
-            | (copy->dir << DMAMCHAN_CMD_TYP_Pos)
-            | (!copy->merge << DMAMCHAN_CMD_INC_Pos)
-            | (1 << DMAMCHAN_CMD_2D_Pos)); // 2d transfer
-    hal_write32(&DMAMCHAN->CMD,copy->loc);
-    hal_write32(&DMAMCHAN->CMD,copy->ext);
-    // 2d part of the transfer
-    hal_write32(&DMAMCHAN->CMD, copy->length
-            | (copy->stride << DMAMCHAN_CMD_2D_STRIDE_Pos));
-}
-
-static inline void pi_cl_dma_flush()
-{
-    while(hal_read32(&DMAMCHAN->STATUS));
-
-    // Free all counters
-    hal_write32(&DMAMCHAN->STATUS, -1);
-}
-
-static inline void pi_cl_dma_wait(void *copy)
-{
-    hal_compiler_barrier();
-    pi_cl_dma_copy_t *_copy = (pi_cl_dma_copy_t *) copy;
-    while((hal_read32(&DMAMCHAN->STATUS) >> _copy->id ) & 0x1 );
-
-    hal_write32(&DMAMCHAN->STATUS, (0x1<<_copy->id));
-}
-
-struct pi_cl_dma_cmd_s
-{
-  int id;
-};
-
-static inline void pi_cl_dma_cmd(uint32_t ext, uint32_t loc, uint32_t size, pi_cl_dma_dir_e dir, pi_cl_dma_cmd_t *cmd)
-{
-  pi_cl_dma_copy_t copy;
-  copy.merge = 0;
-  copy.ext = ext;
-  copy.loc = loc;
-  copy.size = size;
-  copy.dir = dir;
-  pi_cl_dma_memcpy(&copy);
-  cmd->id = copy.id;
-}
-
-static inline void pi_cl_dma_cmd_2d(uint32_t ext, uint32_t loc, uint32_t size, uint32_t stride, uint32_t length, pi_cl_dma_dir_e dir, pi_cl_dma_cmd_t *cmd)
-{
-  pi_cl_dma_copy_2d_t copy;
-  copy.merge = 0;
-  copy.ext = ext;
-  copy.loc = loc;
-  copy.size = size;
-  copy.dir = dir;
-  copy.length = length;
-  copy.stride = stride;
-  pi_cl_dma_memcpy_2d(&copy);
-  cmd->id = copy.id;
-}
-
-static inline void pi_cl_dma_cmd_wait(pi_cl_dma_cmd_t *cmd)
-{
-  pi_cl_dma_copy_t copy;
-  copy.id = cmd->id;
-  pi_cl_dma_wait(&copy);
-}
-
-#endif
-
 /// @endcond
 
-#endif
+#endif  /* __CL_DMA_H__ */
