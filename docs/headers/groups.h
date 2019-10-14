@@ -8,12 +8,6 @@
  * @defgroup groupDrivers Drivers
  */
 
-
 /**
- * @defgroup groupCluster Cluster
+ * @defgroup groupChips Chips
  */
-
-/**
- * @defgroup groupTest Test environment
- */
-

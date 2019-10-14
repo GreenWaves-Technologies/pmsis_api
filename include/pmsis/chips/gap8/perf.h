@@ -27,12 +27,13 @@
  * This section gives information about GAP8 specific features.
  */
 
-/**        
- * @ingroup GAP8
+/**
+ * @addtogroup GAP8
+ * @{
  */
 
 /**        
- * @defgroup GAP8_INFO GAP8_INFO
+ * @defgroup GAP8_INFO GAP8 information
  *
  * All functions transfering data between an external device and a chip memory
  * must use the L2 memory for the chip memory.
@@ -44,9 +45,22 @@
  * allocate one more will stall the core.
  */
 
+/**
+ * @}
+ */
+
+/**
+ * @addtogroup GAP8
+ * @{
+ */
+
 /**        
- * @defgroup GAP8_PERF GAP8_PERF
+ * @defgroup GAP8_PERF GAP8 performance counters
  *
+ */
+
+/**
+ * @}
  */
 
 /**        
@@ -103,7 +117,7 @@ typedef enum {
 //!@}
 
 /**
- * @} end of Hyperbus
+ * @}
  */
 
 #endif
