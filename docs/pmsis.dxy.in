@@ -758,6 +758,9 @@ INPUT                  = ../include/pmsis/chips/gap8/perf.h   \
                          ../include/pmsis/drivers/gpio.h      \
                          ../include/pmsis/drivers/hyperbus.h  \
                          ../include/pmsis/drivers/cpi.h       \
+                         ../include/pmsis/rtos/malloc/pmsis_l2_malloc.h \
+                         ../include/pmsis/rtos/malloc/pmsis_fc_tcdm_malloc.h \
+                         ../include/pmsis/rtos/malloc/pmsis_l1_malloc.h \
                          ../include/pmsis/cluster/cl_malloc.h \
                          ../include/pmsis/cluster/cluster_team/cl_team.h \
                          ../include/pmsis/cluster/cl_pmsis_types.h \
