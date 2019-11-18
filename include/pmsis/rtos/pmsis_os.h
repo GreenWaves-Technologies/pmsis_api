@@ -39,6 +39,10 @@
  * creation */
 static inline int pmsis_kickoff(void *arg);
 
+int pi_os_open(struct pi_device *device);
+
+void pi_os_close(struct pi_device *device);
+
 #ifdef PMSIS_DRIVERS
 
 /** Kickoff the system : Must be called in the main
