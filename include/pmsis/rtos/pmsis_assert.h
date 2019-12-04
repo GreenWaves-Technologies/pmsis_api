@@ -17,7 +17,9 @@
 #ifndef __PMSIS_ASSERT__H__
 #define __PMSIS_ASSERT__H__
 
-#define pmsis_assert(test) \
+#include "stdio.h"
+
+#define pi_assert(test) \
 if (!(test)) { \
 printf("PMSIS assertion error in %s, %s:%ld :\n",__func__, __FILE__, __LINE__); \
 printf("%s\n", #test); \
