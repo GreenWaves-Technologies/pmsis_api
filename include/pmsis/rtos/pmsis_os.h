@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 ETH Zurich, University of Bologna and GreenWaves Technologies
+ * Copyright (C) 2018 GreenWaves Technologies
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@
 #if (defined(__GAP8__) && defined(__USE_TCDM_MALLOC__))
     #include "pmsis/rtos/malloc/pmsis_fc_tcdm_malloc.h"
 #endif
+#include "pmsis/rtos/os_frontend_api/pmsis_freq.h"
 #include "pmsis/rtos/os_frontend_api/pmsis_task.h"
 #include "pmsis/rtos/os_frontend_api/pmsis_time.h"
 #include "pmsis/rtos/event_kernel/event_kernel.h"
@@ -38,6 +39,10 @@
  * Completely OS dependant might do anything from a function call to main task 
  * creation */
 static inline int pmsis_kickoff(void *arg);
+
+int pi_os_open(struct pi_device *device);
+
+void pi_os_close(struct pi_device *device);
 
 #ifdef PMSIS_DRIVERS
 

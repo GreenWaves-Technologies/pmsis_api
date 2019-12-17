@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 ETH Zurich, University of Bologna and GreenWaves Technologies
+ * Copyright (C) 2018 GreenWaves Technologies
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 #define __PMSIS_TYPES__H__
 
 #include "inttypes.h"
+#include "sys/types.h"
 #ifdef PMSIS_DRIVERS
 #include "pmsis_backend/implementation_specific_defines.h"
 #endif  /* PMSIS_DRIVERS */
@@ -55,7 +56,8 @@ typedef enum {
     PI_DEVICE_SPI_TYPE,
     PI_DEVICE_CPI_TYPE,
     PI_DEVICE_I2C_TYPE,
-    PI_DEVICE_GPIO_TYPE
+    PI_DEVICE_GPIO_TYPE,
+    PI_DEVICE_PWM_TYPE
 } pi_device_e;
 
 typedef struct pi_task pi_task_t;
@@ -103,18 +105,19 @@ typedef int (*open_func_async)(struct pi_device *device,
 typedef int (*close_func_async)(struct pi_device *device, pi_task_t *async);
 
 // pmsis device minimal api: used for basic inheritance
-typedef struct pi_device_api {
+typedef struct pi_device_api
+{
     int (*open)(struct pi_device *device);
     int (*close)(struct pi_device *device);
     int (*open_async)(struct pi_device *device, pi_task_t *async);
     int (*close_async)(struct pi_device *device, pi_task_t *async);
-    uint32_t (*read)(struct pi_device *device,
-            uintptr_t size, const void *addr, const void *buffer, pi_task_t *async);
-    uint32_t (*write)(struct pi_device *device,
-            uint32_t func_id, void *arg, pi_task_t *async);
-    uint32_t (*ioctl)(struct pi_device *device, uint32_t func_id, void *arg);
-    uint32_t (*ioctl_async)(struct pi_device *device,
-            uint32_t func_id, void *arg, pi_task_t *async);
+    ssize_t (*read)(struct pi_device *device, uint32_t ext_addr,
+                    void *buffer, uint32_t size, pi_task_t *async);
+    ssize_t (*write)(struct pi_device *device, uint32_t ext_addr,
+                     const void *buffer, uint32_t size, pi_task_t *async);
+    int (*ioctl)(struct pi_device *device, uint32_t func_id, void *arg);
+    int (*ioctl_async)(struct pi_device *device, uint32_t func_id,
+                       void *arg, pi_task_t *async);
     void *specific_api;
 } pi_device_api_t;
 

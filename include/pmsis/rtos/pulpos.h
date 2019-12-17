@@ -14,9 +14,29 @@
  * limitations under the License.
  */
 
-#ifndef __CL_DMA_DECOMPRESSOR_H__
-#define __CL_DMA_DECOMPRESSOR_H__
+#ifndef __PMSIS_RTOS_PULPOS_H__
+#define __PMSIS_RTOS_PULPOS_H__
+
+typedef enum
+{
+	PI_PULPOS_IO_DEV_BRIDGE = 0,
+	PI_PULPOS_IO_DEV_UART = 1,
+	PI_PULPOS_IO_DEV_HOST = 2,
+} pi_pulpos_io_dev_e;
 
 
+struct pi_pulpos_conf
+{
+	pi_pulpos_io_dev_e io_dev;
+	union
+	{
+		struct 
+		{
+			int baudrate;
+		} uart;
+	};
+};
+
+void pi_pulpos_conf_init(struct pi_pulpos_conf *conf);
 
 #endif

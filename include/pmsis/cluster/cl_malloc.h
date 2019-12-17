@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 ETH Zurich, University of Bologna and GreenWaves Technologies
+ * Copyright (C) 2018 GreenWaves Technologies
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,54 +17,44 @@
 #ifndef __CL_MALLOC_H__
 #define __CL_MALLOC_H__
 
+/**
+* @ingroup groupRTOS
+*/
 
 /**        
  * @addtogroup MemAlloc
  * @{        
  */
 
-
-
-/**        
- * @defgroup ClusterMemAlloc Cluster memory allocator
- *
- * This API gives access to the memory allocators from the cluster side.
- */
-
-
-
 /**@{*/
 
-
-/** \brief Alloc request structure.
+/** \brief Cluster memory allocation request structure.
  *
  * This structure is used by the runtime to manage a cluster remote allocation.
- * It must be instantiated once for each allocation and must be kept alive until the allocation is finished.
- * It can be instantiated as a normal variable, for example as a global variable, a local one on the stack,
- * or through a memory allocator.
+ * It must be instantiated once for each allocation and must be kept alive until
+ * the allocation is finished.
+ * It can be instantiated as a normal variable, for example as a global
+ * variable, a local one on the stack, or through a memory allocator.
  */
 typedef struct pi_cl_alloc_req_s pi_cl_alloc_req_t ;
 
 
-/** \brief Free request structure.
+/** \brief Cluster memory free request structure.
  *
  * This structure is used by the runtime to manage a cluster remote free.
- * It must be instantiated once for each free and must be kept alive until the free is finished.
- * It can be instantiated as a normal variable, for example as a global variable, a local one on the stack,
- * or through a memory allocator.
+ * It must be instantiated once for each free and must be kept alive until the
+ * free is finished.
+ * It can be instantiated as a normal variable, for example as a global
+ * variable, a local one on the stack, or through a memory allocator.
  */
 typedef struct pi_cl_free_req_s pi_cl_free_req_t ;
-
-
 
 /** \brief Allocate L2 memory from cluster side.
  *
  * \param size   The size in bytes of the memory to be allocated.
- * \param req       The request structure used for termination.
+ * \param req    The request structure used for termination.
  */
 void pi_cl_l2_malloc(int size, pi_cl_alloc_req_t *req);
-
-
 
 /** \brief Free L2 memory from cluster side.
  *
@@ -74,22 +64,21 @@ void pi_cl_l2_malloc(int size, pi_cl_alloc_req_t *req);
  */
 void pi_cl_l2_free(void *chunk, int size, pi_cl_free_req_t *req);
 
-
-
 /** \brief Wait until the specified allocation request has finished.
  *
- * This blocks the calling core until the specified cluster remote allocation is finished.
+ * This blocks the calling core until the specified cluster remote allocation
+ * is finished.
  *
  * \param req       The request structure used for termination.
- * \return          The allocated chunk or NULL if there was not enough memory available.
+ * \return          The allocated chunk or NULL if there was not enough
+ *   memory available.
  */
 static inline void *pi_cl_l2_malloc_wait(pi_cl_alloc_req_t *req);
 
-
-
 /** \brief Wait until the specified free request has finished.
  *
- * This blocks the calling core until the specified cluster remote free is finished.
+ * This blocks the calling core until the specified cluster remote free is
+ * finished.
  *
  * \param req       The request structure used for termination.
  */

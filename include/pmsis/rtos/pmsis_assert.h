@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 GreenWaves Technologies
+ * Copyright (C) 2019 GreenWaves Technologies
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,16 @@
  * limitations under the License.
  */
 
-#ifndef __CL_DMA_DECOMPRESSOR_H__
-#define __CL_DMA_DECOMPRESSOR_H__
+#ifndef __PMSIS_ASSERT__H__
+#define __PMSIS_ASSERT__H__
 
+#include "stdio.h"
 
+#define pi_assert(test) \
+if (!(test)) { \
+printf("PMSIS assertion error in %s, %s:%d :\n",__func__, __FILE__, (unsigned int)__LINE__); \
+printf("%s\n", #test); \
+pmsis_exit(-1); \
+}
 
 #endif

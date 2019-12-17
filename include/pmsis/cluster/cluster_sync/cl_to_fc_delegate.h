@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 ETH Zurich, University of Bologna and GreenWaves Technologies
+ * Copyright (C) 2018 GreenWaves Technologies
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,20 +21,30 @@
 #include "pmsis/rtos/malloc/pmsis_malloc_internal.h"
 
 /**
- * @ingroup groupCluster
- */
-
-/**
- * @defgroup FC_Delegate
- * Delegation of task to FC by cluster API
- */
-
-/**
- * @addtogroup FC_Delegate
+ * @addtogroup FcClusterSync
  * @{
  */
 
 /**@{*/
+
+/** \brief Enqueue a task to fabric-controller side.
+ *
+ * This enqueues the specified task into the fabric-controller task scheduler for
+ * execution. The task must have been initialized from fabric-controller
+ * side.
+ *
+ * \param task Pointer to the fabric-controller task to be enqueued.
+ */
+void pi_cl_send_task_to_fc(pi_task_t *task);
+
+//!@}
+
+/**
+ * @}
+ */
+
+
+/// @cond IMPLEM
 
 /** \brief Create an opaque task structure for FC
  * create a task ready to launch on the fc (os dependant implementation)
@@ -49,14 +59,6 @@ void *cl_create_pi_task(pi_task_t *task);
  */
 // TODO allocated by cluster (on stack)
 void cl_create_fc_cl_sync_object(void *sync_object);
-
-/** \brief send an opaque task structure for FC
- *
- * FC will execute task according to the opaque structure
- * (callback, driver access...)
- * \param        opaque argument for the fc
- */
-void cl_send_task_to_fc(pi_task_t *task);
 
 /** \brief send an opaque task structure for FC with async call
  *
@@ -126,13 +128,6 @@ void *cl_delegate_malloc(malloc_t *allocator, uint32_t size);
  * \param size size to be allocated
  */
 void cl_delegate_free(malloc_t *allocator, void *ptr, uint32_t size);
-//!@}
-
-/**
- * @} end of FC_Delegate group
- */
-
-// async flavours
 
 /**
  * \brief  deported read to a device (read itself is executed by FC)
@@ -179,5 +174,7 @@ void cl_delegate_free_async(malloc_t *allocator, void *ptr, uint32_t size, void 
  * \param arg config arg (os dependant)
  */
 void mc_fc_delegate_init(void *arg);
+
+/// @endcond
 
 #endif
