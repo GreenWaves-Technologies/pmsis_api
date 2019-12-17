@@ -133,6 +133,16 @@ struct pi_i2s_conf {
     int8_t pdm_shift;
 };
 
+/** \brief Setup specific I2S aspects.
+ *
+ * This function can be called to set specific I2S properties such as the 
+ * number of clock generator. This is typically used by the BSP to give
+ * board specific information.
+ *
+ * \param flags  A bitfield of chip-dependant properties.
+ */
+void pi_i2s_setup(uint32_t flags);
+
 /** \brief Initialize an I2S configuration with default values.
  *
  * This function can be called to get default values for all parameters before
@@ -262,5 +272,14 @@ int pi_i2s_read_status(pi_task_t *task, void **mem_block, size_t *size);
 /**
  * @}
  */
+
+
+
+/// @cond IMPLEM
+
+#define PI_I2S_SETUP_SINGLE_CLOCK (1<<0)
+
+
+/// @endcond
 
 #endif
