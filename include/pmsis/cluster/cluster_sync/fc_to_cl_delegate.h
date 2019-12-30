@@ -202,7 +202,7 @@ int pi_cluster_send_task_to_cl_async(struct pi_device *device,
 #define CLOSE_ASYNC_ID 7
 
 /** \brief check if any cluster is on
- */
+*/
 uint8_t pi_cluster_is_on(void);
 
 // --- Useful defines to manipulate cluster objects
@@ -250,12 +250,13 @@ int pi_cluster_open_async(struct pi_device *device,
 
 static inline struct pi_cluster_task *pi_cluster_task(struct pi_cluster_task *task, void (*entry)(void*), void *arg)
 {
-  task->entry = entry;
-  task->arg = arg;
-  task->stacks = (void *)0;
-  task->stack_size = 0;
-  task->nb_cores = 0;
-  return task;
+    memset(task, 0, sizeof(pi_cluster_task));
+    task->entry = entry;
+    task->arg = arg;
+    task->stacks = (void *)0;
+    task->stack_size = 0;
+    task->nb_cores = 0;
+    return task;
 }
 
 /// @endcond
