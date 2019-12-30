@@ -39,10 +39,10 @@
  */
 typedef enum
 {
-    PI_RTC_MODE_CALENDAR    = 0, /*!< RTC calendar mode. */
-    PI_RTC_MODE_ALARM       = 1, /*!< RTC alarm mode. */
-    PI_RTC_MODE_TIMER       = 2, /*!< RTC countdown mode. */
-    PI_RTC_MODE_CALIBRATION = 3  /*!< RTC calibration mode. */
+    PI_RTC_MODE_CALENDAR    = 0x1, /*!< RTC calendar mode. */
+    PI_RTC_MODE_ALARM       = 0x2, /*!< RTC alarm mode. */
+    PI_RTC_MODE_TIMER       = 0x4, /*!< RTC countdown mode. */
+    PI_RTC_MODE_CALIBRATION = 0x8  /*!< RTC calibration mode. */
 } pi_rtc_mode_e;
 
 /**
@@ -68,6 +68,9 @@ struct pi_rtc_conf
 {
     uint8_t rtc_id;             /*!< RTC device ID. */
     pi_rtc_mode_e mode;         /*!< RTC mode. */
+    struct tm time;             /*!< Current time. */
+    struct tm alarm;            /*!< Alarm to set. */
+    uint32_t counter;           /*!< Counter initial value. */
 };
 
 /**
