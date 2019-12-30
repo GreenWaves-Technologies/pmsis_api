@@ -179,11 +179,13 @@ typedef struct pi_task
 {
     // Warning, might be accessed inline in asm, and thus can not be moved
     uintptr_t arg[4];
-    volatile int8_t done;
     int32_t id;
     uint32_t data[PI_TASK_IMPLEM_NB_DATA];
     pi_sem_t wait_on;
     struct pi_task *next;
+    volatile int8_t done;
+    int8_t core_id;
+    int8_t cluster_id;
     PI_TASK_IMPLEM;
 } pi_task_t;
 
