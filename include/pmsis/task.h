@@ -134,6 +134,29 @@ pi_task_t *pi_task_block_no_mutex(pi_task_t *callback_task);
 
 void pi_task_release(pi_task_t *task);
 
+/** \brief Wait on a pi_task from cluster side
+ *
+ * At the difference of pi_task_wait_on, can't use os facilities directly and 
+ * uses a software event instead (os defined)
+ *
+ * \param task  A pointer to the structure describing the notification callback.
+ *   This structure is allocated by the caller and must be kept alive until the
+ *   notification callback has been executed/released.
+ */
+void pi_cl_pi_task_wait(pi_task_t *task);
+
+/** \brief Notify a cluster that task callback has been executed/released
+ *
+ * Use info contained in task to notify a cluster that pi_task "task" is done.
+ * Wake up the cluster cores waiting on said task if need be.
+ * Use a software event (os defined)
+ *
+ * \param task  A pointer to the structure describing the notification callback,
+ * contains info necessary for cluster notification.
+ *
+ */
+void pi_cl_pi_task_notify_done(pi_task_t *task);
+
 #ifdef PMSIS_DRIVERS
 
 //#include "pmsis_hal/pmsis_hal.h"
