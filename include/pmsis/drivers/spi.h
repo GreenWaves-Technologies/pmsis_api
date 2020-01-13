@@ -65,6 +65,32 @@ typedef enum {
     element is stored in memory can then be specified with the endianness. */
 } pi_spi_wordsize_e;
 
+/**
+ * \enum pi_spi_polarity_e
+ *
+ * Clock polarity.
+ */
+typedef enum
+{
+    PI_SPI_POLARITY_0 = 0, /*!< Leading edge is rising edge, trailing edge is falling edge. */
+    PI_SPI_POLARITY_1 = 1  /*!< Leading edge is falling edge, trailing edge is rising edge. */
+} pi_spi_polarity_e;
+
+/**
+ * \enum pi_spi_phase_e
+ *
+ * Clock phase.
+ */
+typedef enum
+{
+    PI_SPI_PHASE_0 = 0, /*!< Data shifted out on trailing edge of preceding clock cycle.
+                         *   Data sampled on leading edge of clock cycle.
+                         */
+    PI_SPI_PHASE_1 = 1  /*!< Data shifted out on leading edge of current clock cycle.
+                         *   Data sampled on trailing edge of clock cycle.
+                         */
+} pi_spi_phase_e;
+
 /** \struct pi_spi_conf_t
  * \brief SPI master configuration structure.
  *
