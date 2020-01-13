@@ -22,11 +22,11 @@
 
 /// @cond IMPLEM
 
-#define __PI_SPI_CTRL_CPOL_BIT 0
-#define __PI_SPI_CTRL_CPHA_BIT 2
-#define __PI_SPI_CTRL_WORDSIZE_BIT 4
-#define __PI_SPI_CTRL_ENDIANNESS_BIT 6
-#define __PI_SPI_CTRL_SET_MAX_BAUDRATE_BIT 8
+#define __PI_SPI_IOCTL_CPOL_BIT 0
+#define __PI_SPI_IOCTL_CPHA_BIT 2
+#define __PI_SPI_IOCTL_WORDSIZE_BIT 4
+#define __PI_SPI_IOCTL_ENDIANNESS_BIT 6
+#define __PI_SPI_IOCTL_SET_MAX_BAUDRATE_BIT 8
 
 /// @endcond
 
@@ -91,7 +91,7 @@ typedef enum
                          */
 } pi_spi_phase_e;
 
-/** \struct pi_spi_conf_t
+/** \struct pi_spi_conf
  * \brief SPI master configuration structure.
  *
  * This structure is used to pass the desired SPI master configuration to the
@@ -126,25 +126,17 @@ struct pi_spi_conf
  * This is used to reconfigure dynamically some of the parameters of an
  * opened device.
  */
-typedef enum {
-  PI_SPI_CTRL_CPOL0             = 1 << __PI_SPI_CTRL_CPOL_BIT, /*!< Set the
-    clock polarity to 0. */
-  PI_SPI_CTRL_CPOL1             = 2 << __PI_SPI_CTRL_CPOL_BIT, /*!< Set the
-    clock polarity to 1. */
-  PI_SPI_CTRL_CPHA0             = 1 << __PI_SPI_CTRL_CPHA_BIT, /*!< Set the
-    clock phase to 0. */
-  PI_SPI_CTRL_CPHA1             = 2 << __PI_SPI_CTRL_CPHA_BIT, /*!< Set the
-    clock phase to 1. */
-  PI_SPI_CTRL_WORDSIZE_8        = 1 << __PI_SPI_CTRL_WORDSIZE_BIT, /*!< Set the
-    wordsize to 8 bits. */
-  PI_SPI_CTRL_WORDSIZE_32       = 2 << __PI_SPI_CTRL_WORDSIZE_BIT, /*!< Set the
-    wordsize to 32 bits. */
-  PI_SPI_CTRL_BIG_ENDIAN        = 1 << __PI_SPI_CTRL_ENDIANNESS_BIT, /*!<
-    Handle the elements in memory in a big-endian way. */
-  PI_SPI_CTRL_LITTLE_ENDIAN     = 2 << __PI_SPI_CTRL_ENDIANNESS_BIT, /*!<
-    Handle the elements in memory in a little-endian way. */
-  PI_SPI_CTRL_SET_MAX_BAUDRATE  = 1 << __PI_SPI_CTRL_SET_MAX_BAUDRATE_BIT, /*!<
-    Change maximum baudrate. */
+typedef enum
+{
+    PI_SPI_IOCTL_CPOL0            = 1 << __PI_SPI_IOCTL_CPOL_BIT,             /*!< Set the clock polarity to 0. */
+    PI_SPI_IOCTL_CPOL1            = 2 << __PI_SPI_IOCTL_CPOL_BIT,             /*!< Set the clock polarity to 1. */
+    PI_SPI_IOCTL_CPHA0            = 1 << __PI_SPI_IOCTL_CPHA_BIT,             /*!< Set the clock phase to 0. */
+    PI_SPI_IOCTL_CPHA1            = 2 << __PI_SPI_IOCTL_CPHA_BIT,             /*!< Set the clock phase to 1. */
+    PI_SPI_IOCTL_WORDSIZE_8       = 1 << __PI_SPI_IOCTL_WORDSIZE_BIT,         /*!< Set the wordsize to 8 bits. */
+    PI_SPI_IOCTL_WORDSIZE_32      = 2 << __PI_SPI_IOCTL_WORDSIZE_BIT,         /*!< Set the wordsize to 32 bits. */
+    PI_SPI_IOCTL_BIG_ENDIAN       = 1 << __PI_SPI_IOCTL_ENDIANNESS_BIT,       /*!< Handle the elements in memory in a big-endian way. */
+    PI_SPI_IOCTL_LITTLE_ENDIAN    = 2 << __PI_SPI_IOCTL_ENDIANNESS_BIT,       /*!< Handle the elements in memory in a little-endian way. */
+    PI_SPI_IOCTL_SET_MAX_BAUDRATE = 1 << __PI_SPI_IOCTL_SET_MAX_BAUDRATE_BIT, /*!< Change maximum baudrate. */
 } pi_spi_ioctl_e;
 
 
