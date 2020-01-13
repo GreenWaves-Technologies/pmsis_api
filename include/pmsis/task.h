@@ -75,7 +75,7 @@ static inline pi_task_t *pi_task_block(pi_task_t *task);
  *   notification is triggered.
  * \param arg The argument to the callback.
  */
-pi_task_t *pi_task_callback(pi_task_t *task, void (*callback)(void*),
+static inline pi_task_t *pi_task_callback(pi_task_t *task, void (*callback)(void*),
 	void *arg);
 
 /** \brief Wait until a notification event is triggered.
@@ -87,7 +87,7 @@ pi_task_t *pi_task_callback(pi_task_t *task, void (*callback)(void*),
  *
  * \param task  A pointer to the notification event.
  */
-void pi_task_wait_on(pi_task_t *task);
+static inline void pi_task_wait_on(pi_task_t *task);
 
 /** \brief Trigger a notification.
  *
@@ -97,7 +97,7 @@ void pi_task_wait_on(pi_task_t *task);
  *
  * \param task  A pointer to the notification event.
  */
-void pi_task_push(pi_task_t *task);
+static inline void pi_task_push(pi_task_t *task);
 
 /** \brief Trigger a notification.
  *
