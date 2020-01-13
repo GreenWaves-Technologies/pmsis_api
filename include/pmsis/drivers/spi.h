@@ -65,31 +65,58 @@ typedef enum {
     element is stored in memory can then be specified with the endianness. */
 } pi_spi_wordsize_e;
 
+/**
+ * \enum pi_spi_polarity_e
+ *
+ * Clock polarity.
+ */
+typedef enum
+{
+    PI_SPI_POLARITY_0 = 0, /*!< Leading edge is rising edge, trailing edge is falling edge. */
+    PI_SPI_POLARITY_1 = 1  /*!< Leading edge is falling edge, trailing edge is rising edge. */
+} pi_spi_polarity_e;
+
+/**
+ * \enum pi_spi_phase_e
+ *
+ * Clock phase.
+ */
+typedef enum
+{
+    PI_SPI_PHASE_0 = 0, /*!< Data shifted out on trailing edge of preceding clock cycle.
+                         *   Data sampled on leading edge of clock cycle.
+                         */
+    PI_SPI_PHASE_1 = 1  /*!< Data shifted out on leading edge of current clock cycle.
+                         *   Data sampled on trailing edge of clock cycle.
+                         */
+} pi_spi_phase_e;
+
 /** \struct pi_spi_conf_t
  * \brief SPI master configuration structure.
  *
  * This structure is used to pass the desired SPI master configuration to the
  * runtime when opening a device.
  */
-struct pi_spi_conf {
-  int max_baudrate;       /*!< Maximum baudrate for the SPI bitstream which can
-    be used with the opened device . */
-  char wordsize;          /*!< Wordsize of the elements in the bitstream. Can
-    be PI_SPI_WORDSIZE_8 for 8 bits data or PI_SPI_WORDSIZE_32 for 32 bits
-    data. This is used to interpret the endianness. */
-  char big_endian;        /*!< If 1, the elements are stored in memory in a
-    big-endian way, i.e. the most significant byte is stored at the lowest
-    address. This is taken into account only if the wordsize is 32 bits. */
-  char polarity;          /*!< Polarity of the clock. */
-  char phase;             /*!< Phase of the clock. */
-  signed char cs;         /*!< Specifies which SPI chip select is used for the
-    device. */
-  signed char itf;        /*!< Specifies on which SPI interface the device is
-    connected. */
-  int max_rcv_chunk_size; /*!< Specifies maximum chunk size for reception when
-    using copies. */
-  int max_snd_chunk_size; /*!< Specifies maximum chunk size for sending when
-    using copies. */
+struct pi_spi_conf
+{
+    int max_baudrate;           /*!< Maximum baudrate for the SPI bitstream which can
+                                  be used with the opened device . */
+    char wordsize;              /*!< Wordsize of the elements in the bitstream. Can
+                                  be PI_SPI_WORDSIZE_8 for 8 bits data or PI_SPI_WORDSIZE_32 for 32 bits
+                                  data. This is used to interpret the endianness. */
+    char big_endian;            /*!< If 1, the elements are stored in memory in a
+                                  big-endian way, i.e. the most significant byte is stored at the lowest
+                                  address. This is taken into account only if the wordsize is 32 bits. */
+    pi_spi_polarity_e polarity; /*!< Polarity of the clock. */
+    pi_spi_phase_e phase;       /*!< Phase of the clock. */
+    signed char cs;             /*!< Specifies which SPI chip select is used for the
+                                  device. */
+    signed char itf;            /*!< Specifies on which SPI interface the device is
+                                  connected. */
+    int max_rcv_chunk_size;     /*!< Specifies maximum chunk size for reception when
+                                  using copies. */
+    int max_snd_chunk_size;     /*!< Specifies maximum chunk size for sending when
+                                  using copies. */
 };
 
 /** \enum pi_spi_ioctl_e
