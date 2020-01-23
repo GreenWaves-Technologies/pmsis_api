@@ -19,6 +19,7 @@
 
 #include "stdio.h"
 
+#include "pmsis/rtos/os_frontend_api/pmsis_task.h"
 #define pi_assert(test) \
 if (!(test)) { \
 printf("PMSIS assertion error in %s, %s:%d :\n",__func__, __FILE__, (unsigned int)__LINE__); \
