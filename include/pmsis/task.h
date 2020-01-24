@@ -24,7 +24,9 @@
 */
 
 /**
- * @defgroup Task Task management
+ * @defgroup Event_Task Event_Task management
+ *
+ * \brief Event_Task management.
  *
  * The asynchronous interactions between the fabric controller, the cluster and
  * the peripherals are managed with events on the fabric controller side.
@@ -35,7 +37,7 @@
  */
 
 /**
- * @addtogroup Task
+ * @addtogroup Event_Task
  * @{
  */
 

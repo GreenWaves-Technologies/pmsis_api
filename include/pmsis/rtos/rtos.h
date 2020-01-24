@@ -19,7 +19,6 @@
 
 #include <stdint.h>
 #include <stddef.h>
-#include "pmsis.h"
 
 #include "pmsis/rtos/malloc/pmsis_malloc.h"
 #include "pmsis/rtos/malloc/pmsis_l1_malloc.h"
@@ -27,33 +26,9 @@
 #if (defined(__GAP8__) && defined(__USE_TCDM_MALLOC__))
     #include "pmsis/rtos/malloc/pmsis_fc_tcdm_malloc.h"
 #endif
-#include "pmsis/rtos/os_frontend_api/pmsis_freq.h"
-#include "pmsis/rtos/os_frontend_api/pmsis_task.h"
+#include "pmsis/rtos/os_frontend_api/os.h"
+#include "pmsis/rtos/os_frontend_api/freq.h"
 #include "pmsis/rtos/os_frontend_api/pmsis_time.h"
 #include "pmsis/rtos/event_kernel/event_kernel.h"
-
-#include "pmsis_backend/pmsis_backend_native_types.h"
-#include "pmsis_backend/pmsis_backend_native_task_api.h"
-
-/** Kickoff the system : Must be called in the main
- * Completely OS dependant might do anything from a function call to main task 
- * creation */
-static inline int pmsis_kickoff(void *arg);
-
-int pi_os_open(struct pi_device *device);
-
-void pi_os_close(struct pi_device *device);
-
-#ifdef PMSIS_DRIVERS
-
-/** Kickoff the system : Must be called in the main
- * Completely OS dependant might do anything from a function call to main task 
- * creation */
-static inline int pmsis_kickoff(void *arg)
-{
-    return __os_native_kickoff(arg);
-}
-
-#endif
 
 #endif  /* __PMSIS_OS_H__ */

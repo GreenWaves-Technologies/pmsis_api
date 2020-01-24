@@ -23,26 +23,26 @@ typedef enum {
   PI_FREQ_DOMAIN_PERIPH = 2
 } pi_freq_domain_e;
 
-/** \brief Get current frequency of a domain.
+/**
+ * \brief Get current frequency of a domain.
  *
- * Gets the current frequency of a specific frequency domain in Hz. 
- * 
+ * Gets the current frequency of a specific frequency domain in Hz.
+ *
  * \param     domain The frequency domain.
  * \return           The frequency in Hz.
  */
 static inline uint32_t pi_freq_get(pi_freq_domain_e domain);
 
-
-
-/** \brief Set frequency of a domain.
+/**
+ * \brief Set frequency of a domain.
  *
- * Set thefrequency of a specific frequency domain in Hz. 
+ * Set thefrequency of a specific frequency domain in Hz.
  * This can return an error if the frequency is invalid.
- * 
+ *
  * \param     domain The frequency domain.
  * \param     freq   The desired frequency in Hz.
  * \return           0 if successfull, -1 otherwise.
  */
 static inline int32_t pi_freq_set(pi_freq_domain_e domain, uint32_t freq);
 
-#endif
+#endif  /* __PMSIS_FREQ_H__ */
