@@ -26,6 +26,7 @@
 #if (defined(__GAP8__) && defined(__USE_TCDM_MALLOC__))
     #include "pmsis/rtos/malloc/pmsis_fc_tcdm_malloc.h"
 #endif
+#include "pmsis/rtos/malloc/pmsis_l1_fc_malloc.h"
 #include "pmsis/rtos/os_frontend_api/os.h"
 #include "pmsis/rtos/os_frontend_api/freq.h"
 #include "pmsis/rtos/os_frontend_api/pmsis_time.h"
