@@ -14,21 +14,19 @@
  * limitations under the License.
  */
 
-#ifndef __PMSIS_OS_H__
-#define __PMSIS_OS_H__
+#ifndef __PMSIS_RTOS_RTOS_H__
+#define __PMSIS_RTOS_RTOS_H__
 
 #include <stdint.h>
 #include <stddef.h>
 
-#include "pmsis/rtos/malloc/pmsis_malloc.h"
-#include "pmsis/rtos/malloc/pmsis_l1_malloc.h"
-#include "pmsis/rtos/malloc/pmsis_l2_malloc.h"
-#if (defined(__GAP8__) && defined(__USE_TCDM_MALLOC__))
-    #include "pmsis/rtos/malloc/pmsis_fc_tcdm_malloc.h"
-#endif
+#include "pmsis/rtos/malloc/pi_malloc.h"
+#include "pmsis/rtos/malloc/fc_l1_malloc.h"
+#include "pmsis/rtos/malloc/cl_l1_malloc.h"
+#include "pmsis/rtos/malloc/l2_malloc.h"
 #include "pmsis/rtos/os_frontend_api/os.h"
 #include "pmsis/rtos/os_frontend_api/freq.h"
 #include "pmsis/rtos/os_frontend_api/pmsis_time.h"
 #include "pmsis/rtos/event_kernel/event_kernel.h"
 
-#endif  /* __PMSIS_OS_H__ */
+#endif  /* __PMSIS_RTOS_RTOS_H__ */

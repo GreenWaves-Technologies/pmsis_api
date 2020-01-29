@@ -57,11 +57,15 @@
  * \brief Wordsize of the SPI bitstream elements.
  *
  * This is used to know how the endianness must be applied.
+ * Not all sizes are supported on all chips, check the chip-specific section
+ * to get more information.
  */
 typedef enum {
   PI_SPI_WORDSIZE_8 = 0,     /*!< Each element is 8 bits. Thus the endianness
     has no effect. */
-  PI_SPI_WORDSIZE_32 = 1     /*!< Each element is 32 bits. The way each
+  PI_SPI_WORDSIZE_16 = 1,     /*!< Each element is 16 bits. The way each
+    element is stored in memory can then be specified with the endianness. */
+  PI_SPI_WORDSIZE_32 = 2     /*!< Each element is 32 bits. The way each
     element is stored in memory can then be specified with the endianness. */
 } pi_spi_wordsize_e;
 
