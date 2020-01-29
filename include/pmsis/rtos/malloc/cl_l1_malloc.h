@@ -89,6 +89,7 @@ void *pi_cl_l1_malloc_align(struct pi_device *device, int size, int align);
 #define pi_l1_malloc(x, y)          pi_cl_l1_malloc(x, y)
 #define pi_l1_malloc_align(x, y, z) pi_cl_l1_malloc_align(x, y, z)
 #define pi_l1_malloc_free(x, y)     pi_cl_l1_free(x, y)
+#define pi_l1_free(x, y, z)     pi_cl_l1_free(x, y, z)
 
 /**
  * \brief malloc init: initialize mutex and heap
