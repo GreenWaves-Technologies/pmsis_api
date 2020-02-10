@@ -20,7 +20,7 @@
 #include "inttypes.h"
 #include "sys/types.h"
 #ifdef PMSIS_DRIVERS
-#include "pmsis_backend/implementation_specific_defines.h"
+#include "pmsis/backend/implementation_specific_defines.h"
 #endif  /* PMSIS_DRIVERS */
 
 /**
