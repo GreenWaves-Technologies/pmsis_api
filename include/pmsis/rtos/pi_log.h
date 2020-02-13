@@ -24,6 +24,7 @@
 
 #include "stdint.h"
 #include "stdarg.h"
+#include "stdbool.h"
 #include "stdio.h"
 
 #include "pmsis.h"
@@ -120,7 +121,7 @@ static inline pi_log_level_t pi_log_get_dynamic_level(void)
  *
  * @return the static local log level, it may be different than global log level (Max(dynamic_level, static_level))
  */
-#define pi_log_get_static_level() PI_LOG_LOCAL_LEVEL;
+#define PI_LOG_GET_STATIC_LEVEL() PI_LOG_LOCAL_LEVEL;
 
 /**
  * @brief Get the current log level.
@@ -131,6 +132,29 @@ static inline pi_log_level_t pi_log_get_level(void)
 {
     pi_log_level_t dynamic = pi_log_get_dynamic_level();
     return (dynamic <= PI_LOG_LOCAL_LEVEL) ? dynamic : PI_LOG_LOCAL_LEVEL;
+}
+
+/**
+ * @brief Compare the log level passed in parameter whith  the current static and dynamic log level.
+ *
+ * Example:
+ * if (pi_log_level_is_enabled(PI_LOG_INFO) {
+ *     print_table();
+ * }
+ *
+ * @param level The level to compare with the current level.
+ * @return Return true if the level passed in parameter is printable, false otherwise.
+ */
+static inline bool pi_log_level_is_enabled(pi_log_level_t level)
+{
+    if(level <= PI_LOG_LOCAL_LEVEL)
+    {
+        if(level <= pi_log_get_dynamic_level())
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 /**
