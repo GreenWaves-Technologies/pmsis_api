@@ -113,7 +113,7 @@ struct pi_i2s_conf
     pi_i2s_fmt_t format;        /*!< Data stream format as defined by PI_I2S_FMT_* constants. */
     pi_i2s_opt_t options;       /*!< Configuration options as defined by PI_I2S_OPT_* constants. */
     uint32_t frame_clk_freq;    /*!< Frame clock (WS) frequency, this is sampling rate. */
-    size_t block_size;          /*!< Size of one RX/TX memory block (buffer) in bytes. */
+    size_t block_size;          /*!< Size of one RX/TX memory block (buffer) in bytes. On some chips, this size may have to be set under a maximum size, check the chip-specific section. */
     void *pingpong_buffers[2];  /*!< Pair of buffers used in double-buffering mode to
                                   capture the incoming samples.  */
     uint16_t pdm_decimation;    /*!< In PDM mode, this gives the decimation factor to be used,
