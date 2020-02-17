@@ -126,6 +126,9 @@ typedef struct pi_device_api
     void* mutex_object;
 #endif
 
+/** Memory slab allocator */
+typedef struct pi_mem_slab pi_mem_slab_t;
+
 /** Task types **/
 typedef void (*__pmsis_mutex_func)(void *mutex_object);
 
