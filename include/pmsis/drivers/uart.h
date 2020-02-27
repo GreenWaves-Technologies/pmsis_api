@@ -58,6 +58,9 @@ struct pi_uart_conf
       connected. */
     uint8_t enable_rx; /*!< 1 to activate reception, 0 to deactivate it. */
     uint8_t enable_tx; /*!< 1 to activate transmission, 0 to deactivate it. */
+    uint8_t is_usart;
+    uint8_t use_ctrl_flow;
+    uint8_t bit_len;
 };
 
 /** \brief UART cluster request structure.
