@@ -19,6 +19,13 @@
 
 #include <stdint.h>
 
+/// @cond IMPLEM
+
+#define PI_I2S_SETUP_SINGLE_CLOCK (1<<0)
+
+/// @endcond
+
+
 /**
  * @ingroup groupDrivers
  *
@@ -113,6 +120,35 @@ typedef uint8_t pi_i2s_opt_t;
  */
 #define PI_I2S_OPT_TDM                     (1 << 1)
 
+typedef uint8_t pi_i2s_ch_fmt_t;
+
+/** Data order bit field position. */
+#define PI_I2S_CH_FMT_DATA_ORDER_SHIFT       0
+/** Data order bit field mask. */
+#define PI_I2S_CH_FMT_DATA_ORDER_MASK        (1 << 0)
+
+/** Data align bit field position. */
+#define PI_I2S_CH_FMT_DATA_ALIGN_SHIFT       1
+/** Data align bit field mask. */
+#define PI_I2S_CH_FMT_DATA_ALIGN_MASK        (1 << 1)
+
+/** Data align bit field position. */
+#define PI_I2S_CH_FMT_DATA_SIGN_SHIFT       2
+/** Data align bit field mask. */
+#define PI_I2S_CH_FMT_DATA_SIGN_MASK        (1 << 2)
+
+/** Send MSB first */
+#define PI_I2S_CH_FMT_DATA_ORDER_MSB              (0 << 0)
+/** Send LSB first */
+#define PI_I2S_CH_FMT_DATA_ORDER_LSB              (1 << 0)
+/** Left Justified Data Format. */
+#define PI_I2S_CH_FMT_DATA_ALIGN_LEFT             (0 << 1)
+/** Right Justified Data Format. */
+#define PI_I2S_CH_FMT_DATA_ALIGN_RIGHT            (1 << 1)
+/** No sign extension. */
+#define PI_I2S_CH_FMT_DATA_SIGN_NO_EXTEND         (0 << 2)
+/** Sign extension. */
+#define PI_I2S_CH_FMT_DATA_SIGN_EXTEND            (1 << 2)
 
 typedef uint8_t pi_i2s_ch_opt_t;
 
@@ -222,11 +258,14 @@ struct pi_i2s_conf
 struct pi_i2s_ch_conf
 {
     uint8_t id;                 /*!< Channel ID, from 0 to the number of channels minus 1. */
+    uint8_t word_size;          /*!< Number of bits representing one data word. */
+    pi_i2s_ch_fmt_t format;     /*!< Data stream format as defined by PI_I2S_CH_FMT_* constants. */
     pi_i2s_ch_opt_t options;    /*!< Channel configuration options as defined by PI_I2S_CH_OPT_* constants. */
     size_t block_size;          /*!< Size of one RX/TX memory block (buffer) in bytes. On some chips, this size may have to be set under a maximum size, check the chip-specific section. */
     pi_mem_slab_t *mem_slab;    /*!< memory slab to store RX/TX data. */
     void *pingpong_buffers[2];  /*!< Pair of buffers used in double-buffering mode to
                                   capture the incoming samples.  */
+    uint8_t enabled;            /*!< 1 if channel is enabled. */
 };
 
 /** \brief Setup specific I2S aspects.
