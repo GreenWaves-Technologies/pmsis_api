@@ -19,6 +19,9 @@
 
 #include "pmsis/pmsis_types.h"
 
+#ifndef PI_INLINE_HYPER_LVL_0
+#define PI_INLINE_HYPER_LVL_0
+#endif
 
 /**
 * @ingroup groupDrivers
@@ -130,7 +133,7 @@ void pi_hyper_close(struct pi_device *device);
  * \param addr        The address of the copy in the processor.
  * \param size        The size in bytes of the copy
  */
-void pi_hyper_read(struct pi_device *device,
+PI_INLINE_HYPER_LVL_0 void pi_hyper_read(struct pi_device *device,
   uint32_t hyper_addr, void *addr, uint32_t size);
 
 /** \brief Enqueue an asynchronous read copy to the Hyperbus (from Hyperbus
@@ -151,7 +154,7 @@ void pi_hyper_read(struct pi_device *device,
  * \param task        The task used to notify the end of transfer.
    See the documentation of pi_task_t for more details.
  */
-void pi_hyper_read_async(struct pi_device *device,
+PI_INLINE_HYPER_LVL_0 void pi_hyper_read_async(struct pi_device *device,
   uint32_t hyper_addr, void *addr, uint32_t size, struct pi_task *task);
 
 /** \brief Enqueue a write copy to the Hyperbus (from processor to Hyperbus).
@@ -168,7 +171,7 @@ void pi_hyper_read_async(struct pi_device *device,
  * \param addr        The address of the copy in the processor.
  * \param size        The size in bytes of the copy
  */
-void pi_hyper_write(struct pi_device *device,
+PI_INLINE_HYPER_LVL_0 void pi_hyper_write(struct pi_device *device,
   uint32_t hyper_addr, void *addr, uint32_t size);
 
 /** \brief Enqueue an asynchronous write copy to the Hyperbus (from processor
@@ -189,7 +192,7 @@ void pi_hyper_write(struct pi_device *device,
  * \param task        The task used to notify the end of transfer. See the
  *   documentation of pi_task_t for more details.
  */
-void pi_hyper_write_async(struct pi_device *device,
+PI_INLINE_HYPER_LVL_0 void pi_hyper_write_async(struct pi_device *device,
   uint32_t hyper_addr, void *addr, uint32_t size, struct pi_task *task);
 
 /** \brief Enqueue a 2D read copy (rectangle area) to the Hyperbus (from
@@ -211,7 +214,7 @@ void pi_hyper_write_async(struct pi_device *device,
  * \param length      2D length, which is the number of transferred bytes after
  *   which the driver will switch to the next line.
  */
-void pi_hyper_read_2d(struct pi_device *device,
+PI_INLINE_HYPER_LVL_0 void pi_hyper_read_2d(struct pi_device *device,
   uint32_t hyper_addr, void *addr, uint32_t size, uint32_t stride,
   uint32_t length);
 
@@ -237,7 +240,7 @@ void pi_hyper_read_2d(struct pi_device *device,
  * \param task        The task used to notify the end of transfer. See the
  * documentation of pi_task_t for more details.
  */
-void pi_hyper_read_2d_async(struct pi_device *device,
+PI_INLINE_HYPER_LVL_0 void pi_hyper_read_2d_async(struct pi_device *device,
   uint32_t hyper_addr, void *addr, uint32_t size, uint32_t stride,
   uint32_t length, struct pi_task *task);
 
@@ -260,7 +263,7 @@ void pi_hyper_read_2d_async(struct pi_device *device,
  * \param length      2D length, which is the number of transferred bytes after
  *   which the driver will switch to the next line.
  */
-void pi_hyper_write_2d(struct pi_device *device,
+PI_INLINE_HYPER_LVL_0 void pi_hyper_write_2d(struct pi_device *device,
   uint32_t hyper_addr, void *addr, uint32_t size, uint32_t stride,
   uint32_t length);
 
@@ -286,7 +289,7 @@ void pi_hyper_write_2d(struct pi_device *device,
  * \param task        The task used to notify the end of transfer. See the
  *   documentation of pi_task_t for more details.
  */
-void pi_hyper_write_2d_async(struct pi_device *device,
+PI_INLINE_HYPER_LVL_0 void pi_hyper_write_2d_async(struct pi_device *device,
   uint32_t hyper_addr, void *addr, uint32_t size, uint32_t stride,
   uint32_t length, struct pi_task *task);
 
