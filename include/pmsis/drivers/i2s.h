@@ -19,12 +19,6 @@
 
 #include <stdint.h>
 
-/// @cond IMPLEM
-
-#define PI_I2S_SETUP_SINGLE_CLOCK (1<<0)
-
-/// @endcond
-
 
 /**
  * @ingroup groupDrivers
