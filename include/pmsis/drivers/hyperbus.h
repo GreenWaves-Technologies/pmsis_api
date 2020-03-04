@@ -498,11 +498,6 @@ void pi_cl_hyperram_alloc(struct pi_device *device, uint32_t size,
 void pi_cl_hyperram_free(struct pi_device *device, uint32_t chunk,
   uint32_t size, pi_cl_hyperram_free_req_t *req);
 
-static inline uint32_t pi_cl_hyperram_alloc_wait(
-  pi_cl_hyperram_alloc_req_t *req);
-
-static inline void pi_cl_hyperram_free_wait(pi_cl_hyperram_free_req_t *req);
-
 void pi_hyper_flash_erase(struct pi_device *device, uint32_t hyper_addr);
 
 void pi_hyper_flash_write(struct pi_device *device, uint32_t hyper_addr,
