@@ -72,9 +72,12 @@ void pi_dmacpy_conf_init(struct pi_dmacpy_conf *conf);
  *
  * \param device         Pointer to device structure.
  *
+ * \retval 0             If operation is successfull.
+ * \retval ERRNO         An error code otherwise.
+ *
  * \note This function must be called before any use of the device.
  */
-void pi_dmacpy_open(struct pi_device *device);
+int pi_dmacpy_open(struct pi_device *device);
 
 /**
  * \brief Close an opened DMA Memcpy device.
