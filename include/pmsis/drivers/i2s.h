@@ -435,6 +435,7 @@ int pi_i2s_channel_read(struct pi_device *dev, int channel, void **mem_block,
  * 4 bytes.
  *
  * @param dev Pointer to the device structure for the driver instance.
+ * @param channel ID of the channel, from 0 to the number of channels minus 1.
  * @param task        The task used to notify the end of transfer.
  *
  * @retval 0 If successful, -1 if not.
