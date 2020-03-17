@@ -74,6 +74,7 @@ struct pi_hyper_conf
     pi_hyper_type_e type;/*!< Type of device connected on the hyperbus
     interface. */
     uint32_t baudrate;   /*!< Baudrate (in bytes/second). */
+    int32_t burst_length; /*< Maximum burst length in ns. */
 };
 
 /** \brief Hyperbus cluster request structure.
