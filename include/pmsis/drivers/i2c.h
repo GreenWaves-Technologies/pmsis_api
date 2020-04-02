@@ -104,6 +104,30 @@ typedef enum {
  */
 void pi_i2c_conf_init(pi_i2c_conf_t *conf);
 
+/** \brief set slave addr for device 
+ *  This function set the addr of the slave to be addressed for this device
+ *  \param conf A pointer to the I2C configuration
+ *  \param slave_addr Addr of the slave device
+ * **/
+void pi_i2c_conf_set_slave_addr(struct pi_i2c_conf *conf, uint16_t slave_addr);
+
+/** \brief set slave_addr0 for gap9 
+ *  This function set the addr0 which can be used to  address gap9
+ *  \param conf A pointer to the I2C configuration
+ *  \param slave_addr addr0 to which gap9 should respond
+ * **/
+void pi_i2c_conf_set_gap_slave_addr0(struct pi_i2c_conf *conf,
+        uint16_t slave_addr);
+
+/** \brief set slave_addr1 for gap9 
+ *  This function set the addr1 which can be used to  address gap9
+ *  Both addr0 and addr1 can be used at the same time
+ *  \param conf A pointer to the I2C configuration
+ *  \param slave_addr addr1 to which gap9 should respond
+ * **/
+void pi_i2c_conf_set_gap_slave_addr1(struct pi_i2c_conf *conf,
+        uint16_t slave_addr);
+
 /** \brief Open an I2C device.
  *
  * This function must be called before the Hyperbus device can be used.
