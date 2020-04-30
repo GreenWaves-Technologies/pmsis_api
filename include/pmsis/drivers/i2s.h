@@ -426,7 +426,7 @@ int pi_i2s_read_async(struct pi_device *dev, pi_task_t *task);
  * @retval 0 If successful.
  * @retval -1 An error occured.
  */
-int pi_i2s_write(struct pi_device *dev, int channel, void *mem_block,
+int pi_i2s_write(struct pi_device *dev, void *mem_block,
     size_t size);
 
 /**
@@ -456,7 +456,7 @@ int pi_i2s_write(struct pi_device *dev, int channel, void *mem_block,
  * @retval 0 If successful.
  * @retval -1 An error occured.
  */
-int pi_i2s_write_async(struct pi_device *dev, int channel,
+int pi_i2s_write_async(struct pi_device *dev,
     void *mem_block, size_t size, pi_task_t *task);
 
 /**
