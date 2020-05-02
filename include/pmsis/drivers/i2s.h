@@ -80,30 +80,30 @@ typedef uint8_t pi_i2s_fmt_t;
 /** Data order bit field position. */
 #define PI_I2S_CH_FMT_DATA_ORDER_SHIFT       0
 /** Data order bit field mask. */
-#define PI_I2S_CH_FMT_DATA_ORDER_MASK        (1 << 0)
+#define PI_I2S_CH_FMT_DATA_ORDER_MASK        (1 << 3)
 
 /** Data align bit field position. */
 #define PI_I2S_CH_FMT_DATA_ALIGN_SHIFT       1
 /** Data align bit field mask. */
-#define PI_I2S_CH_FMT_DATA_ALIGN_MASK        (1 << 1)
+#define PI_I2S_CH_FMT_DATA_ALIGN_MASK        (1 << 4)
 
 /** Data align bit field position. */
 #define PI_I2S_CH_FMT_DATA_SIGN_SHIFT       2
 /** Data align bit field mask. */
-#define PI_I2S_CH_FMT_DATA_SIGN_MASK        (1 << 2)
+#define PI_I2S_CH_FMT_DATA_SIGN_MASK        (1 << 5)
 
 /** Send MSB first */
-#define PI_I2S_CH_FMT_DATA_ORDER_MSB              (0 << 0)
+#define PI_I2S_CH_FMT_DATA_ORDER_MSB              (0 << 3)
 /** Send LSB first */
-#define PI_I2S_CH_FMT_DATA_ORDER_LSB              (1 << 0)
+#define PI_I2S_CH_FMT_DATA_ORDER_LSB              (1 << 4)
 /** Left Justified Data Format. */
-#define PI_I2S_CH_FMT_DATA_ALIGN_LEFT             (0 << 1)
+#define PI_I2S_CH_FMT_DATA_ALIGN_LEFT             (0 << 4)
 /** Right Justified Data Format. */
-#define PI_I2S_CH_FMT_DATA_ALIGN_RIGHT            (1 << 1)
+#define PI_I2S_CH_FMT_DATA_ALIGN_RIGHT            (1 << 5)
 /** No sign extension. */
-#define PI_I2S_CH_FMT_DATA_SIGN_NO_EXTEND         (0 << 2)
+#define PI_I2S_CH_FMT_DATA_SIGN_NO_EXTEND         (0 << 5)
 /** Sign extension. */
-#define PI_I2S_CH_FMT_DATA_SIGN_EXTEND            (1 << 2)
+#define PI_I2S_CH_FMT_DATA_SIGN_EXTEND            (1 << 5)
 
 
 typedef uint8_t pi_i2s_opt_t;
