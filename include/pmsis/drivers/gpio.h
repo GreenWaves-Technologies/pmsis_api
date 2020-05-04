@@ -18,8 +18,8 @@
 #define __PI_DRIVERS_GPIO_H__
 
 #include "pmsis/pmsis_types.h"
-#include "pmsis/drivers/pad.h"
 #include "pmsis/chips/gap8/gpio.h"
+#include "pmsis/drivers/pad.h"
 
 /**
  * @ingroup groupDrivers
