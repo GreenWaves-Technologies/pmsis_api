@@ -18,7 +18,6 @@
 #define __DRIVERS__PAD_H__
 
 #include <stdint.h>
-#include "pmsis/chips/gap8/pad.h"
 
 /**
 * @ingroup groupDrivers
