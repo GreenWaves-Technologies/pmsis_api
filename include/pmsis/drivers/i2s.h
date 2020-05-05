@@ -193,7 +193,21 @@ typedef uint8_t pi_i2s_opt_t;
  * In this mode each slot must be configured separately
  * using the I2S configuration. Each slot can have an RX and a TX channel. 
  */
-#define PI_I2S_OPT_TDM                     (1 << 1)
+#define PI_I2S_OPT_TDM                        (1 << 4)
+
+/** @brief Use external clock
+ *
+ * If this option is specified, no clock is generated and an external clock
+ * is used.
+ */
+#define PI_I2S_OPT_EXT_CLK                    (1 << 5)
+
+/** @brief Use external word strobe
+ *
+ * If this option is specified, no word strobe is generated and an external
+ * one is used.
+ */
+#define PI_I2S_OPT_EXT_WS                    (1 << 6)
 
 
 /** IOCTL command */
