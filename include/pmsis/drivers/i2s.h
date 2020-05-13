@@ -291,6 +291,9 @@ struct pi_i2s_conf
         channels minus 1. In TDM mode this gives the ID of the slot to be
         configured. The options field can be used to specify if the RX or TX
         channel must be configured. */
+    int8_t asrc_channel;        /*!< If different from -1, this redirect the
+        specified stream (can be input or output) to/from the ASRC block with
+        the channel specified here. */
 };
 
 
